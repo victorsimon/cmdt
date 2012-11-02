@@ -1,0 +1,119 @@
+/* Styles for mobile devices */
+
+@media screen and (max-width: 480px) {
+	.nav {
+		padding: 0.15em;
+	}
+
+	.nav li {
+		margin: 0 0.15em 0 0;
+		padding: 0.10em;
+	}
+
+	/* Hide individual steps in pagination, just have next & previous */
+	.pagination .step, .pagination .currentStep {
+		display: none;
+	}
+
+	.pagination .prevLink {
+		float: left;
+	}
+
+	.pagination .nextLink {
+		float: right;
+	}
+
+	/* pagination needs to wrap around floated buttons */
+	.pagination {
+		overflow: hidden;
+	}
+
+	/* slightly smaller margin around content body */
+	fieldset,
+	.property-list {
+		padding: 0.25em .25em .25em .25em;
+		margin: 0.25em .25em .25em .25em;
+	}
+
+	input, textarea {
+		width: 100%;
+		   -moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		    -ms-box-sizing: border-box;
+		        box-sizing: border-box;
+	}
+
+	select, input[type=checkbox], input[type=radio], input[type=submit], input[type=button], input[type=reset] {
+		width: auto;
+	}
+
+	/* hide all but the first column of list tables */
+	.scaffold-list td:not(:first-child),
+	.scaffold-list th:not(:first-child) {
+		display: none;
+	}
+
+	.scaffold-list thead th {
+		text-align: center;
+	}
+
+	/* stack form elements */
+	.fieldcontain {
+		margin-top: 0.3em;
+	}
+
+	.fieldcontain label,
+	.fieldcontain .property-label,
+	.fieldcontain .property-value {
+		display: block;
+		float: none;
+		margin: 0 0 0.5em 0;
+		text-align: left;
+		width: auto;
+	}
+
+	.errors ul,
+	.message p {
+		margin: 0.5em;
+	}
+
+	.error ul {
+		margin-left: 0;
+	}
+	
+	/* Compartir Mesa de Tren customization */
+	
+	#header {
+		background: #9C3B8D;
+		padding: .5em .5em .5em .5em;
+		margin-bottom: .25em;
+	}
+	
+	a.header-main:link, a.header-main:visited {
+		color: #fff;
+		font-size: 1em;
+		font-weight: bold;
+	}
+	
+	.header-sub {
+		color: #fff;
+		font-size: .75em;
+		font-style: italic;
+	}
+	
+	#footer {
+		font-size: 0.25em;
+		font-style: italic;
+		padding: 1em 0.5em 1em 0.5em;
+		margin-bottom: .5em;
+		margin-top: .5em;
+		clear: both;
+	}
+	
+	#search {
+		width: 45%;
+		float: right;
+		margin: .25em .25em;
+	}
+
+}
