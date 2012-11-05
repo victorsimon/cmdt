@@ -104,3 +104,12 @@ grails {
 }
 
 grails.mail.default.from = "noreply@compartirmesadetren.com"
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'compartirmesadetren.Usuario'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'compartirmesadetren.UsuarioRole'
+grails.plugins.springsecurity.authority.className = 'compartirmesadetren.Role'
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'compartirmesadetren.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'compartirmesadetren.UserRole'
+grails.plugins.springsecurity.authority.className = 'compartirmesadetren.Role'

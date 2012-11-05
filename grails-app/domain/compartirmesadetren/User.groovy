@@ -1,29 +1,40 @@
 package compartirmesadetren
 
 class User {
-	static searchable = true
 
-	String login
+	transient springSecurityService
+
+	String username
 	String password
-	String role = "user"
-	
-    static constraints = {
-		login(blank:false, nullable:false, unique:true)
-		password(black:false, nullable:false, password:true)
-		role(inList:["admin", "user"])
-    }
-	
-	static transients = ['admin']
-	
-	boolean isAdmin() {
-		return role == "admin"
+	boolean enabled
+	boolean accountExpired
+	boolean accountLocked
+	boolean passwordExpired
+
+	static constraints = {
+		username blank: false, unique: true
+		password blank: false
 	}
-	
-	def beforeInsert = {
-		password = password.encodeAsSHA()
+
+	static mapping = {
+		password column: '`password`'
 	}
-	
-	String toString() {
-		login
+
+	Set<Role> getAuthorities() {
+		UserRole.findAllByUser(this).collect { it.role } as Set
+	}
+
+	def beforeInsert() {
+		encodePassword()
+	}
+
+	def beforeUpdate() {
+		if (isDirty('password')) {
+			encodePassword()
+		}
+	}
+
+	protected void encodePassword() {
+		password = springSecurityService.encodePassword(password)
 	}
 }

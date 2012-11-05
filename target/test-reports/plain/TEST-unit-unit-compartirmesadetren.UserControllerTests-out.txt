@@ -1,0 +1,2 @@
+--Output from testValidAuthenticate--
+--Output from testInvalidAuthenticate--
