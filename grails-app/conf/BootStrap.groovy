@@ -1,9 +1,11 @@
 import compartirmesadetren.Asiento
 import compartirmesadetren.Estacion
 import compartirmesadetren.Mesa
+import compartirmesadetren.Role
 import compartirmesadetren.Trayecto
 import compartirmesadetren.Tren
 import compartirmesadetren.User
+import compartirmesadetren.UserRole
 import compartirmesadetren.Usuario
 import grails.util.GrailsUtil;
 import java.sql.Time
@@ -13,10 +15,21 @@ class BootStrap {
     def init = { servletContext ->
 		switch (GrailsUtil.environment) {
 			case "development":
-				def madrid = new Estacion(nombre:"Madrid")
+				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+				def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+				def testUser = new User(username: 'me', enabled: true, password: 'password')
+				testUser.save(flush: true)
+				UserRole.create testUser, adminRole, true
+				UserRole.create testUser, userRole, true
+				
+				def testUser1 = new User(username: 'you', enabled: true, password: 'password')
+				testUser1.save(flush: true)
+				UserRole.create testUser1, userRole, true
+
+				def madrid = new Estacion(nombre:"Madrid (*)", code:"MADRI")
 				madrid.save()
 
-				def pamplona = new Estacion(nombre:"Pamplona")
+				def pamplona = new Estacion(nombre:"Pamplona", code:"80100")
 				pamplona.save()
 				
 				def madridPamplona = new Trayecto(
@@ -47,7 +60,8 @@ class BootStrap {
 					nombre:"Victor",
 					apellidos:"Simon Batanero",
 					email:"vsimon.batanero@gmail.com",
-					movil:"629570963"
+					movil:"629570963",
+					user: testUser
 					)
 				victor.save()
 				println victor.errors
@@ -56,28 +70,12 @@ class BootStrap {
 					nombre:"Isabel",
 					apellidos:"Berruezo Adulate",
 					email:"isaberruezo@gmail.com",
-					movil:"629570963"
+					movil:"629570963",
+					user: testUser1
 					)
 				ixa.save()
 				println ixa.errors
 
-				def admin = new User(
-					login:"vsimon",
-					password:"sk3514",
-					role:"admin")
-				admin.save()
-				if(admin.hasErrors()){
-					println admin.errors
-				}
-				
-				def jdoe = new User(
-					login:"jdoe",
-					password:"password",
-					role:"user")
-				jdoe.save()
-				if(jdoe.hasErrors()){
-					println jdoe.errors
-				}
 				
 			break
 			default: break

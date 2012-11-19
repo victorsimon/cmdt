@@ -7,16 +7,17 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title><g:layoutTitle default="Grails"/></title>
+		<title><g:layoutTitle default="CMDT"/></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<meta name="HandheldFriendly" content="true">
 		<meta name="MobileOptimized" content="width">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta property="og:title" content="CompartirMesaDeTren"/>
+		<meta property="og:image" content="${resource(dir: 'images', file: 'cmdt_logo.jpg')}"/>
+		<meta property="og:description" content="Compartir mesa de tren en ave y alvia"/>
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
-		<link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
-		<link rel="apple-touch-icon" sizes="114x114" href="${resource(dir: 'images', file: 'apple-touch-icon-retina.png')}">
+		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'cmdt_logo.jpg')}" type="image/x-icon">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
 		<g:layoutHead/>

@@ -65,7 +65,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://www.compartirmesadetren.com"
     }
 }
 
@@ -91,25 +91,56 @@ log4j = {
 }
 
 grails {
-	mail {
-	  host = "*.arvixe.com"
-	  port = 465
-	  username = "noreply@compartirmesadetren.com"
-	  password = "sk3514"
-	  props = ["mail.smtp.auth":"true",
-			   "mail.smtp.socketFactory.port":"465",
-			   "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
-			   "mail.smtp.socketFactory.fallback":"false"]
-	}
+   mail {
+     host = "smtp.gmail.com"
+     port = 465
+     username = "noreply.compartirmesadetren"
+     password = "#ks3514!"
+	 from = "noreply@compartirmesadetren.com"
+     props = ["mail.smtp.auth":"true",
+              "mail.smtp.socketFactory.port":"465",
+              "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+              "mail.smtp.socketFactory.fallback":"false"]
+   }
 }
-
-grails.mail.default.from = "noreply@compartirmesadetren.com"
-// Added by the Spring Security Core plugin:
-grails.plugins.springsecurity.userLookup.userDomainClassName = 'compartirmesadetren.Usuario'
-grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'compartirmesadetren.UsuarioRole'
-grails.plugins.springsecurity.authority.className = 'compartirmesadetren.Role'
-
+   
 // Added by the Spring Security Core plugin:
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'compartirmesadetren.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'compartirmesadetren.UserRole'
 grails.plugins.springsecurity.authority.className = 'compartirmesadetren.Role'
+grails.plugins.springsecurity.ui.password.validationRegex = ''
+grails.plugins.springsecurity.ui.password.minLength = 4
+
+// Added by the Spring Security OAuth plugin:
+grails.plugins.springsecurity.oauth.domainClass = 'compartirmesadetren.OAuthID'
+
+oauth {
+	providers {
+		google {
+			api = org.scribe.builder.api.GoogleApi
+			key = '273808781997.apps.googleusercontent.com'
+			secret = 'sqLSQjpsIbsqJEOmc5l70F08'
+			scope = "https://www.googleapis.com/auth/userinfo.email"
+			callback = "http://localhost:8080/CompartirMesaDeTren/oauth/google/callback"
+			successUri = "http://localhost:8080/CompartirMesaDeTren/oauth/google/success"
+			failureUri = "http://localhost:8080/CompartirMesaDeTren/oauth/google/failure"
+		}
+		twitter {
+			api = org.scribe.builder.api.TwitterApi
+			key = 'cjAf40dFHzj0Gk0m1vy6Kw'
+			secret = 'Aclu3EkYqJRwVaxgXiv8L688UEG207Xqd0O3usIq0W4'
+			callback = "http://localhost:8080/CompartirMesaDeTren/oauth/twitter/callback"
+			successUri = "http://localhost:8080/CompartirMesaDeTren/oauth/twitter/success"
+			failureUri = "http://localhost:8080/CompartirMesaDeTren/oauth/twitter/failure"
+		}
+		facebook {
+			api = org.scribe.builder.api.FacebookApi
+			key = '130052670479745'
+			secret = 'e0fceabaa2121ade42939fdaab135fac'
+			callback = "http://localhost:8080/CompartirMesaDeTren/oauth/facebook/callback"
+			successUri = "http://localhost:8080/CompartirMesaDeTren/oauth/facebook/success"
+			failureUri = "http://localhost:8080/CompartirMesaDeTren/oauth/facebook/failure"
+		}
+	}
+	debug = true
+}

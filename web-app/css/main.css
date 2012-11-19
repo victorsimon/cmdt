@@ -61,11 +61,13 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: #111111;
+	text-decoration: none;
 }
 
 a:hover, a:active {
 	outline: none; /* prevents outline in webkit on active links but retains it for tab focus */
+	text-decoration: none;
 }
 
 h1 {
@@ -114,7 +116,7 @@ img {
 }
 
 .footer a {
-	color: #255b17;
+	color: #cccccc;
 }
 
 .spinner {
@@ -279,7 +281,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-	color: #48802C;
+	color: #CCCCCC;
 	display: inline-block;
 	font-weight: bold;
 	margin-left: 0.3em;
@@ -594,7 +596,7 @@ a.skip {
 /* Compartir Mesa de Tren customization */
 
 #header {
-	background: #9C3B8D;
+	background: #8B0073; /*#9C3B8D;*/
 	padding: 2em 1em 2em 1em;
 	margin-bottom: 1em;
 }
@@ -611,6 +613,10 @@ a.header-main:link, a.header-main:visited {
 	font-style: italic;
 }
 
+.entrar {
+	float: right;
+}
+
 #footer {
 	font-size: 0.75em;
 	font-style: italic;
@@ -623,4 +629,15 @@ a.header-main:link, a.header-main:visited {
 #search {
 	float: right;
 	margin: .5em 1em;
+}
+
+.bienvenida {
+	font-size: 1em;
+	padding-right: .5em;
+	color: #fff;
+}
+
+.social-login {
+	width: 64px;
+	height: 64px;	
 }

@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Mantenimientos</title>
 		<style type="text/css" media="screen">
 			#status {
 				background-color: #eee;

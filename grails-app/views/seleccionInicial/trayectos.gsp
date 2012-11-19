@@ -2,7 +2,6 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
-		<title>Compartir mesa de tren</title>
 		<style type="text/css" media="screen">
 
 			#page-body {
@@ -51,7 +50,7 @@
 			<g:form action="trayectos" method="post">
 				<fieldset class="form">
 					<h2>Selecciona el trayecto <g:select name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" /></h2>
-					<h2><g:datePicker name="fecha" value="${fecha}" precision="day" default="${new Date()}" /></h2>
+					<h2><g:datePicker name="fecha" value="${fecha}" precision="day" /></h2>
 					<h2>Selecciona por fecha <g:actionSubmit value="Buscar" action="trayectos" /></h2>
 					<h2>O vea los <g:actionSubmit value="proximos disponibles" action="proximos" /></h2>
 				</fieldset>

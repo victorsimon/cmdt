@@ -101,6 +101,11 @@
 		font-style: italic;
 	}
 	
+	.entrar {
+		float: right;
+	}
+	
+	
 	#footer {
 		font-size: 0.25em;
 		font-style: italic;
@@ -116,4 +121,12 @@
 		margin: .25em .25em;
 	}
 
+	.bienvenida {
+		display: none;
+	}	
+	
+	.social-login {
+		width: 32px;
+		height: 32px;	
+	}
 }

@@ -1,4 +1,21 @@
 <div id="header">
-	<p><a class="header-main" href="${resource(dir:'')}">Compartir Mesa de Tren</a></p>
-	<p class="header-sub">... para viajar más barato</p>
+	<div>
+	<span><a class="header-main" href="${resource(dir:'')}">Compartir Mesa de Tren</a></span>
+	<span class="entrar">
+		<sec:ifLoggedIn>
+			<div class="bienvenida">Hola <sec:loggedInUserInfo field="username"/></div>
+		</sec:ifLoggedIn>
+	</span>
+	</div>
+	<div>
+	<span class="header-sub">... para viajar más barato</span>
+	<span class="entrar">
+		<sec:ifNotLoggedIn>
+			<g:link class="buttons" controller='login' action='auth'>Entrar</g:link>
+		</sec:ifNotLoggedIn>
+		<sec:ifLoggedIn>
+			<g:link class="buttons" controller='logout'>Salir</g:link>
+		</sec:ifLoggedIn>
+	</span>
+	</div>
 </div>

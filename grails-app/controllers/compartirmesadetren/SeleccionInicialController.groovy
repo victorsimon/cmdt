@@ -1,9 +1,15 @@
 package compartirmesadetren
 
 class SeleccionInicialController {
-	
+
+	def trenesService
+		
 	def trayectos(Integer opcion) {
-		def Date fecha = params.fecha
+		def Date fecha
+		if (params?.time)
+			fecha = new Date(params.time.toLong())
+		else
+			fecha = params.fecha
 		def Trayecto trayecto
 		List trenes
 		if (params.trayecto) {
@@ -26,6 +32,8 @@ class SeleccionInicialController {
 	}
 
 	def proximos = {
-		chain (action: "trayectos", params: [trayecto: params.trayecto, opcion: 1])
+		def Date fecha = params.fecha
+		trenesService.buscarTren(fecha, Trayecto.findById(params.trayecto))
+		chain (action: "trayectos", params: [trayecto: params.trayecto, time : fecha.getTime(), opcion: 1])
 	}
 }

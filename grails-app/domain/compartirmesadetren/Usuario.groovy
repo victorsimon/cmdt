@@ -7,7 +7,8 @@ class Usuario {
 	String apellidos
 	String email
 	String movil
-	static hasMany = [billetes:Billete]
+	static hasMany = [billetes:Billete, oAuthIDs:OAuthID]
+	static belongsTo = [user:User]
 	Date dateCreated
 	Date lastUpdated
 	
