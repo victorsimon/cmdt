@@ -3,7 +3,7 @@ package compartirmesadetren
 class Billete {
 	static searchable = true
 
-	static belongsTo = [asiento:Asiento, usuario:Usuario]
+	static belongsTo = [asiento:Asiento, usuario:User]
 	Boolean pagado = Boolean.FALSE
 	Date dateCreated
 	

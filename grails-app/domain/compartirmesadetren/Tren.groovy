@@ -13,7 +13,7 @@ class Tren {
 	
     static constraints = {
 		nombre(blank:false)
-		salida(validator: {return (it > new Date() - 1)})
+		salida(unique: true, validator: {return (it > new Date() - 1)})
 		llegada(validator: {return (it > new Date() - 1)})
 		trayecto()
 		mesas()
@@ -24,7 +24,16 @@ class Tren {
 	}
 	
 	String toString() {
-		return "${nombre}, ${salida.format('dd-MM-yyy hh:mm')}"
+		return "${nombre}, ${salida.format('dd-MM-yyy HH:mm')}"
 	}
 	
+	static List<Tren> buscarPorDiaSalida(Long time) {
+		def inicioDia = new GregorianCalendar()
+		inicioDia.time = new Date(time)
+		inicioDia.set(Calendar.HOUR_OF_DAY, 0)
+		inicioDia.set(Calendar.MINUTE, 0)
+		inicioDia.set(Calendar.MILLISECOND, 0)
+		def finDia = inicioDia.time + 1
+		return Tren.findAllBySalidaBetween(inicioDia.time, finDia)
+	}
 }

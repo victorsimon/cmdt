@@ -6,7 +6,6 @@ import compartirmesadetren.Trayecto
 import compartirmesadetren.Tren
 import compartirmesadetren.User
 import compartirmesadetren.UserRole
-import compartirmesadetren.Usuario
 import grails.util.GrailsUtil;
 import java.sql.Time
 
@@ -17,12 +16,12 @@ class BootStrap {
 			case "development":
 				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
 				def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
-				def testUser = new User(username: 'me', enabled: true, password: 'password')
+				def testUser = new User(username: 'me', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
 				testUser.save(flush: true)
 				UserRole.create testUser, adminRole, true
 				UserRole.create testUser, userRole, true
 				
-				def testUser1 = new User(username: 'you', enabled: true, password: 'password')
+				def testUser1 = new User(username: 'you', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
 				testUser1.save(flush: true)
 				UserRole.create testUser1, userRole, true
 
@@ -46,6 +45,7 @@ class BootStrap {
 					)
 				pamplonaMadrid.save()
 
+				/*
 				createTren("00601-ALVIA", madridPamplona)
 				createTren("00602-ALVIA", madridPamplona)
 				createTren("00603-ALVIA", madridPamplona)
@@ -55,27 +55,7 @@ class BootStrap {
 				createTren("00606-ALVIA", pamplonaMadrid)
 				createTren("00607-ALVIA", pamplonaMadrid)
 				createTren("00608-ALVIA", pamplonaMadrid)
-
-				def victor = new Usuario(
-					nombre:"Victor",
-					apellidos:"Simon Batanero",
-					email:"vsimon.batanero@gmail.com",
-					movil:"629570963",
-					user: testUser
-					)
-				victor.save()
-				println victor.errors
-				
-				def ixa = new Usuario(
-					nombre:"Isabel",
-					apellidos:"Berruezo Adulate",
-					email:"isaberruezo@gmail.com",
-					movil:"629570963",
-					user: testUser1
-					)
-				ixa.save()
-				println ixa.errors
-
+				*/
 				
 			break
 			default: break

@@ -12,7 +12,9 @@
 	<div class="login-inner">
 	<form action='${postUrl}' method='POST' id="loginForm" name="loginForm" autocomplete='off'>
 	<div class="sign-in">
-
+	<g:if test="${session['lastURL']}">
+	<input name="spring-security-redirect" type="hidden" value="${session['lastURL']}" />
+	</g:if>
 	<table>
 		<tr>
 			<td><label for="username"><g:message code='cmdt.login.username' default="Usuario"/></label></td>

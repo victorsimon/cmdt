@@ -1,8 +1,7 @@
 <html>
 
 <head>
-	<meta name='layout' content='register'/>
-	<title><g:message code='spring.security.ui.register.title'/></title>
+	<meta name='layout' content='main'/>
 </head>
 
 <body>
@@ -40,7 +39,7 @@
 	</tbody>
 	</table>
 
-	<s2ui:submitButton elementId='create' form='registerForm' messageCode='spring.security.ui.register.submit'/>
+    <g:submitButton value="${message(code: 'spring.security.ui.register.submit', default: 'Create')}" name="create"/>
 
 	</g:else>
 

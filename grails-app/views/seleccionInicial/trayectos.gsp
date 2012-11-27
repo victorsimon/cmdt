@@ -50,7 +50,7 @@
 			<g:form action="trayectos" method="post">
 				<fieldset class="form">
 					<h2>Selecciona el trayecto <g:select name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" /></h2>
-					<h2><g:datePicker name="fecha" value="${fecha}" precision="day" /></h2>
+					<h2><g:datePicker name="fecha" value="${fecha}" precision="day" default="${new Date() + 2}" /></h2>
 					<h2>Selecciona por fecha <g:actionSubmit value="Buscar" action="trayectos" /></h2>
 					<h2>O vea los <g:actionSubmit value="proximos disponibles" action="proximos" /></h2>
 				</fieldset>
@@ -59,8 +59,8 @@
 						<h2>Trenes disponibles</h2>
 					</g:if>
 					<lu>
-						<g:each in="${trenes}" var="tren">
-							<li style="margin: .75em;"><g:link controller="tren" action="show" id="${tren.id}">${tren}</g:link></li>
+						<g:each in="${trenes}" var="ptren">
+							<li style="margin: .75em;"><g:link action="detalle" id="${ptren.tren.id}">${ptren.tren} ${ptren.oportunidad} ${ptren.cuantosFaltan}</g:link></li>
 						</g:each>
 					</lu>
 				</fieldset>
