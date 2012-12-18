@@ -47,33 +47,33 @@
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main">
-			<g:form action="trayectos" method="post">
-				<fieldset class="form">
-					<input type="hidden" name="id" value="${peticionesTren.tren.id}" />
-					<h2>${peticionesTren.tren.nombre}, ${peticionesTren.tren.trayecto}</h2>
-					<h2>Salida
-					<input size="13" disabled="disabled" value="${peticionesTren.tren.salida.format('dd-MM-yyyy HH:mm')}" /></h2>
-					<h2>Llegada
-					<input size="13" disabled="disabled" value="${peticionesTren.tren.llegada.format('dd-MM-yyyy HH:mm')}" /></h2>
-					<g:if test="${peticionesTren.meApuntoYViajoSeguro}">
-						<h2>¡Si te apuntas viajas!</h2>
-					</g:if>
-					<g:if test="${!peticionesTren.meApuntoYViajoSeguro && !(peticionesTren.cuantosFaltan == 0)}">
-						<h2>¡Faltan ${peticionesTren.cuantosFaltan} para viajar!</h2>
-					</g:if>
-					<h2><g:actionSubmit value="¡Me apunto!" action="peticion" /></h2>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:if test="${sugeridos}">
-						<h2>Puede interesarte...</h2>
-					</g:if>
-					<lu>
-						<g:each in="${sugeridos}" var="ptren">
-							<li style="margin: .75em;"><g:link action="detalle" id="${ptren.tren.id}">${ptren.tren} ${ptren.oportunidad}</g:link></li>
-						</g:each>
-					</lu>
-				</fieldset>
-			</g:form>
+			<fieldset class="form">
+				<input type="hidden" name="id" value="${peticionesTren.tren.id}" />
+				<h2>${peticionesTren.tren.nombre}, ${peticionesTren.tren.trayecto}</h2>
+				<h2>Salida
+				<input size="13" disabled="disabled" value="${peticionesTren.tren.salida.format('dd-MM-yyyy HH:mm')}" /></h2>
+				<h2>Llegada
+				<input size="13" disabled="disabled" value="${peticionesTren.tren.llegada.format('dd-MM-yyyy HH:mm')}" /></h2>
+				<g:if test="${peticionesTren.meApuntoYViajoSeguro}">
+					<h2>¡Si te apuntas viajas!</h2>
+				</g:if>
+				<g:if test="${!peticionesTren.meApuntoYViajoSeguro && !(peticionesTren.cuantosFaltan == 0)}">
+					<h2>¡Faltan ${peticionesTren.cuantosFaltan} para viajar!</h2>
+				</g:if>
+				<h2><paypal:button itemName="${peticionesTren.tren.nombre}, ${peticionesTren.tren.trayecto}" 
+					itemNumber="${peticionesTren.tren.id}" amount="37,68" buyerId="${user.id}" 
+					discountAmount="0" params="[paymentaction: 'Authorization']" /></h2>
+			</fieldset>
+			<fieldset class="buttons">
+				<g:if test="${sugeridos}">
+					<h2>Puede interesarte...</h2>
+				</g:if>
+				<lu>
+					<g:each in="${sugeridos}" var="ptren">
+						<li style="margin: .75em;"><g:link action="detalle" id="${ptren.tren.id}">${ptren.tren} ${ptren.oportunidad}</g:link></li>
+					</g:each>
+				</lu>
+			</fieldset>
 		</div>
 	</body>
 </html>

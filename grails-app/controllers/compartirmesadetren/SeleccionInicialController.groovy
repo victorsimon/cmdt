@@ -1,5 +1,7 @@
 package compartirmesadetren
 import grails.plugins.springsecurity.Secured
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class SeleccionInicialController {
 
@@ -12,8 +14,10 @@ class SeleccionInicialController {
 		def Date fecha
 		if (params?.time)
 			fecha = new Date(params.time.toLong())
-		else
-			fecha = params.fecha
+		else if (params.fecha) {
+			def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
+			fecha = dateFormat.parse(params.fecha)
+		}
 		def Trayecto trayecto
 		List<PeticionesTren> peticionesTren = []
 		if (params.trayecto) {
@@ -24,12 +28,34 @@ class SeleccionInicialController {
 				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3], trayecto)
 			}
 		}
-		[trayectos: Trayecto.list(), trayecto: trayecto, fecha: fecha, trenes: peticionesTren]
+		[trayectos: Trayecto.list(), trayecto: trayecto, fecha: fecha?.format("dd/MM/yyyy"), trenes: peticionesTren]
+	}
+	
+	def trenes(Integer opcion) {
+		def Date fecha
+		if (params?.time)
+			fecha = new Date(params.time.toLong())
+		else if (params.fecha) {
+			def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
+			fecha = dateFormat.parse(params.fecha)
+		}
+		def Trayecto trayecto
+		List<PeticionesTren> peticionesTren = []
+		if (params.trayecto) {
+			trayecto = Trayecto.get(params.trayecto)
+			if (!opcion) {
+				peticionesTren = getPeticionesTrenes([fecha], trayecto)
+			} else if (opcion == 1) { //proximos tres dias
+				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3], trayecto)
+			}
+		}
+		[trenes: peticionesTren]
 	}
 
 	def proximos() {
-		def Date fecha = params.fecha
-		chain (action: "trayectos", params: [trayecto: params.trayecto, time : fecha.getTime(), opcion: 1])
+		def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
+		def fecha = dateFormat.parse(params.fecha)
+		chain (action: "trenes", params: [trayecto: params.trayecto, time : fecha.getTime(), opcion: 1])
 	}
 	
 	def detalle() {
@@ -43,13 +69,13 @@ class SeleccionInicialController {
 				sugeridos << it
 			}
 		}
-		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos]
+		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos, user: getAuthenticatedUser()]
 	}
 	
 	@Secured(['ROLE_USER'])
 	def peticion() {
 		Tren tren = Tren.get(params.id)
-		Peticion peticion = new Peticion(salida: tren.salida, user: getAuthenticatedUser())
+		Peticion peticion = new Peticion(salida: tren.salida, user: getAuthenticatedUser(), trayecto: tren.trayecto)
 		peticion.save(flush: true)
 	}
 	
@@ -59,14 +85,14 @@ class SeleccionInicialController {
 			session['lastURL'] += '/' + params.id
 		if (request.getQueryString())
 			session['lastURL'] += '?' + request.getQueryString()
-		println "Last URL: " + session['lastURL']
+		log.debug("Last URL: " + session['lastURL'])
 	}
 
 	private List<PeticionesTren> getPeticionesTrenes(List<Date> fechas, Trayecto trayecto) {
 		List<PeticionesTren> peticionesTren = []
 		List<Tren> trenesDia = trenesService.buscarTrenes(fechas, trayecto)
-		trenesDia.each {
-			peticionesTren << peticionesService.peticionesTren(it)
+		trenesDia.each { Tren tren ->
+			peticionesTren << peticionesService.peticionesTren(tren)
 		}
 		return peticionesTren
 	}

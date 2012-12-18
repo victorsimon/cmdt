@@ -2,14 +2,15 @@ package compartirmesadetren
 
 class ContentMD5 {
 
-	String key
+	String contentKey
 	String md5HexString
+	Long timeStamp
 	
     static constraints = {
-		key(unique: true)
+		contentKey(unique: true)
     }
 	
 	String toString() {
-		return key + " - [" + md5HexString + "]"
+		return contentKey + " - [" + md5HexString + "]"
 	}
 }

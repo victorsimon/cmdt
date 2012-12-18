@@ -1,15 +1,18 @@
 package compartirmesadetren
 
 import org.springframework.dao.DataIntegrityViolationException
+import grails.plugins.springsecurity.Secured
 
 class PeticionController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
+	@Secured(['ROLE_ADMIN'])
     def index() {
         redirect(action: "list", params: params)
     }
 
+	@Secured(['ROLE_ADMIN'])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 		def list = params.q? Peticion.search(params.q, params).results: Peticion.list(params)
@@ -17,10 +20,12 @@ class PeticionController {
         [peticionInstanceList: list, peticionInstanceTotal: total]
     }
 
+	@Secured(['ROLE_ADMIN'])
     def create() {
         [peticionInstance: new Peticion(params)]
     }
 
+	@Secured(['ROLE_ADMIN'])
     def save() {
         def peticionInstance = new Peticion(params)
         if (!peticionInstance.save(flush: true)) {
@@ -32,6 +37,7 @@ class PeticionController {
         redirect(action: "show", id: peticionInstance.id)
     }
 
+	@Secured(['ROLE_ADMIN'])
     def show(Long id) {
         def peticionInstance = Peticion.get(id)
         if (!peticionInstance) {
@@ -43,6 +49,7 @@ class PeticionController {
         [peticionInstance: peticionInstance]
     }
 
+	@Secured(['ROLE_ADMIN'])
     def edit(Long id) {
         def peticionInstance = Peticion.get(id)
         if (!peticionInstance) {
@@ -54,6 +61,7 @@ class PeticionController {
         [peticionInstance: peticionInstance]
     }
 
+	@Secured(['ROLE_ADMIN'])
     def update(Long id, Long version) {
         def peticionInstance = Peticion.get(id)
         if (!peticionInstance) {
@@ -83,6 +91,7 @@ class PeticionController {
         redirect(action: "show", id: peticionInstance.id)
     }
 
+	@Secured(['ROLE_ADMIN'])
     def delete(Long id) {
         def peticionInstance = Peticion.get(id)
         if (!peticionInstance) {

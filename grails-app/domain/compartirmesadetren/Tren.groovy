@@ -6,6 +6,7 @@ class Tren {
 	String nombre
 	Date salida 
 	Date llegada
+	boolean noValido 
 	static belongsTo = [trayecto:Trayecto]
 	static hasMany = [mesas:Mesa]
 	Date dateCreated
@@ -15,6 +16,7 @@ class Tren {
 		nombre(blank:false)
 		salida(unique: true, validator: {return (it > new Date() - 1)})
 		llegada(validator: {return (it > new Date() - 1)})
+		noValido()
 		trayecto()
 		mesas()
     }
@@ -27,13 +29,13 @@ class Tren {
 		return "${nombre}, ${salida.format('dd-MM-yyy HH:mm')}"
 	}
 	
-	static List<Tren> buscarPorDiaSalida(Long time) {
+	static List<Tren> buscarPorDiaSalida(Long time, Trayecto trayecto) {
 		def inicioDia = new GregorianCalendar()
 		inicioDia.time = new Date(time)
 		inicioDia.set(Calendar.HOUR_OF_DAY, 0)
 		inicioDia.set(Calendar.MINUTE, 0)
 		inicioDia.set(Calendar.MILLISECOND, 0)
 		def finDia = inicioDia.time + 1
-		return Tren.findAllBySalidaBetween(inicioDia.time, finDia)
+		return Tren.findAllBySalidaBetweenAndTrayecto(inicioDia.time, finDia, trayecto)
 	}
 }

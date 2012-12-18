@@ -3,11 +3,13 @@ package compartirmesadetren
 class Peticion {
 	
 	Date salida
+	Trayecto trayecto
 	User user
 
     static constraints = {
-		salida(blank: false)
-		user(blank: false)
+		salida(blank: false, nullable: false)
+		trayecto(blank: false, nullable: false)
+		user(blank: false, nullable: false)
     }
 	
 	String toString() {

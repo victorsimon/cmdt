@@ -6,7 +6,7 @@ if (typeof jQuery !== 'undefined') {
 			$(this).fadeOut();
 		});
 	})(jQuery);
-}
+} 
 
 /**
  * Hide the URL address bar on standard Android's browser by setting enough

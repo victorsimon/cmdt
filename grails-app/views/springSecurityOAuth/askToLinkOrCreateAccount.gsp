@@ -45,7 +45,7 @@
         <div class="errors">${flash.error}</div>
     </g:if>
 
-    <h4><g:message code="springSecurity.oauth.registration.link.not.exists" default="No user was found with this account." args="[session.springSecurityOAuthToken.providerName]"/></h4>
+    <h4><g:message code="springSecurity.oauth.registration.link.not.exists" default="No he encontrado un usuario para esta cuente." args="[session.springSecurityOAuthToken.providerName]"/></h4>
     <br/>
 
     <g:hasErrors bean="${createAccountCommand}">
@@ -56,17 +56,17 @@
 
     <g:form action="createAccount" method="post" autocomplete="off">
         <fieldset>
-            <legend><g:message code="springSecurity.oauth.registration.create.legend" default="Create a new account"/></legend>
+            <legend><g:message code="springSecurity.oauth.registration.create.legend" default="Crear una nueva"/></legend>
             <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'username', 'error')} ">
-                <label for='username'><g:message code="OAuthCreateAccountCommand.username.label" default="Username"/>:</label>
+                <label for='username'><g:message code="OAuthCreateAccountCommand.username.label" default="Usuario"/>:</label>
                 <g:textField name='username' value='${createAccountCommand?.username}'/>
             </div>
             <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'password1', 'error')} ">
-                <label for='password1'><g:message code="OAuthCreateAccountCommand.password1.label" default="Password"/>:</label>
+                <label for='password1'><g:message code="OAuthCreateAccountCommand.password1.label" default="Clave"/>:</label>
                 <g:passwordField name='password1' value='${createAccountCommand?.password1}'/>
             </div>
             <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'password2', 'error')} ">
-                <label for='password2'><g:message code="OAuthCreateAccountCommand.password2.label" default="Password re-type"/>:</label>
+                <label for='password2'><g:message code="OAuthCreateAccountCommand.password2.label" default="Re-introduzca la clave"/>:</label>
                 <g:passwordField name='password2' value='${createAccountCommand?.password2}'/>
             </div>
             <g:submitButton name="${message(code: 'springSecurity.oauth.registration.create.button', default: 'Create')}"/>
@@ -75,20 +75,20 @@
 
     <g:form action="linkAccount" method="post" autocomplete="off">
         <fieldset>
-            <legend><g:message code="springSecurity.oauth.registration.link.legend" default="Link to existing account"/></legend>
+            <legend><g:message code="springSecurity.oauth.registration.link.legend" default="Enlazar con una existente"/></legend>
             <div class="fieldcontain ${hasErrors(bean: linkAccountCommand, field: 'username', 'error')} ">
-                <label for='username'><g:message code="OAuthLinkAccountCommand.username.label" default="Username"/>:</label>
+                <label for='username'><g:message code="OAuthLinkAccountCommand.username.label" default="Usuario"/>:</label>
                 <g:textField name='username' value='${createAccountCommand?.username}'/>
             </div>
             <div class="fieldcontain ${hasErrors(bean: linkAccountCommand, field: 'password', 'error')} ">
-                <label for='password1'><g:message code="OAuthLinkAccountCommand.password.label" default="Password"/>:</label>
+                <label for='password1'><g:message code="OAuthLinkAccountCommand.password.label" default="Clave"/>:</label>
                 <g:passwordField name='password' value='${linkAccountCommand?.password}'/>
             </div>
             <g:submitButton name="${message(code: 'springSecurity.oauth.registration.link.button', default: 'Link')}"/>
         </fieldset>
     </g:form>
 
-    <g:link controller="login" action="auth"><g:message code="springSecurity.oauth.registration.back" default="Back to login page"/></g:link>
+    <g:link controller="login" action="auth"><g:message code="springSecurity.oauth.registration.back" default="Volver"/></g:link>
 </div>
 
 </body>

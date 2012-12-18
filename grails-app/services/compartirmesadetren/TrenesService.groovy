@@ -1,53 +1,65 @@
 package compartirmesadetren
 
-import org.cyberneko.html.parsers.SAXParser;
+import org.cyberneko.html.parsers.SAXParser
+//import java.util.concurrent.*
 
 class TrenesService {
 	
     def List<Tren> buscarTrenes(List<Date> salidas, Trayecto trayecto) {
 		def List<Tren> trenesDisponibles = []
-		def cookieSession = extraerCookieSession()
-		salidas.each { salida ->
-			def URLconsulta = componerURL(trayecto, salida)
-			def URLConnection conexion = conectarConCookieSession(URLconsulta, cookieSession)
-			def contenidoLimpio = limpiarContenido(conexion.content.text)
-			if (haCambiado(salida, contenidoLimpio)) {
-				//conexion = conectarConCookieSession(URLconsulta, cookieSession)
-				//def Map<String, String> trenesProgramados = extraerTrenes(conexion)
-				def Map<String, String> trenesProgramados = extraerTrenes(contenidoLimpio)
-				trenesProgramados.each {
-					//println it.value
-					def trenProgramado = it.value.split ("\\|")
-					def horaSalida = setHora(salida, trenProgramado[7].split("\\.")[0].toInteger(),
-						trenProgramado[7].split("\\.")[1].toInteger())
-					def horaLlegada = setHora(salida, trenProgramado[8].split("\\.")[0].toInteger(),
-						trenProgramado[8].split("\\.")[1].toInteger())
-					if (horaLlegada < horaSalida) //Ajustamos el dia si llega al día siguiente (la programación no da la info necesaria)
-						horaLlegada = horaLlegada + 1
-					
-					Tren tren = Tren.findBySalida(horaSalida.time)
-					if (!tren) {
-						tren = new Tren(nombre: trenProgramado[4] + '-' + trenProgramado[1],
-							salida: horaSalida.time,
-							llegada: horaLlegada.time,
-							trayecto: trayecto);
-						tren.save(flush: true)
-					}
-					if (tren.hasErrors())
-						println tren.errors
-					else
-						trenesDisponibles << tren
-					//println tren.toString() + " " + tren.id + " con salida " + tren.salida.time
-				}
-				borrarTrenes(salida, trayecto, trenesDisponibles)
-				guardarMD5(salida, contenidoLimpio)
-			} else {
-				trenesDisponibles.addAll(Tren.buscarPorDiaSalida(salida.time))
-			}		
+		salidas.each {salida ->
+			trenesDisponibles.addAll(Tren.buscarPorDiaSalida(salida.time, trayecto))
 		}
 		return trenesDisponibles
     }
+	
+	def extraerTrenesDisponiblesPorDia(Trayecto trayecto, List<Date> salidas) {
+		def cookieSession = extraerCookieSession()
+		salidas.each {salida ->
+			def List<Tren> trenesDisponiblesDia = []
+			def URLconsulta = componerURL(trayecto, salida)
+			def URLConnection conexion = conectarConCookieSession(URLconsulta, cookieSession)
+			def contenidoLimpio = limpiarContenido(conexion.content.text)
+			if (haCambiado(salida, trayecto, contenidoLimpio)) {
+				def Map<String, String> trenesProgramados = extraerTrenes(contenidoLimpio)
+				trenesProgramados.each {
+					convertirLineasEnTrenes(it.value, salida, trayecto)
+				}
+				guardarReferenciaDeCambio(salida, trayecto, contenidoLimpio)
+			}
+		}
+	}
 
+	private List convertirLineasEnTrenes(String source, Date salida, Trayecto trayecto) {
+		List trenes = []
+		def trenProgramado = source.split ("\\|")
+		def horaSalida = setHora(salida, trenProgramado[7].split("\\.")[0].toInteger(),
+				trenProgramado[7].split("\\.")[1].toInteger())
+		def horaLlegada = setHora(salida, trenProgramado[8].split("\\.")[0].toInteger(),
+				trenProgramado[8].split("\\.")[1].toInteger())
+		if (horaLlegada < horaSalida) //Ajustamos el dia si llega al día siguiente (la programación no da la info necesaria)
+			horaLlegada = horaLlegada + 1
+
+		Tren tren = Tren.findBySalida(horaSalida.time)
+		if (!tren) {
+			tren = crearTren (trenProgramado[4] + "-" + trenProgramado[1], horaSalida.time, horaLlegada.time, trayecto)
+		}
+		if (tren)
+			trenes.add(tren)
+		return trenes
+	}
+
+	private Tren crearTren(String nombre, Date salida, Date llegada, Trayecto trayecto){
+		Tren tren = new Tren(nombre: nombre,
+			salida: salida,
+			llegada: llegada,
+			trayecto: trayecto);
+		tren.save(flush: true)
+		if (tren.hasErrors())
+			log.error(tren.errors)
+		return tren
+	}
+	
 	private String limpiarContenido(String content) {
 		//content = content.replaceAll(/<!DOCTYPE.+>/, "<!DOCTYPE html>")
 		content = content.replaceAll(/id\s=\s"longHoy"\s+value="\d+"/, "COCODRILO")
@@ -55,39 +67,59 @@ class TrenesService {
 		return content
 	}
 	
-	private boolean haCambiado(Date fecha, String content) {
-		def nuevoMD5 = content.encodeAsMD5()
-		def key = fecha.format('dd-MM-yyyy')
-		//println nuevoMD5
-		def contentMD5 = ContentMD5.findByKey(key)
-		if (contentMD5) {
-			println "Hay para esa fecha"
-			if (nuevoMD5 == contentMD5.md5HexString) {
-				println "Es la misma"
-				return false
-			} else {
-				contentMD5.delete(flush: true)
+	private boolean haCambiado(Date fecha, Trayecto trayecto, String content) {
+		ContentMD5.withTransaction { status ->
+			def contentKey = fecha.format('dd-MM-yyyy') + ' - ' + trayecto
+			log.info(contentKey)
+			def contentMD5 = ContentMD5.findByContentKey(contentKey)
+			if (contentMD5) {
+				log.info("Hay para esa fecha")
+				def nuevoMD5 = content.encodeAsMD5()
+				if (nuevoMD5 == contentMD5.md5HexString) {
+					log.info("Es la misma")
+					return false
+				} else {
+					contentMD5.delete(flush: true)
+				}
 			}
+			log.info("Ha cambiado")
+			return true
 		}
-		println "Ha cambiado"
-		return true
 	}
 
-	private guardarMD5(Date fecha, String content) {
+	private boolean tengoDatosRecientes(Date fecha, Trayecto trayecto) {
+		ContentMD5.withTransaction { status ->
+			def contentKey = fecha.format('dd-MM-yyyy') + ' - ' + trayecto
+			log.info(contentKey)
+			def contentMD5 = ContentMD5.findByContentKey(contentKey)
+			if (contentMD5) {
+				log.info("Hay para esa fecha")
+				def currentTime = Calendar.instance
+				currentTime.add(Calendar.MINUTE, 30)
+				if (contentMD5.timeStamp < currentTime.time.time) {
+					log.info("Es reciente")
+					return true
+				}
+			}
+			log.info("Caducado")
+			return false
+		}
+	}
+
+	private guardarReferenciaDeCambio(Date fecha, Trayecto trayecto, String content) {
 		def nuevoMD5 = content.encodeAsMD5()
-		def key = fecha.format('dd-MM-yyyy')
-		def nuevoContentMD5 = new ContentMD5(key: key, md5HexString: nuevoMD5)
+		def contentKey = fecha.format('dd-MM-yyyy') + ' - ' + trayecto
+		def nuevoContentMD5 = new ContentMD5(contentKey: contentKey, md5HexString: nuevoMD5, timeStamp: new Date().time)
 		nuevoContentMD5.save()
 	}
 
-	private borrarTrenes(Date salida, Trayecto trayecto, List<Tren> trenesAMantener) {
-		def trenesBorrar = Tren.buscarPorDiaSalida(salida.time)
-		trenesBorrar.each {
-			if (!trenesAMantener.contains(it)) {
-				//println it.toString() + " " + it.id + " con salida " + it.salida.time + " borrado"	
-				it.delete(flush: true) 
-			} //else
-				//println it.toString() + " " + it.id + " con salida " + it.salida.time + " mantenido"
+	private marcarTrenesObsoletos(Date salida, Trayecto trayecto, List<Tren> trenesAMantener) {
+		def trenesBorrar = Tren.buscarPorDiaSalida(salida.time, trayecto)
+		trenesBorrar.each { Tren tren ->
+			if (!trenesAMantener.contains(tren)) {
+				tren.noValido = true
+			}
+			tren.save(flush: true)
 		}
 	}
 	
@@ -116,7 +148,7 @@ class TrenesService {
 	}
 
 	private Map<String, String> extraerTrenes(String busqueda) {
-		println "Parsing text"
+		log.info("Parsing text")
 		def parser = new SAXParser()
 		parser.setFeature("http://xml.org/sax/features/namespaces", false);
 		def slurper = new XmlSlurper(parser)

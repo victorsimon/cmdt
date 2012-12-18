@@ -31,7 +31,10 @@
 					
 						<g:sortableColumn property="salida" title="${message(code: 'peticion.salida.label', default: 'Salida')}" />
 					
-						<th><g:message code="peticion.user.label" default="User" /></th>
+						<g:sortableColumn property="trayecto" title="${message(code: 'peticion.trayecto.label', default: 'Trayecto')}" />
+						
+						<g:sortableColumn property="user" title="${message(code: 'peticion.user.label', default: 'Usuario')}" />
+						<!-- th><g:message code="peticion.user.label" default="User" /></th -->
 					
 					</tr>
 				</thead>
@@ -41,8 +44,10 @@
 					
 						<td><g:link action="show" id="${peticionInstance.id}">${fieldValue(bean: peticionInstance, field: "salida")}</g:link></td>
 					
-						<td><g:link action="show" id="${peticionInstance.id}">${fieldValue(bean: peticionInstance, field: "user")}</g:link></td>
+						<td><g:link action="show" id="${peticionInstance.id}">${fieldValue(bean: peticionInstance, field: "trayecto")}</g:link></td>
 					
+						<td><g:link action="show" id="${peticionInstance.id}">${fieldValue(bean: peticionInstance, field: "user")}</g:link></td>
+
 					</tr>
 				</g:each>
 				</tbody>

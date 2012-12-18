@@ -5,11 +5,11 @@ class DebugFilters {
     def filters = {
         all(controller:'*', action:'*') {
             before = {
-				print "DEBUG: ${actionUri} called"
+				log.debug("${actionUri} called")
 				if (session?.user?.login) {
-					println "DEBUG: by ${session.user.login} and role ${session.user.role}"
+					log.debug("by ${session.user.login} and role ${session.user.role}")
 				}
-				println "DEBUG: ${params}"
+				log.debug("${params}")
             }
             after = { Map model ->
 

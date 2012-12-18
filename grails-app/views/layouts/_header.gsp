@@ -1,6 +1,6 @@
 <div id="header">
 	<div>
-	<span><a class="header-main" href="${resource(dir:'')}">Compartir Mesa de Tren</a></span>
+	<span><a class="header-main" href="${resource(dir:'/')}">Compartir Mesa de Tren</a></span>
 	<span class="entrar">
 		<sec:ifLoggedIn>
 			<div class="bienvenida">Hola <sec:loggedInUserInfo field="username"/></div>
@@ -14,6 +14,7 @@
 			<g:link class="buttons" controller='login' action='auth'>Entrar</g:link>
 		</sec:ifNotLoggedIn>
 		<sec:ifLoggedIn>
+			<g:link class="buttons" controller='miCuenta'>Mi cuenta</g:link>
 			<g:link class="buttons" controller='logout'>Salir</g:link>
 		</sec:ifLoggedIn>
 	</span>

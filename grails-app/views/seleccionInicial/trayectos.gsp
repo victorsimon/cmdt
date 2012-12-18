@@ -28,7 +28,19 @@
 				list-style-position: inside;
 				margin: 0.25em 0;
 			}
-
+			
+			.spinner {
+				background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
+			    position: fixed;
+			    left: 50%;
+				top: 50%;
+				margin-left: -50px; /* half width of the spinner gif */
+			    margin-top: -50px; /* half height of the spinner gif */
+				text-align: center;
+				overflow: auto;
+				display: none;
+			}
+			
 			@media screen and (max-width: 480px) {
 				#status {
 					display: none;
@@ -43,28 +55,25 @@
 				}
 			}
 		</style>
+		<g:javascript library="jquery" />
+		<g:javascript library="jquery-ui" />
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main">
-			<g:form action="trayectos" method="post">
+			<g:form action="trenes" method="POST">
 				<fieldset class="form">
 					<h2>Selecciona el trayecto <g:select name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" /></h2>
-					<h2><g:datePicker name="fecha" value="${fecha}" precision="day" default="${new Date() + 2}" /></h2>
-					<h2>Selecciona por fecha <g:actionSubmit value="Buscar" action="trayectos" /></h2>
-					<h2>O vea los <g:actionSubmit value="proximos disponibles" action="proximos" /></h2>
+					<h2>Buscar <input type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}"></h2>
+					<h2>Selecciona por <g:submitToRemote url="[action: 'trenes']" update="panel" name="buscar" value="fecha"/></h2>
+					<h2>O vea los <g:submitToRemote url="[action: 'proximos']" update="panel" value="próximos disponibles" /></h2>
 				</fieldset>
-				<fieldset class="buttons">
-					<g:if test="${trenes}">
-						<h2>Trenes disponibles</h2>
-					</g:if>
-					<lu>
-						<g:each in="${trenes}" var="ptren">
-							<li style="margin: .75em;"><g:link action="detalle" id="${ptren.tren.id}">${ptren.tren} ${ptren.oportunidad} ${ptren.cuantosFaltan}</g:link></li>
-						</g:each>
-					</lu>
+				<fieldset id="panel" class="buttons">
 				</fieldset>
 			</g:form>
 		</div>
+	    <script type="text/javascript">
+        $(document).ready(function() { $.datepicker.regional['es'] = {closeText: 'Cerrar',prevText: '&#x3C;Ant',nextText: 'Sig&#x3E;',currentText: 'Hoy',monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],dayNames: ['Domingo','Lunes','Martes','Mi&#xE9;rcoles','Jueves','Viernes','S&#xE1;bado'],dayNamesShort: ['Dom','Lun','Mar','Mi&#xE9;','Juv','Vie','S&#xE1;b'],dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&#xE1;'],weekHeader: 'Sm',dateFormat: 'dd/mm/yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};$.datepicker.setDefaults($.datepicker.regional['es']);$("#fecha").datepicker($.datepicker.regional[ "es" ]);})
+	    </script>
 	</body>
 </html>

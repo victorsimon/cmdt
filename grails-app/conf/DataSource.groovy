@@ -3,6 +3,16 @@ dataSource {
     driverClassName = "org.h2.Driver"
     username = "sa"
     password = ""
+	properties {
+		maxActive = 50
+		maxIdle = 25
+		minIdle = 5
+		initialSize = 5
+		minEvictableIdleTimeMillis = 1000 * 60 * 10
+		timeBetweenEvictionRunsMillis = 1000 * 60 * 10
+		maxWait = 10000
+		validationQuery = "SELECT 1"
+	}
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -25,19 +35,26 @@ environments {
     }
     production {
         dataSource {
+		    driverClassName = "com.mysql.jdbc.Driver"
+		    username = "vsimon_cmdt"
+		    password = "sk3514"
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://compartirmesadetren.com:3306/vsimon_cmdt?autoreconnect=true"
+			dialect=org.hibernate.dialect.MySQLInnoDBDialect
+			autoreconnect = true
             pooled = true
-            properties {
-               maxActive = -1
-               minEvictableIdleTimeMillis=1800000
-               timeBetweenEvictionRunsMillis=1800000
-               numTestsPerEvictionRun=3
-               testOnBorrow=true
-               testWhileIdle=true
-               testOnReturn=true
-               validationQuery="SELECT 1"
-            }
+        }
+    }
+    sandbox {
+        dataSource {
+		    driverClassName = "com.mysql.jdbc.Driver"
+		    username = "vsimon_cmdt"
+		    password = "sk3514"
+            dbCreate = "update"
+            url = "jdbc:mysql://compartirmesadetren.com:3306/vsimon_cmdt_sandbox?autoreconnect=true"
+			dialect=org.hibernate.dialect.MySQLInnoDBDialect
+			autoreconnect = true
+            pooled = true
         }
     }
 }

@@ -10,7 +10,7 @@
 // if (System.properties["${appName}.config.location"]) {
 //    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
 // }
-
+grails.app.context = '/'
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 grails.mime.file.extensions = true // enables the parsing of file extensions from URLs into the request format
 grails.mime.use.accept.header = false
@@ -36,7 +36,7 @@ grails.mime.types = [
 grails.resources.adhoc.patterns = ['/images/*', '/css/*', '/js/*', '/plugins/*']
 
 // The default codec used to encode data with ${}
-grails.views.default.codec = "none" // none, html, base64
+grails.views.default.codec = "html" // none, html, base64
 grails.views.gsp.encoding = "UTF-8"
 grails.converters.encoding = "UTF-8"
 // enable Sitemesh preprocessing of GSP pages
@@ -47,7 +47,7 @@ grails.scaffolding.templates.domainSuffix = 'Instance'
 // Set to false to use the new Grails 1.2 JSONBuilder in the render method
 grails.json.legacy.builder = false
 // enabled native2ascii conversion of i18n properties files
-grails.enable.native2ascii = true
+grails.enable.native2ascii = false
 // packages to include in Spring bean scanning
 grails.spring.bean.packages = []
 // whether to disable processing of multi part requests
@@ -62,10 +62,24 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        grails.serverURL = "http://localhost:8080"
+		grails.compartirmesadetren.oauth.debug = true
+		grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
     }
     production {
         grails.logging.jul.usebridge = false
         grails.serverURL = "http://www.compartirmesadetren.com"
+		grails.compartirmesadetren.oauth.debug = false
+		grails.paypal.server = "https://www.paypal.com/cgi-bin/webscr"
+		grails.paypal.email = "vsimon.batanero@gmail.com"    
+	}
+    sandbox {
+        grails.logging.jul.usebridge = false
+        grails.serverURL = "http://www.compartirmesadetren.com/sandbox"
+		grails.compartirmesadetren.oauth.debug = false
+		grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
     }
 }
 
@@ -88,6 +102,8 @@ log4j = {
            'org.springframework',
            'org.hibernate',
            'net.sf.ehcache.hibernate'
+		   
+	info   'grails.app'
 }
 
 grails {
@@ -121,26 +137,28 @@ oauth {
 			key = '273808781997.apps.googleusercontent.com'
 			secret = 'sqLSQjpsIbsqJEOmc5l70F08'
 			scope = "https://www.googleapis.com/auth/userinfo.email"
-			callback = "http://localhost:8080/CompartirMesaDeTren/oauth/google/callback"
-			successUri = "http://localhost:8080/CompartirMesaDeTren/oauth/google/success"
-			failureUri = "http://localhost:8080/CompartirMesaDeTren/oauth/google/failure"
+			callback = grails.serverURL + "/oauth/google/callback"
+			successUri = grails.serverURL + "/oauth/google/success"
+			failureUri = grails.serverURL + "/oauth/google/failure"
 		}
 		twitter {
 			api = org.scribe.builder.api.TwitterApi
 			key = 'cjAf40dFHzj0Gk0m1vy6Kw'
 			secret = 'Aclu3EkYqJRwVaxgXiv8L688UEG207Xqd0O3usIq0W4'
-			callback = "http://localhost:8080/CompartirMesaDeTren/oauth/twitter/callback"
-			successUri = "http://localhost:8080/CompartirMesaDeTren/oauth/twitter/success"
-			failureUri = "http://localhost:8080/CompartirMesaDeTren/oauth/twitter/failure"
+			callback = grails.serverURL + "/oauth/twitter/callback"
+			successUri = grails.serverURL + "/oauth/twitter/success"
+			failureUri = grails.serverURL + "/oauth/twitter/failure"
 		}
 		facebook {
 			api = org.scribe.builder.api.FacebookApi
 			key = '130052670479745'
 			secret = 'e0fceabaa2121ade42939fdaab135fac'
-			callback = "http://localhost:8080/CompartirMesaDeTren/oauth/facebook/callback"
-			successUri = "http://localhost:8080/CompartirMesaDeTren/oauth/facebook/success"
-			failureUri = "http://localhost:8080/CompartirMesaDeTren/oauth/facebook/failure"
+			callback = grails.serverURL + "/oauth/facebook/callback"
+			successUri = grails.serverURL + "/oauth/facebook/success"
+			failureUri = grails.serverURL + "/oauth/facebook/failure"
 		}
 	}
 	debug = true
 }
+
+grails.resources.mappers.googleclosurecompiler.compilation_level = 'SIMPLE_OPTIMIZATIONS'

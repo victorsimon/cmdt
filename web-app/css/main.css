@@ -121,13 +121,16 @@ img {
 
 .spinner {
 	background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
-	height: 16px;
-	width: 16px;
-    padding: 0.5em;
-    position: absolute;
-    right: 0;
-	top: 0;
-	text-indent: -9999px;
+	height: 100px;
+	width: 100px;
+    position: fixed;
+    left: 50%;
+	top: 50%;
+	margin-left: -50px; /* half width of the spinner gif */
+    margin-top: -50px; /* half height of the spinner gif */
+	text-align: center;
+	overflow: auto;
+	display: none;
 }
 
 /* NAVIGATION MENU */
@@ -248,6 +251,14 @@ input, select, textarea {
 	border: 1px solid #cccccc;
 	font-size: 1em;
 	padding: 0.2em 0.4em;
+}
+
+input[type="submit"] {
+	cursor: pointer;
+}
+
+input[type="submit"]:hover {
+	color: #111;
 }
 
 select {
