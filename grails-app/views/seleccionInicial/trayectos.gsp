@@ -57,6 +57,11 @@
 		</style>
 		<g:javascript library="jquery" />
 		<g:javascript library="jquery-ui" />
+	    <script type="text/javascript">
+        b = function() {
+        	$("#buscar").click();
+        }
+	    </script>
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -64,9 +69,9 @@
 			<g:form action="trenes" method="POST">
 				<fieldset class="form">
 					<h2>Selecciona el trayecto <g:select name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" /></h2>
-					<h2>Buscar <input type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}"></h2>
-					<h2>Selecciona por <g:submitToRemote url="[action: 'trenes']" update="panel" name="buscar" value="fecha"/></h2>
-					<h2>O vea los <g:submitToRemote url="[action: 'proximos']" update="panel" value="próximos disponibles" /></h2>
+					<h2>Buscar para el día <input type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}" onchange="b();"></h2>
+					<div  style="display: none;"><g:submitToRemote id="buscar" url="[action: 'trenes']" update="panel" name="buscar" value="fecha" /></div>
+					<h2>O vea <g:submitToRemote url="[action: 'proximos']" update="panel" value="las ofertas disponibles" /></h2>
 				</fieldset>
 				<fieldset id="panel" class="buttons">
 				</fieldset>
@@ -74,6 +79,7 @@
 		</div>
 	    <script type="text/javascript">
         $(document).ready(function() { $.datepicker.regional['es'] = {closeText: 'Cerrar',prevText: '&#x3C;Ant',nextText: 'Sig&#x3E;',currentText: 'Hoy',monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],dayNames: ['Domingo','Lunes','Martes','Mi&#xE9;rcoles','Jueves','Viernes','S&#xE1;bado'],dayNamesShort: ['Dom','Lun','Mar','Mi&#xE9;','Juv','Vie','S&#xE1;b'],dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&#xE1;'],weekHeader: 'Sm',dateFormat: 'dd/mm/yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};$.datepicker.setDefaults($.datepicker.regional['es']);$("#fecha").datepicker($.datepicker.regional[ "es" ]);})
+        
 	    </script>
 	</body>
 </html>
