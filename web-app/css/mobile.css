@@ -36,7 +36,7 @@
 	}
 
 	input, textarea {
-		width: 100%;
+		width: auto;
 		   -moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 		    -ms-box-sizing: border-box;

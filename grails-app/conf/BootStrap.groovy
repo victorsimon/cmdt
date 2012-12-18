@@ -88,6 +88,38 @@ class BootStrap {
 						)
 					pamplonaMadrid.save()
 				}
+				break
+			case "sandbox":
+				if (!Role.findByAuthority('ROLE_ADMIN')) {
+					def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+					def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+					def testUser = new User(username: 'me', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
+					testUser.save(flush: true)
+					UserRole.create testUser, adminRole, true
+					UserRole.create testUser, userRole, true
+				}
+				if (!Estacion.findByNombre("Madrid (*)")) {
+					def madrid = new Estacion(nombre:"Madrid (*)", code:"MADRI")
+					madrid.save()
+	
+					def pamplona = new Estacion(nombre:"Pamplona", code:"80100")
+					pamplona.save()
+					
+					def madridPamplona = new Trayecto(
+						origen:madrid,
+						destino:pamplona,
+						precioMesa:94.2
+						)
+					madridPamplona.save()
+					
+					def pamplonaMadrid = new Trayecto(
+						origen:pamplona,
+						destino:madrid,
+						precioMesa:94.2
+						)
+					pamplonaMadrid.save()
+				}
+				break
 			default: break
 		}
     }

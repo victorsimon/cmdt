@@ -13,6 +13,14 @@
 				margin-bottom: 0.3em;
 				font-size: 1em;
 			}
+			
+			h2 div {
+				display: inline;
+			}
+
+			#fecha {
+				width: 100px;
+			}
 
 			p {
 				line-height: 1.5;
@@ -40,12 +48,19 @@
 				overflow: auto;
 				display: none;
 			}
-			
+						
 			div.info img {
 				display:inline;
-  				height: 2em;
-				width: 2em;
+				margin: 0 0 0 -4px;
+				padding: 0 0 0 0;
+  				height: 1.1em;
+				width: 1.1em;
 				vertical-align: bottom;
+				cursor: help;
+			}
+			
+			div.info input {
+				cursor: pointer;
 			}
 			
 			@media screen and (max-width: 480px) {
@@ -59,6 +74,11 @@
 
 				#page-body h1 {
 					margin-top: 0;
+				}				
+				
+				div.balloonTip {
+					font-size: small;
+					width: 150px;
 				}
 			}
 		</style>
@@ -76,17 +96,17 @@
 		<div id="page-body" role="main">
 			<g:form action="trenes" method="POST">
 				<fieldset class="form">
-					<h2><div id="info1" class="info">Selecciona el trayecto 
-					<g:select name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" />
+					<h2>Selecciona el trayecto 
+					<div id="info1" class="info"><g:select name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" />
 					<img src="images/info.png" alt="info"/>
 					</div></h2>
-					<h2><div id="info2" class="info">Buscar para el día 
-					<input type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}" onchange="b();">
+					<h2>Buscar para el día 
+					<div id="info2" class="info"><input type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}" onchange="b();">
 					<img src="images/info.png" alt="info"/>
 					</div></h2>
 					<div  style="display: none;"><g:submitToRemote id="buscar" url="[action: 'trenes']" update="panel" name="buscar" value="fecha" /></div>
-					<h2><div id="info3" class="info">O vea 
-					<g:submitToRemote url="[action: 'proximos']" update="panel" value="las ofertas disponibles" />
+					<h2>O vea 
+					<div id="info3" class="info"><g:submitToRemote url="[action: 'proximos']" update="panel" value="las ofertas disponibles" />
 					<img src="images/info.png" alt="info"/>
 					</div></h2>
 				</fieldset>
@@ -107,7 +127,8 @@
 	    	"<b>OPORTUNIDADES YA DISPONIBLES</b>.";
         $(document).ready(function() { 
             $.datepicker.regional['es'] = {closeText: 'Cerrar',prevText: '&#x3C;Ant',nextText: 'Sig&#x3E;',currentText: 'Hoy',monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],dayNames: ['Domingo','Lunes','Martes','Mi&#xE9;rcoles','Jueves','Viernes','S&#xE1;bado'],dayNamesShort: ['Dom','Lun','Mar','Mi&#xE9;','Juv','Vie','S&#xE1;b'],dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&#xE1;'],weekHeader: 'Sm',dateFormat: 'dd/mm/yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};$.datepicker.setDefaults($.datepicker.regional['es']);$("#fecha").datepicker($.datepicker.regional[ "es" ]);
-            $.balloon.defaults.position = 'top';
+            $.balloon.defaults.position = 'left';
+            $.balloon.defaults.classname = 'balloonTip';
             $.balloon.defaults.css = {
             	  minWidth: "20px",
             	  padding: "5px",
