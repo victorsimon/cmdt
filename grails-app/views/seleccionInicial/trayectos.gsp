@@ -57,7 +57,6 @@
 		</style>
 		<g:javascript library="jquery" />
 		<g:javascript library="jquery-ui" />
-		<g:helpBallons />
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
