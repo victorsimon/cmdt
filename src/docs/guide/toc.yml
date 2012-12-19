@@ -1,0 +1,9 @@
+﻿controlversiones:
+ title: Documento de Control de Versiones
+ introduccion:
+  title: Introducción
+  cambios: Control de cambios
+ versiones:
+  title: Control de versiones
+  identificacion: Identificación
+  lista: Lista de versiones

@@ -162,3 +162,14 @@ oauth {
 }
 
 grails.resources.mappers.googleclosurecompiler.compilation_level = 'SIMPLE_OPTIMIZATIONS'
+
+grails {
+	doc {
+		title = 'Compartir Mesa De Tren'
+		subtitle = 'Documentacion de proyecto'
+		authors = 'Victor Simon Batanero "victor.simon@compartirmesadetren.com"'
+		license = '-'
+		copyright = 'Contenido y soluciones para moviles, S.L.'
+		footer = ''
+	}
+}

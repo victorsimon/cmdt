@@ -58,6 +58,7 @@ class SeleccionInicialController {
 		chain (action: "trenes", params: [trayecto: params.trayecto, time : fecha.getTime(), opcion: 1])
 	}
 	
+	@Secured(['ROLE_USER'])
 	def detalle() {
 		Tren tren = Tren.get(params.id)
 		PeticionesTren peticionesTren = peticionesService.peticionesTren(tren)

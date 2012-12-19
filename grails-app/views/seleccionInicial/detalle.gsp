@@ -63,6 +63,12 @@
 				<h2><paypal:button itemName="${peticionesTren.tren.nombre}, ${peticionesTren.tren.trayecto}" 
 					itemNumber="${peticionesTren.tren.id}" amount="37,68" buyerId="${user.id}" 
 					discountAmount="0" params="[paymentaction: 'Authorization']" /></h2>
+				<p style="border: 1px solid black;">Datos de prueba para realizar la compra.<br/>
+				Credit card:<br/>
+				- Visa 4073774447610449<br />
+				- Exp. date 11/2017<br />
+				- CVV2 123<br />
+				</p>
 			</fieldset>
 			<fieldset class="buttons">
 				<g:if test="${sugeridos}">
