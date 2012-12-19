@@ -1,0 +1,13 @@
+﻿{warning}
+Pendiente
+{warning}
+
+{table}
+*ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
+BUG-002 | Plantilla mail nuevo usuario en Castellano | 19/12/2012 | - | -
+{table}
+
+h3. Origen
+Reportado por Isabel Berruezo vía mail
+h3. Detalle
+El mail enviado para la confirmación de la identidad de quien quiere crear un nuevo usuario en el sistema debería estar en Castellano.

@@ -1,0 +1,11 @@
+﻿{warning}
+Pendiente
+{warning}
+
+{table}
+*ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
+BUG-001 | Descripción corta | Fecha de alta | Fecha de resolución | Número de versión que lo incorpora
+{table}
+
+* Origen
+* Detalle

@@ -1,0 +1,13 @@
+﻿{note}
+Aprobada 19/12/2012
+{note}
+{table}
+*ID* | *Descripción* | *Alta* | *Finalización* | *Versión*
+REQ-001 | Crear un nuevo usuario de cada vinculación a una cuenta OAuth | 19/12/2012 | - | -
+{table}
+
+h3. Origen
+Solicitado por Isabel Berruezo vía mail
+h3. Detalle
+Desde el login, se usa una cuenta existente en Twitter, FB o G+ para acceder a la app. Tras conceder acceso con una de esas cuentas se solicita al usuario que vincule dicha cuenta a una de CMDT o, si aún no dispone de una, cree una nueva cuanta y la vincule. 
+Se solicita que no se proporcione dichas opciones y que cada vez que se vincule se cree un usuario de forma automática.

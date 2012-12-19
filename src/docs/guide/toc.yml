@@ -3,6 +3,17 @@
  introduccion:
   title: Introducción
   cambios: Control de cambios
+ requisitos:
+  title: Requerimientos
+  reqtemplate: Plantilla de requerimiento
+  req-001: REG-001 Crear un nuevo usuario de cada vinculación a una cuenta OAuth
+  req-002: REQ-002 Bajar las restricciones para el password
+ bugs:
+  title: Reporte de bugs
+  bugtemplate: Plantilla de bug reportado
+  bug-001: BUG-001 Nuevo usuario vinculado a cuenta OAuth
+  bug-002: BUG-002 Plantilla mail nuevo usuario en Castellano
+  bug-003: BUG-003 Creación de un usuario
  versiones:
   title: Control de versiones
   identificacion: Identificación
