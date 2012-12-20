@@ -1,0 +1,13 @@
+﻿Aprobada 19/12/2012
+Iniciada 19/12/2012
+Finalizada
+
+{table}
+*ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
+REQ-003 | Ayuda contextual con click en icono | 19/12/2012 | 19/12/2012 | -
+{table}
+
+h3. Origen
+Solicitado por Isabel Berruezo en conversación.
+h3. Detalle
+La funcionalidad actual reacciona al pasar sobre el icono.

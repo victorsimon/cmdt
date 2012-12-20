@@ -1,7 +1,17 @@
-﻿{table}
+﻿{note}
+Aprobada 19/12/2012
+{note}
+
+{table}
 *ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
 REQ-001 | Descripción corta | Fecha de alta | Fecha de resolución | Número de versión que lo incorpora
 {table}
 
-* Origen
-* Detalle
+h3. Origen
+h3. Detalle
+
+{note}
+h3. Dependencias
+* [REQ|guide:reqtemplate] o [BUG|guide:bugtemplate]
+* ...
+{note}

@@ -1,6 +1,6 @@
-﻿{warning}
-Pendiente
-{warning}
+﻿{note}
+Retirado por [REQ-001|guide:req-001]
+{note}
 
 {table}
 *ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
@@ -11,8 +11,3 @@ h3. Origen
 Reportado por Isabel Berruezo vía mail
 h3. Detalle
 Desde el login, se usa una cuenta existente en Twitter, FB o G+ para acceder a la app. Tras conceder acceso con una de esas cuentas se solicita al usuario que vincule dicha cuenta a una de CMDT o, si aún no dispone de una, cree una nueva cuanta y la vincule. Esta última opción de crear y vincular no funciona y no muestra ningún error.
-
-{note}
-h3. Dependencias
-[REQ-001|guide:req-001]
-{note}

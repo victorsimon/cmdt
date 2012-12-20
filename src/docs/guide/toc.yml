@@ -8,6 +8,7 @@
   reqtemplate: Plantilla de requerimiento
   req-001: REG-001 Crear un nuevo usuario de cada vinculación a una cuenta OAuth
   req-002: REQ-002 Bajar las restricciones para el password
+  req-003: REQ-003 Ayuda contextual con click en icono
  bugs:
   title: Reporte de bugs
   bugtemplate: Plantilla de bug reportado

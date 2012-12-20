@@ -98,7 +98,7 @@
 				<fieldset class="form">
 					<h2>Selecciona el trayecto 
 					<div id="info1" class="info"><g:select name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" />
-					<img src="images/info.png" alt="info"/>
+					<img src="images/info.png" alt="info" />
 					</div></h2>
 					<h2>Buscar para el día 
 					<div id="info2" class="info"><input type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}" onchange="b();">
@@ -125,6 +125,14 @@
 	    var info3 = "Si tienes flexibilidad de fechas…<br/>" +
 	    	"¡este es tu apartado! No dejes de mirar las<br/>" + 
 	    	"<b>OPORTUNIDADES YA DISPONIBLES</b>.";
+		prepareBalloon = function(id, text) {
+	        $(id).click(function(e) {
+					$(this).showBalloon({contents: text});
+				});
+			$(id).mouseleave(function(e) {
+					$(this).hideBalloon();
+				});
+		}
         $(document).ready(function() { 
             $.datepicker.regional['es'] = {closeText: 'Cerrar',prevText: '&#x3C;Ant',nextText: 'Sig&#x3E;',currentText: 'Hoy',monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],dayNames: ['Domingo','Lunes','Martes','Mi&#xE9;rcoles','Jueves','Viernes','S&#xE1;bado'],dayNamesShort: ['Dom','Lun','Mar','Mi&#xE9;','Juv','Vie','S&#xE1;b'],dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&#xE1;'],weekHeader: 'Sm',dateFormat: 'dd/mm/yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};$.datepicker.setDefaults($.datepicker.regional['es']);$("#fecha").datepicker($.datepicker.regional[ "es" ]);
             $.balloon.defaults.position = 'left';
@@ -141,9 +149,9 @@
             	  zIndex: "32767",
             	  textAlign: "left"
             };
-	        $('#info1 img').balloon({contents: info1});
-	        $('#info2 img').balloon({contents: info2});
-	        $('#info3 img').balloon({contents: info3});
+			prepareBalloon('#info1 img', info1);
+			prepareBalloon('#info2 img', info2);
+			prepareBalloon('#info3 img', info3);
         })
 	    </script>
 	</body>

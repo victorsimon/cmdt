@@ -1,11 +1,20 @@
 ﻿{warning}
 Pendiente
 {warning}
+{note}
+Retirado por [REQ|guide:reqtemplate] o [BUG|guide:bugtemplate]
+{note}
 
 {table}
 *ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
 BUG-001 | Descripción corta | Fecha de alta | Fecha de resolución | Número de versión que lo incorpora
 {table}
 
-* Origen
-* Detalle
+h3. Origen
+h3. Detalle
+
+{note}
+h3. Dependencias
+* [REQ|guide:reqtemplate] o [BUG|guide:bugtemplate]
+* ...
+{note}
