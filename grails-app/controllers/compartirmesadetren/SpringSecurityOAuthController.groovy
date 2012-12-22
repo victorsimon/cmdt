@@ -74,11 +74,20 @@ class SpringSecurityOAuthController {
             // internal account or link to an existing one.
             session[SPRING_SECURITY_OAUTH_TOKEN] = oAuthToken
 
+			def username = oAuthToken.principal
+			while (User.countByUsername(username) > 0) {
+				username = username + '_1' 
+			}
+			
+			def command = [username: username]
+			render view: 'askToLinkOrCreateAccount', model: [createAccountCommand: command]
+			/*
             def redirectUrl = SpringSecurityUtils.securityConfig.oauth.registration.askToLinkOrCreateAccountUri
             assert redirectUrl, "grails.plugins.springsecurity.oauth.registration.askToLinkOrCreateAccountUri" +
                     " configuration option must be set!"
             log.debug "Redirecting to askToLinkOrCreateAccountUri: ${redirectUrl}"
             redirect(redirectUrl instanceof Map ? redirectUrl : [uri: redirectUrl])
+            */
         }
     }
 
@@ -128,7 +137,7 @@ class SpringSecurityOAuthController {
         return
     }
 
-    def createAccount = { OAuthCreateAccountCommand command ->
+    def createAccount = { CMDTCreateAccountCommand command ->
         OAuthToken oAuthToken = session[SPRING_SECURITY_OAUTH_TOKEN]
         assert oAuthToken, "There is no auth token in the session!"
 
@@ -136,8 +145,9 @@ class SpringSecurityOAuthController {
             if (!springSecurityService.loggedIn) {
                 def config = SpringSecurityUtils.securityConfig
 
+				int password = new Date().time % 10000 
                 boolean created = command.validate() && User.withTransaction { status ->
-                    User user = new User(username: command.username, password: command.password1, enabled: true)
+                    User user = new User(username: command.username, password: password, email: command.email, phoneNumber: command.phoneNumber, enabled: true)
                     OAuthID oauthID = new OAuthID(provider: oAuthToken.providerName, accessToken: oAuthToken.socialId, user: user)
 
                     // updateUser(user, oAuthToken)
@@ -181,7 +191,7 @@ class SpringSecurityOAuthController {
     protected OAuthToken createAuthToken(providerName, scribeToken) {
         def providerService = grailsApplication.mainContext.getBean("${providerName}SpringSecurityOAuthService")
         OAuthToken oAuthToken = providerService.createAuthToken(scribeToken)
-
+		
         def oAuthID = OAuthID.findByProviderAndAccessToken(oAuthToken.providerName, oAuthToken.socialId)
         if (oAuthID) {
             updateOAuthToken(oAuthToken, oAuthID.user)
@@ -343,6 +353,31 @@ class SpringSecurityOAuthController {
         redirect(redirectUrl instanceof Map ? redirectUrl : [uri: redirectUrl])
     }
 
+}
+
+class CMDTCreateAccountCommand {
+	
+	String username
+	String email
+	String email2
+	String phoneNumber
+
+    static constraints = {
+        username blank: false, validator: { String username, command ->
+            User.withNewSession { session ->
+                if (username && User.countByUsername(username)) {
+                    return 'OAuthCreateAccountCommand.username.error.unique'
+                }
+            }
+        }
+        email blank: false, email: true
+        email2 nullable: true, blank: true, validator: { email2, command ->
+            if (command.email != email2) {
+                return 'OAuthCreateAccountCommand.password.error.mismatch'
+            }
+        }
+		
+    }
 }
 
 class OAuthCreateAccountCommand {

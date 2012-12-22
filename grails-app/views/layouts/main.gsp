@@ -20,6 +20,9 @@
 		<link rel="shortcut icon" href="${resource(dir: 'images', file: 'cmdt_logo.jpg')}" type="image/x-icon">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
 		<link rel="stylesheet" href="${resource(dir: 'css', file: 'mobile.css')}" type="text/css">
+		<g:javascript library="jquery" />
+		<g:javascript library="jquery-ui" />
+		<g:javascript library="jquery-balloon" />
 		<g:layoutHead/>
 		<r:layoutResources />
 	</head>

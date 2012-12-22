@@ -124,8 +124,9 @@ grails {
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'compartirmesadetren.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'compartirmesadetren.UserRole'
 grails.plugins.springsecurity.authority.className = 'compartirmesadetren.Role'
-grails.plugins.springsecurity.ui.password.validationRegex = ''
+grails.plugins.springsecurity.ui.password.validationRegex = '^.*$'
 grails.plugins.springsecurity.ui.password.minLength = 4
+grails.plugins.springsecurity.ui.encodePassword = false
 
 // Added by the Spring Security OAuth plugin:
 grails.plugins.springsecurity.oauth.domainClass = 'compartirmesadetren.OAuthID'
@@ -159,6 +160,7 @@ oauth {
 		}
 	}
 	debug = true
+	registration.roleNames = ['ROLE_USER']
 }
 
 grails.resources.mappers.googleclosurecompiler.compilation_level = 'SIMPLE_OPTIMIZATIONS'
@@ -173,3 +175,37 @@ grails {
 		footer = ''
 	}
 }
+
+security {
+	ui {
+		register {
+			emailBody = '''\
+Hi $user.username,<br/>
+<br/>
+You (or someone pretending to be you) created an account with this email address.<br/>
+<br/>
+If you made the request, please click&nbsp;<a href="$url">here</a> to finish the registration.
+'''
+			emailFrom = 'noreply@compartirmesadetren.com'
+			emailSubject = 'New Account'
+			defaultRoleNames = ['ROLE_USER']
+			postRegisterUrl = null // use defaultTargetUrl if not set
+		}
+
+		forgotPassword {
+			emailBody = '''\
+Hi $user.username,<br/>
+<br/>
+You (or someone pretending to be you) requested that your password be reset.<br/>
+<br/>
+If you didn't make this request then ignore the email; no changes have been made.<br/>
+<br/>
+If you did make the request, then click <a href="$url">here</a> to reset your password.
+'''
+			emailFrom = 'noreply@compartirmesadetren.com'
+			emailSubject = 'Password Reset'
+			postResetUrl = null // use defaultTargetUrl if not set
+		}
+	}
+}
+

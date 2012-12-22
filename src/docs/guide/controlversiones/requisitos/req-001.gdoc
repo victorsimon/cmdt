@@ -1,11 +1,10 @@
-﻿{note}
-* Aprobada 19/12/2012
+﻿* Aprobada 19/12/2012
 * Iniciada 19/12/2012
-{note}
+* Finalizada
 
 {table}
 *ID* | *Descripción* | *Alta* | *Finalización* | *Versión*
-REQ-001 | Crear un nuevo usuario de cada vinculación a una cuenta OAuth | 19/12/2012 | - | -
+REQ-001 | Crear un nuevo usuario de cada vinculación a una cuenta OAuth | 19/12/2012 | 20/12/2012 | -
 {table}
 
 h3. Origen

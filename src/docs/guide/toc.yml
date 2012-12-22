@@ -3,19 +3,23 @@
  introduccion:
   title: Introducción
   cambios: Control de cambios
+ versiones:
+  title: Control de versiones
+  identificacion: Identificación
+  lista: Lista de versiones
  requisitos:
   title: Requerimientos
   reqtemplate: Plantilla de requerimiento
-  req-001: REG-001 Crear un nuevo usuario de cada vinculación a una cuenta OAuth
+  req-001: REQ-001 Crear un nuevo usuario de cada vinculación a una cuenta OAuth
   req-002: REQ-002 Bajar las restricciones para el password
   req-003: REQ-003 Ayuda contextual con click en icono
+  req-004: REQ-004 El usuario puede darnos su tlfn
+  req-005: REQ-005 Normalizar la apariencia de todas las pantallas
  bugs:
   title: Reporte de bugs
   bugtemplate: Plantilla de bug reportado
   bug-001: BUG-001 Nuevo usuario vinculado a cuenta OAuth
   bug-002: BUG-002 Plantilla mail nuevo usuario en Castellano
   bug-003: BUG-003 Creación de un usuario
- versiones:
-  title: Control de versiones
-  identificacion: Identificación
-  lista: Lista de versiones
+  
+  

@@ -7,6 +7,7 @@ class User {
 	String username
 	String password
 	String email
+	String phoneNumber
 	boolean enabled
 	boolean accountExpired
 	boolean accountLocked
@@ -16,6 +17,7 @@ class User {
 		username blank: false, unique: true
 		password blank: false
 		email blank: false, nullable: false, email: true
+		phoneNumber blank: true, nullable: true
 	}
 
 	static mapping = {
@@ -37,7 +39,7 @@ class User {
 	}
 
 	protected void encodePassword() {
-		password = springSecurityService.encodePassword(password)
+		password = springSecurityService.encodePassword(password, null)
 	}
 	
 	String toString() {

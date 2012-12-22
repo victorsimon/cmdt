@@ -1,0 +1,15 @@
+﻿* Aprobada 19/12/2012
+* Iniciada 19/12/2012
+* Finalizada
+
+{table}
+*ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
+REQ-004 | El usuario puede darnos su tlfn | 19/12/2012 | 19/12/2012 | -
+{table}
+
+h3. Origen
+Solicitado por Victor Simon
+h3. Detalle
+Para contactar con el usuario se utiliza como medio principal el mail. 
+Se desea dar la posibilidad al usuario de proporcionar un número de teléfono para casos de urgencia.
+

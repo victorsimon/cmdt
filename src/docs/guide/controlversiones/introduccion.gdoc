@@ -1,1 +1,6 @@
-﻿Hola mundo
+﻿La aplicación maneja actualmente tres entornos y multiples funcionalidades. Con el fin de documentar cada versión, se crea este documento.
+Los entornos actuales son:
+* Desarrollo: Estandar en las aplicaciones grails, se identifica como dev.
+* Sandbox: Entorno gemelo de un despliegue real para testear funcionalidades, permitir pruebas de concepto, etc, etc. Se identifica como sandbox, y debe invocarse en grails añadiendo -Dgrails.env=sandbox
+* Prodducción: Destinado a despliegues en producción, es estandar de las aplicaciones grails.
+

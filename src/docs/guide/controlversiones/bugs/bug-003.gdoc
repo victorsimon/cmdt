@@ -1,10 +1,6 @@
-﻿{warning}
-Pendiente
-{warning}
-
-{table}
+﻿{table}
 *ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
-BUG-003 | Creación de un usuario | 19/12/2012 | - | -
+BUG-003 | Creación de un usuario | 19/12/2012 | 20/12/2012 | -
 {table}
 
 h3. Origen

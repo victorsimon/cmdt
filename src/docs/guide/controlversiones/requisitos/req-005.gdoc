@@ -1,0 +1,13 @@
+﻿* Aprobada 20/12/2012
+* Iniciada 20/12/2012
+
+{table}
+*ID* | *Descripción* | *Alta* | *Resolución* | *Versión*
+REQ-005 | Normalizar la apariencia de todas las pantallas | 20/12/2012 | - | -
+{table}
+
+h3. Origen
+Solicitado por Victor Simon
+h3. Detalle
+Establecer unas pautas de normalización para la creación de los formularios y pantallas de la aplicación.
+Crear un documento

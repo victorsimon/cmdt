@@ -31,8 +31,8 @@
 	/* slightly smaller margin around content body */
 	fieldset,
 	.property-list {
-		padding: 0.25em .25em .25em .25em;
-		margin: 0.25em .25em .25em .25em;
+		width: auto;
+		font-size: .80em;
 	}
 
 	input, textarea {
@@ -60,16 +60,6 @@
 	/* stack form elements */
 	.fieldcontain {
 		margin-top: 0.3em;
-	}
-
-	.fieldcontain label,
-	.fieldcontain .property-label,
-	.fieldcontain .property-value {
-		display: block;
-		float: none;
-		margin: 0 0 0.5em 0;
-		text-align: left;
-		width: auto;
 	}
 
 	.errors ul,

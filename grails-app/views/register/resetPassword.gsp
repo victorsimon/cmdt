@@ -1,38 +1,80 @@
 <html>
 
 <head>
-<title><g:message code='spring.security.ui.resetPassword.title'/></title>
-<meta name='layout' content='register'/>
+    <meta name='layout' content='main'/>
+    <style type="text/css" media="screen">
+		h3, h4, p {
+			text-align: center;
+		}
+		
+		fieldset.property-list {
+			width: auto;
+		}
+
+		.fieldcontain .property-label {
+			float: left;
+		}
+		
+		.fieldcontain .property-value {
+			margin: 1px 0 0 0;
+			float: none;
+		}
+
+		.fieldcontain img.property-info {
+			float: left;
+			margin: 4px 0 0 0;
+		}
+
+		div.balloonTip {
+			font-size: medium;
+			width: 300px;
+		}
+
+		@media screen and (max-width: 480px) {
+			div.balloonTip {
+				font-size: small;
+				width: 200px;
+			}
+		}
+    </style>
 </head>
 
 <body>
 
 <p/>
-
-<s2ui:form width='475' height='250' elementId='resetPasswordFormContainer'
-           titleCode='spring.security.ui.resetPassword.header' center='true'>
-
+<div class="page-body">
 	<g:form action='resetPassword' name='resetPasswordForm' autocomplete='off'>
 	<g:hiddenField name='t' value='${token}'/>
-	<div class="sign-in">
+	<fieldset class="property-list">
 
 	<br/>
-	<h4><g:message code='spring.security.ui.resetPassword.description'/></h4>
+	<h4><g:message code='compartirmesadetren.oauth.resetpassword.update.description' default="Ya solo te queda un paso más. Introduce tu nueva clave."/></h4>
 
-	<table>
-		<s2ui:passwordFieldRow name='password' labelCode='resetPasswordCommand.password.label' bean="${command}"
-                             labelCodeDefault='Password' value="${command?.password}"/>
+		<g:hasErrors bean="${command}">
+			<ul class="errors" role="alert">
+				<g:eachError bean="${command}" var="error">
+					<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
+				</g:eachError>
+			</ul>
+		</g:hasErrors>
 
-		<s2ui:passwordFieldRow name='password2' labelCode='resetPasswordCommand.password2.label' bean="${command}"
-                             labelCodeDefault='Password (again)' value="${command?.password2}"/>
-	</table>
+        <div class="fieldcontain ${hasErrors(bean: command, field: 'password', 'error')}" >
+			<label class="property-label" for="password"><g:message code='compartirmesadetren.oauth.resetpassword.password' default="Clave"/></label>
+			<g:passwordField class="property-value" name="password" size="25" />
+		</div>
+        <div class="fieldcontain ${hasErrors(bean: command, field: 'password2', 'error')}" >
+			<label class="property-label" for="password2"><g:message code='compartirmesadetren.oauth.resetpassword.password' default="Repita la clave"/></label>
+			<g:passwordField class="property-value" name="password2" size="25" />
+		</div>
 
-	<s2ui:submitButton elementId='reset' form='resetPasswordForm' messageCode='spring.security.ui.resetPassword.submit'/>
+	    <div class="fieldcontain" style="text-align: center;">
+		    <g:link class="buttons" controller="login" action="auth"><g:message code="compartirmesadetren.oauth.resetpassword.cancel" default="Cancelar"/></g:link>
+	        <g:submitButton class="buttons" id="reset" name="${message(code: 'compartirmesadetren.oauth.resetpassword.update', default: 'Actualiza mi clave')}"/>
+	    </div>
 
-	</div>
+	</fieldset>
 	</g:form>
-
-</s2ui:form>
+</div>
 
 <script>
 $(document).ready(function() {

@@ -3,57 +3,82 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+    <meta name='layout' content='main'/>
+    <style type="text/css" media="screen">
+		h3, h4, p {
+			text-align: center;
+		}
+		
+		fieldset.property-list {
+			width: auto;
+		}
+
+		.fieldcontain .property-label {
+			float: left;
+		}
+		
+		.fieldcontain .property-value {
+			margin: 1px 0 0 0;
+			float: none;
+		}
+
+		.fieldcontain img.property-info {
+			float: left;
+			margin: 4px 0 0 0;
+		}
+
+		.fieldcontain .buttons {
+			margin: 1em 0 0 0;
+		}
+
+		div.balloonTip {
+			font-size: medium;
+			width: 300px;
+		}
+
+		@media screen and (max-width: 480px) {
+			div.balloonTip {
+				font-size: small;
+				width: 200px;
+			}
+		}
+	</style>
 	</head>
 	<body>
-		<a href="#show-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-			</ul>
-		</div>
-		<div id="show-user" class="content scaffold-show" role="main">
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list user">
+		<div class="page-body" role="main">
+		<form action="cambiar">
+			<fieldset class="property-list">
+				<g:if test="${flash.message}">
+				<div class="message" role="status">${flash.message}</div>
+				</g:if>
 			
-				<li class="fieldcontain">
-					<span id="username-label" class="property-label"><g:message code="user.username.label" default="Nombre" /></span>
-					
-						<span class="property-value" aria-labelledby="username-label"><g:fieldValue bean="${userInstance}" field="username"/></span>
-					
-				</li>
+				<div class="fieldcontain">
+					<label class="property-label"><g:message code="user.username.label" default="Nombre" /></label>
+					<input class="property-value" value="<g:fieldValue bean="${userInstance}" field="username"/>" disabled="disabled" />
+				</div>
 			
-				<li class="fieldcontain">
-					<span class="property-label buttons">
-						<g:link class="edit" action="changePassword" id="${userInstance?.id}"><g:message code="default.button.changepassword.label" default="Cambiar clave" /></g:link>
-					</span>
-				</li>
+				<div class="fieldcontain">
+					<label class="property-label"><g:message code="user.email.label" default="E-mail" /></label>
+					<input class="property-value" value="<g:fieldValue bean="${userInstance}" field="email"/>" disabled="disabled" />
+				</div>
 			
-				<li class="fieldcontain">
-					<span class="property-label buttons">
-						<g:link class="edit" action="changeEmail" id="${userInstance?.id}"><g:message code="default.button.changeemail.label" default="Cambiar email" /></g:link>
-					</span>
-				
-				</li>
+				<div class="fieldcontain">
+					<label class="property-label"><g:message code="user.phoneNumber.label" default="Teléfono" /></label>
+					<input class="property-value" value="<g:fieldValue bean="${userInstance}" field="phoneNumber"/>-" disabled="disabled" />
+				</div>
 			
-				<li class="fieldcontain">
-					<span class="property-label buttons">
-						<g:link class="list" action="listRequest" id="${userInstance?.id}"><g:message code="default.button.listrequest.label" default="Peticiones pendientes" /></g:link>
-					</span>
-				
-				</li>
+				<div class="fieldcontain" style="text-align: center; padding: .5em;">
+						<g:link class="buttons" controller="cambiarPassword" ><g:message code="default.button.changepassword.label" default="Cambiar clave" /></g:link>
+						<g:link class="buttons" action="changeEmail" id="${userInstance?.id}"><g:message code="default.button.changeemail.label" default="Cambiar email" /></g:link>
+				</div>
+			
+				<div class="fieldcontain" style="text-align: center; padding: .5em;">
+						<g:link class="buttons" action="listRequest" id="${userInstance?.id}"><g:message code="default.button.listrequest.label" default="Peticiones pendientes" /></g:link>
+						<g:link class="buttons" action="listClosed" id="${userInstance?.id}"><g:message code="default.button.listclosed.label" default="Peticiones anteriores." /></g:link>
+				</div>
 
-				<li class="fieldcontain">
-					<span class="property-label buttons">
-						<g:link class="list" action="listClosed" id="${userInstance?.id}"><g:message code="default.button.listclosed.label" default="Peticiones anteriores" /></g:link>
-					</span>
-				
-				</li>
-
-			</ol>
+			</fieldset>
+		</form>
 		</div>
 	</body>
 </html>

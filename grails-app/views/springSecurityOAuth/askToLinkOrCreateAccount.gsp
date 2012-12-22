@@ -1,53 +1,50 @@
+<!DOCTYPE html>
+<html>
 <head>
     <meta name='layout' content='main'/>
-    <style type="text/css">
-    fieldset {
-        border: 1px solid gray;
-        padding: 1em;
-        font: 80%/1 sans-serif;
-    }
+    <style type="text/css" media="screen">
+		h3, h4, p {
+			text-align: center;
+		}
+		
+		fieldset.property-list {
+			width: auto;
+		}
 
-    fieldset legend {
-        padding: 0.2em 0.5em;
-        border: 1px solid gray;
-        color: green;
-        font-weight: bold;
-        font-size: 90%;
-        text-align: right;
-    }
+		.fieldcontain .property-label {
+			float: left;
+		}
+		
+		.fieldcontain .property-value {
+			margin: 1px 0 0 0;
+			float: none;
+		}
 
-    fieldset label {
-        float: left;
-        width: 25%;
-        margin-top: 5px;
-        margin-right: 0.5em;
-        padding-top: 0.2em;
-        text-align: right;
-        font-weight: bold;
-    }
+		.fieldcontain img.property-info {
+			float: left;
+			margin: 4px 0 0 0;
+		}
 
-    fieldset input[type="submit"] {
-        float: right;
-        background: #F0F0F0;
-        cursor: pointer;
-    }
+		div.balloonTip {
+			font-size: medium;
+			width: 300px;
+		}
 
-    fieldset br {
-        margin-top: 10px;
-    }
+		@media screen and (max-width: 480px) {
+			div.balloonTip {
+				font-size: small;
+				width: 200px;
+			}
+		}
     </style>
 </head>
 
 <body>
 
-<div class='body' >
+<div class="page-body">
     <g:if test='${flash.error}'>
         <div class="errors">${flash.error}</div>
     </g:if>
-
-    <h4><g:message code="springSecurity.oauth.registration.link.not.exists" default="No he encontrado un usuario para esta cuente." args="[session.springSecurityOAuthToken.providerName]"/></h4>
-    <br/>
-
     <g:hasErrors bean="${createAccountCommand}">
     <div class="errors">
         <g:renderErrors bean="${createAccountCommand}" as="list"/>
@@ -55,40 +52,44 @@
     </g:hasErrors>
 
     <g:form action="createAccount" method="post" autocomplete="off">
-        <fieldset>
-            <legend><g:message code="springSecurity.oauth.registration.create.legend" default="Crear una nueva"/></legend>
-            <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'username', 'error')} ">
-                <label for='username'><g:message code="OAuthCreateAccountCommand.username.label" default="Usuario"/>:</label>
-                <g:textField name='username' value='${createAccountCommand?.username}'/>
+        <fieldset class="property-list">
+		    <h3><g:message code="compartirmesadetren.oauth.crear.cuenta" default="¡Bienvenido desde {0}, {1}!" args="[session.springSecurityOAuthToken.providerName, session.springSecurityOAuthToken.principal]"/></h3>
+		    <br/>
+			<h4>Como te hemos dicho, no usaremos ningún dato tuyo de tu cuenta externa...<br/> ¡por lo que tendremos que preguntarte algunas cosas!</h4>
+			<br/>
+			<p>Necesitamos tu email para poder comunicarnos contigo y enviarte el billete de tren.</p>
+            <g:hiddenField name='username' value='${createAccountCommand?.username}'/>
+
+            <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'email', 'error')} ">
+                <label class="property-label" for='email'><g:message code="compartirmesadetren.oauth.crear.cuenta.email.label" default="Email"/><span class="required-indicator">*</span></label>
+                <g:textField class="property-value" name='email' value='${createAccountCommand?.email}'/>
             </div>
-            <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'password1', 'error')} ">
-                <label for='password1'><g:message code="OAuthCreateAccountCommand.password1.label" default="Clave"/>:</label>
-                <g:passwordField name='password1' value='${createAccountCommand?.password1}'/>
+            
+            <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'email2', 'error')} ">
+                <label class="property-label" for='email2'><g:message code="compartirmesadetren.oauth.crear.cuenta.email2.label" default="Repita su Email"/><span class="required-indicator">*</span></label>
+                <g:textField class="property-value" name='email2' value='${createAccountCommand?.email2}'/>
             </div>
-            <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'password2', 'error')} ">
-                <label for='password2'><g:message code="OAuthCreateAccountCommand.password2.label" default="Re-introduzca la clave"/>:</label>
-                <g:passwordField name='password2' value='${createAccountCommand?.password2}'/>
+            
+            <br/>
+			<p>Y si quieres, puedes darnos tu teléfono.<br/> 
+			Solo lo usaremos en casos <b>MUY</b> urgentes <b>¡Prometido!</b></p>
+			
+            <div class="fieldcontain ${hasErrors(bean: createAccountCommand, field: 'phoneNumber', 'error')} ">
+                <label class="property-label" for='phoneNumber'><g:message code="compartirmesadetren.oauth.crear.cuenta.phoneNumber.label" default="Teléfono"/></label>
+                <g:textField class="property-value" name='phoneNumber' value='${createAccountCommand?.phoneNumber}'/>
             </div>
-            <g:submitButton name="${message(code: 'springSecurity.oauth.registration.create.button', default: 'Create')}"/>
+            
+            <div class="fieldcontain" style="text-align: center;">
+			    <g:link class="buttons" controller="login" action="auth"><g:message code="compartirmesadetren.oauth.crear.cuenta.cancel" default="Cancelar"/></g:link>
+	            <g:submitButton class="buttons" name="${message(code: 'compartirmesadetren.oauth.crear.cuenta.button', default: 'Entrar')}"/>
+		    </div>
         </fieldset>
     </g:form>
-
-    <g:form action="linkAccount" method="post" autocomplete="off">
-        <fieldset>
-            <legend><g:message code="springSecurity.oauth.registration.link.legend" default="Enlazar con una existente"/></legend>
-            <div class="fieldcontain ${hasErrors(bean: linkAccountCommand, field: 'username', 'error')} ">
-                <label for='username'><g:message code="OAuthLinkAccountCommand.username.label" default="Usuario"/>:</label>
-                <g:textField name='username' value='${createAccountCommand?.username}'/>
-            </div>
-            <div class="fieldcontain ${hasErrors(bean: linkAccountCommand, field: 'password', 'error')} ">
-                <label for='password1'><g:message code="OAuthLinkAccountCommand.password.label" default="Clave"/>:</label>
-                <g:passwordField name='password' value='${linkAccountCommand?.password}'/>
-            </div>
-            <g:submitButton name="${message(code: 'springSecurity.oauth.registration.link.button', default: 'Link')}"/>
-        </fieldset>
-    </g:form>
-
-    <g:link controller="login" action="auth"><g:message code="springSecurity.oauth.registration.back" default="Volver"/></g:link>
 </div>
-
+<script>
+$(document).ready(function() {
+	$('#email').focus();
+});
+</script>
 </body>
+</html>
