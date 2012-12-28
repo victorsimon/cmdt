@@ -1,6 +1,9 @@
 <g:if test="${trenes}">
 	<h2>Trenes disponibles</h2>
 </g:if>
+<g:if test="${!trenes}">
+	<h2>Noy hay trenes disponibles</h2>
+</g:if>
 <g:each in="${trenes}" var="ptren">
 	<g:if test="${!ptren.tren.noValido}">
 		<p><g:link action="detalle" id="${ptren.tren.id}">

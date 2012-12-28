@@ -58,8 +58,18 @@ class SeleccionInicialController {
 		chain (action: "trenes", params: [trayecto: params.trayecto, time : fecha.getTime(), opcion: 1])
 	}
 	
-	@Secured(['ROLE_USER'])
+	/**
+	 * This method id only needed for setting the lastURI variable 
+	 * into the current session
+	 * 
+	 * @return redirect to reserva action
+	 */
 	def detalle() {
+		redirect action: 'reserva', params: params
+	}
+	
+	@Secured(['ROLE_USER'])
+	def reserva() {
 		Tren tren = Tren.get(params.id)
 		PeticionesTren peticionesTren = peticionesService.peticionesTren(tren)
 		List<Date> fechasSugeridas = [tren.salida -1, tren.salida, tren.salida +1]

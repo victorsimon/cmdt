@@ -69,7 +69,7 @@
 			
 				<div class="fieldcontain" style="text-align: center; padding: .5em;">
 						<g:link class="buttons" controller="cambiarPassword" ><g:message code="default.button.changepassword.label" default="Cambiar clave" /></g:link>
-						<g:link class="buttons" action="changeEmail" id="${userInstance?.id}"><g:message code="default.button.changeemail.label" default="Cambiar email" /></g:link>
+						<g:link class="buttons" action="cambiarEmail" ><g:message code="default.button.changeemail.label" default="Cambiar email" /></g:link>
 				</div>
 			
 				<div class="fieldcontain" style="text-align: center; padding: .5em;">

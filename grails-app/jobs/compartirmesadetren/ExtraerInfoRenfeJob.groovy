@@ -14,7 +14,7 @@ class ExtraerInfoRenfeJob {
 		println "*********** iniciando extraccion de datos ****************"
 		def dia = new Date() + 2
 		def fechas = []
-		60.times {
+		30.times {
 			fechas << dia + it
 		}
 		def trayectos = Trayecto.list()

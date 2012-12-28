@@ -14,7 +14,7 @@
 			<g:link class="buttons" controller='login' action='auth'>Entrar</g:link>
 		</sec:ifNotLoggedIn>
 		<sec:ifLoggedIn>
-			<g:link class="buttons" controller='miCuenta'>Mi cuenta</g:link>
+			<g:link class="buttons" controller='miCuenta' action='show'>Mi cuenta</g:link>
 			<g:link class="buttons" controller='logout'>Salir</g:link>
 		</sec:ifLoggedIn>
 	</span>

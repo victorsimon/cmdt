@@ -3,6 +3,7 @@ package compartirmesadetren
 import grails.plugins.springsecurity.ui.AbstractS2UiController;
 import org.codehaus.groovy.grails.plugins.springsecurity.NullSaltSource
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.plugins.springsecurity.Secured
 
 class CambiarPasswordController extends AbstractS2UiController {
 
@@ -16,23 +17,20 @@ class CambiarPasswordController extends AbstractS2UiController {
 	def messageSource
 	def saltSource
 
+	@Secured(['ROLE_USER'])
 	def index = { ResetPasswordCommand command ->
-		println command
 		
 		if (!request.post) {
 			return [command: new ResetPasswordCommand()]
 		}
 
 		command.username = springSecurityService.getCurrentUser()
-		println command.username
 		command.validate()
 
-		println command.hasErrors()
 		if (command.hasErrors()) {
 			return [command: command]
 		}
 
-		println 'kk'
 		String salt = saltSource instanceof NullSaltSource ? null : registrationCode.username
 
 		def user = lookupUserClass().findByUsername(command.username)
