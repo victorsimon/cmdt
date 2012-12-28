@@ -67,7 +67,7 @@
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div id="page-body" role="main">
+		<div id="page-body" role="main" id="page-body">
 			<g:form action="trenes" method="POST">
 				<fieldset class="form property-list">
 					<div class="fieldcontain">

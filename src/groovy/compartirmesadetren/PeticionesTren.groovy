@@ -18,13 +18,13 @@ public class PeticionesTren {
 	}
 	
 	/**
-	 * Dependiendo de los pasajeros con solicitud, faltaran más o menos
+	 * Dependiendo de los pasajeros con solicitud, faltaran mï¿½s o menos
 	 * por apuntarse para poder iniciar las gestines de mesa
 	 * 
 	 * @return int numero de parajeros que faltan
 	 */
 	def int getCuantosFaltan() {
-		if (pasajeros == 5 || pasajeros == 2)
+		if (pasajeros == 2)
 			return 1
 		if (pasajeros == 1)
 			return 2
@@ -48,7 +48,7 @@ public class PeticionesTren {
 	 * @return true en caso de que deban comprarse mesas
 	 */
     def boolean isViajaSeguro() {
-		return pasajeros > 2 && pasajeros != 5
+		return pasajeros > 2
     }
 	
 	/**
@@ -58,7 +58,7 @@ public class PeticionesTren {
 	 * gestionen mesas
 	 */
     def boolean isMeApuntoYViajoSeguro() {
-		return pasajeros > 2 && pasajeros != 4
+		return pasajeros > 2
     }
 
 	/**
@@ -68,7 +68,7 @@ public class PeticionesTren {
 	 * @return true en caso de ser una ocasion para el pasajero
 	 */
 	def boolean isOportunidad() {
-		return oportunidades.contains(pasajeros) || pasajeros > 5
+		return pasajeros > 2
 	}
 	
 	/**
@@ -150,11 +150,19 @@ public class PeticionesTren {
 		def int re = pos % 4
 		def m4 = (co + 1) - (4 - re)
 		def m3 = 4 - re
+		def asiento = 0
+		if (re == 1) {
+			m4 = co
+			m3 = 0
+			asiento = 1
+		} 
 		mesas4 << m4
 		mesas3 << m3
+		asientos << asiento
 	}
 	
-	def List oportunidades = [2, 5]
-	def List mesas4 = [0,0,0,1,1,0,1,2,0,1,2,3,1,2,3,4,2,3,4,5,3,4,5,6,4,5,6,7,5,6,7,8,6,7,8,9,7,8,9,10]
-	def List mesas3 = [0,0,1,0,0,2,1,0,3,2,1,0,3,2,1,0,3,2,1,0,3,2,1,0,3,2,1,0,3,2,1,0,3,2,1,0,3,2,1,0]
+	def List oportunidades = [2]
+	def List mesas4   = [0,0,0,1,1,0,1,2,2,1,2,3,3,2,3,4,0,3,4,5,5,4,5,6,6,5,6,7,7,6,7,8,8,7,8,9,9,8,9,10]
+	def List mesas3   = [0,0,1,0,0,2,1,0,0,2,1,0,0,2,1,0,0,2,1,0,0,2,1,0,0,2,1,0,0,2,1,0,0,2,1,0,0,2,1,0]
+	def List asientos = [0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0]
 }
