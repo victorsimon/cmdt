@@ -73,20 +73,20 @@
 					<div class="fieldcontain">
 						<label class="property-label" for="trayecto">Selecciona el trayecto</label>
 						<g:select class="property-value" name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" />
-						<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.png')}" alt="info" />
+						<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 					</div>
 					 
 					<div class="fieldcontain">
 						<label class="property-label" for="fecha">Buscar para el día</label>
 						<input class="property-value" type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}" onchange="b();" size="10" maxLength="10"/>
-						<img id="info2"  class="property-info" src="${resource(dir: 'images', file: 'info.png')}" alt="info"/>
+						<img id="info2"  class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info"/>
 					</div>
 					<div  style="display: none;"><g:submitToRemote id="buscar" url="[action: 'trenes']" update="panel" name="buscar" value="fecha" /></div>
 					
 					<div class="fieldcontain">
 						<label class="property-label" for="ofertas">O vea </label>
 						<g:submitToRemote class="property-value" name="ofertas" url="[action: 'proximos']" update="panel" value="las ofertas disponibles" />
-						<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.png')}" alt="info"/>
+						<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info"/>
 					</div>
 				</fieldset>
 				<fieldset id="panel" class="buttons">

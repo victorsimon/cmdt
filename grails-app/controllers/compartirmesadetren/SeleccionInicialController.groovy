@@ -9,7 +9,8 @@ class SeleccionInicialController {
 	def beforeInterceptor = [action: this.&setLastURI]
 	def trenesService
 	def peticionesService
-		
+	def grailsApplication
+	
 	def trayectos(Integer opcion) {
 		def Date fecha
 		if (params?.time)
@@ -80,14 +81,18 @@ class SeleccionInicialController {
 				sugeridos << it
 			}
 		}
-		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos, user: getAuthenticatedUser()]
+		def doPayment = grailsApplication.config.cmdt.dopayment
+
+		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos, user: getAuthenticatedUser(), doPayment: doPayment]
 	}
 	
 	@Secured(['ROLE_USER'])
 	def peticion() {
+		println "Creando peticion " + params.id
 		Tren tren = Tren.get(params.id)
-		Peticion peticion = new Peticion(salida: tren.salida, user: getAuthenticatedUser(), trayecto: tren.trayecto)
+		Peticion peticion = new Peticion(salida: tren.salida, user: getAuthenticatedUser(), trayecto: tren.trayecto, estado: EstadoPeticion.A_LA_ESPERA)
 		peticion.save(flush: true)
+		println peticion.errors
 	}
 	
 	private setLastURI() {

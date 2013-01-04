@@ -77,6 +77,9 @@
 						<g:link class="buttons" action="listClosed" id="${userInstance?.id}"><g:message code="default.button.listclosed.label" default="Peticiones anteriores." /></g:link>
 				</div>
 
+				<div class="fieldcontain" style="text-align: center; padding: .5em;">
+						<g:link class="buttons" controller="seleccionInicial" ><g:message code="default.button.volver.label" default="Volver" /></g:link>
+				</div>
 			</fieldset>
 		</form>
 		</div>

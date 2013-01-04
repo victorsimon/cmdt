@@ -22,14 +22,14 @@ class MiCuentaController {
 		def userInstance = springSecurityService.currentUser
 		def peticiones = Peticion.findAllByUserAndSalidaGreaterThan(userInstance, new Date(), params)
 		def total = peticiones?.size()
-		render (view: "list", model: [peticionInstanceList: peticiones, peticionInstanceTotal: total])
+		render (view: "list", model: [peticionInstanceList: peticiones, peticionInstanceTotal: total, peticionesTittle: 'Peticiones abiertas'])
 	}
 
 	def listClosed(Long id) {
 		def userInstance = springSecurityService.currentUser
 		def peticiones = Peticion.findAllByUserAndSalidaLessThan(userInstance, new Date(), params)
 		def total = peticiones?.size()
-		render (view: "list", model: [peticionInstanceList: peticiones, peticionInstanceTotal: total])
+		render (view: "list", model: [peticionInstanceList: peticiones, peticionInstanceTotal: total, peticionesTittle: 'Historico de peticiones'])
 	}
 	
 	def cambiarEmail(CambiarEmailCommand command) {

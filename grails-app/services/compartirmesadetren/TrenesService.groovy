@@ -37,7 +37,7 @@ class TrenesService {
 				trenProgramado[7].split("\\.")[1].toInteger())
 		def horaLlegada = setHora(salida, trenProgramado[8].split("\\.")[0].toInteger(),
 				trenProgramado[8].split("\\.")[1].toInteger())
-		if (horaLlegada < horaSalida) //Ajustamos el dia si llega al día siguiente (la programación no da la info necesaria)
+		if (horaLlegada < horaSalida) //Ajustamos el dia si llega al dï¿½a siguiente (la programaciï¿½n no da la info necesaria)
 			horaLlegada = horaLlegada + 1
 
 		Tren tren = Tren.findBySalida(horaSalida.time)
@@ -70,19 +70,19 @@ class TrenesService {
 	private boolean haCambiado(Date fecha, Trayecto trayecto, String content) {
 		ContentMD5.withTransaction { status ->
 			def contentKey = fecha.format('dd-MM-yyyy') + ' - ' + trayecto
-			log.info(contentKey)
+			log.debug(contentKey)
 			def contentMD5 = ContentMD5.findByContentKey(contentKey)
 			if (contentMD5) {
-				log.info("Hay para esa fecha")
+				log.debug("Hay para esa fecha")
 				def nuevoMD5 = content.encodeAsMD5()
 				if (nuevoMD5 == contentMD5.md5HexString) {
-					log.info("Es la misma")
+					log.debug("Es la misma")
 					return false
 				} else {
 					contentMD5.delete(flush: true)
 				}
 			}
-			log.info("Ha cambiado")
+			log.debug("Ha cambiado")
 			return true
 		}
 	}
@@ -90,18 +90,18 @@ class TrenesService {
 	private boolean tengoDatosRecientes(Date fecha, Trayecto trayecto) {
 		ContentMD5.withTransaction { status ->
 			def contentKey = fecha.format('dd-MM-yyyy') + ' - ' + trayecto
-			log.info(contentKey)
+			log.debug(contentKey)
 			def contentMD5 = ContentMD5.findByContentKey(contentKey)
 			if (contentMD5) {
-				log.info("Hay para esa fecha")
+				log.debug("Hay para esa fecha")
 				def currentTime = Calendar.instance
 				currentTime.add(Calendar.MINUTE, 30)
 				if (contentMD5.timeStamp < currentTime.time.time) {
-					log.info("Es reciente")
+					log.debug("Es reciente")
 					return true
 				}
 			}
-			log.info("Caducado")
+			log.debug("Caducado")
 			return false
 		}
 	}
@@ -148,7 +148,7 @@ class TrenesService {
 	}
 
 	private Map<String, String> extraerTrenes(String busqueda) {
-		log.info("Parsing text")
+		log.debug("Parsing text")
 		def parser = new SAXParser()
 		parser.setFeature("http://xml.org/sax/features/namespaces", false);
 		def slurper = new XmlSlurper(parser)

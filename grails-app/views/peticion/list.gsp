@@ -35,6 +35,7 @@
 						
 						<g:sortableColumn property="user" title="${message(code: 'peticion.user.label', default: 'Usuario')}" />
 						<!-- th><g:message code="peticion.user.label" default="User" /></th -->
+						<g:sortableColumn property="estado" title="${message(code: 'peticion.estado.label', default: 'Estado')}" />
 					
 					</tr>
 				</thead>
@@ -48,6 +49,7 @@
 					
 						<td><g:link action="show" id="${peticionInstance.id}">${fieldValue(bean: peticionInstance, field: "user")}</g:link></td>
 
+						<td><g:link action="show" id="${peticionInstance.id}">${fieldValue(bean: peticionInstance, field: "estado")}</g:link></td>
 					</tr>
 				</g:each>
 				</tbody>

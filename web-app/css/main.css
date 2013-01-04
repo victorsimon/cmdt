@@ -261,6 +261,10 @@ fieldset,
 	width: auto;
 }
 
+.fieldcontain .property-value:disabled {
+	background:#ddd;
+}
+
 label {
 	display: inline-block;
 	margin: 0.25em 0.25em 0 0;
@@ -627,13 +631,13 @@ a.skip {
 /* Compartir Mesa de Tren customization */
 
 #header {
-	background: #8B0073; /*#9C3B8D;*/
+	background: #FFF; /*#81005E; /*#9C3B8D;*/
 	padding: 2em 1em 2em 1em;
 	margin-bottom: 1em;
 }
 
 a.header-main:link, a.header-main:visited {
-	color: #fff;
+	color: #81005E;
 	font-size: 2em;
 	font-weight: bold;
 }

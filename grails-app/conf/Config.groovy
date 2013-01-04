@@ -66,6 +66,8 @@ environments {
 		grails.compartirmesadetren.oauth.debug = true
 		grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
 		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
+		grails.mail.contact = "vsimon.batanero@gmail.com"
+		cmdt.dopayment = false
     }
     production {
         grails.logging.jul.usebridge = false
@@ -73,6 +75,8 @@ environments {
 		grails.compartirmesadetren.oauth.debug = false
 		grails.paypal.server = "https://www.paypal.com/cgi-bin/webscr"
 		grails.paypal.email = "vsimon.batanero@gmail.com"    
+		grails.mail.contact = "contacto@compartirmesadetren.com"
+		cmdt.dopayment = true
 	}
     sandbox {
         grails.logging.jul.usebridge = false
@@ -80,6 +84,8 @@ environments {
 		grails.compartirmesadetren.oauth.debug = false
 		grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
 		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
+		grails.mail.contact = "contacto@compartirmesadetren.com"
+		cmdt.dopayment = true
     }
 }
 

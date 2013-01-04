@@ -48,7 +48,8 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main">
 			<h2>Ya estas en manos de Sit. El te mantendrá al tanto de todo.</h2>
-			<g:link action="trayectos">Volver al principio</g:link>
+			<br/>
+			<g:link class="buttons" action="trayectos">Volver</g:link>
 		</div>
 	</body>
 </html>
