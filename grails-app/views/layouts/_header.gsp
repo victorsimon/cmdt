@@ -6,6 +6,9 @@
 }
 
 #header {
+	border-top: 5px solid white;
+	border-top-right-radius: 150px 100px;
+	border-bottom-right-radius: 20px;
 	position: relative; 
 	z-index: 1; 
 	padding-left: 90px;
@@ -31,8 +34,26 @@
 	margin-left: -5.5em;
 }
 
+.entrar {
+	margin-top: 2.2em;
+}
+
 .entrar a {
 	font-size: .75em;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+@media screen and (max-width: 680px) {
+	.entrar a {
+		font-size: .75em;
+	}
+	
+	.bienvenida {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 480px) {
@@ -44,6 +65,14 @@
 		margin-top: -.5em;
 		margin-left: -.5em;
 	}
+
+	.entrar a {
+		font-size: .75em;
+	}
+	
+	.entrar {
+		margin-top: 1em;
+	}
 }
 -->
 </style>
@@ -52,9 +81,6 @@
 	<div>
 	<span><a class="header-main" href="${resource(dir:'/')}"><b>C</b>ompartir<b>M</b>esa<b>D</b>e<b>T</b>ren</a></span>
 	<span class="entrar">
-		<sec:ifLoggedIn>
-			<div class="bienvenida">Hola <sec:loggedInUserInfo field="username"/></div>
-		</sec:ifLoggedIn>
 	</span>
 	</div>
 	<div>

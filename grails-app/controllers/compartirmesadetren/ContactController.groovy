@@ -27,7 +27,6 @@ class ContactController {
 	}
 	
 	def form(EmailCommand command) {
-		println command
 		if (command.subject) {
 			//command = new EmailCommand()
 			def user = springSecurityService.currentUser
@@ -35,11 +34,11 @@ class ContactController {
 				command.user = user
 				command.responseEmail = user.email
 			}
-			return command
+			return render (view: 'index', model: [command: command])
 		}
 		
 		if (!command.validate()) {
-			return command
+			return render (view: 'index', model: [command: command])
 		}
 		
 		/*println grailsApplication.config.grails.mail.contact

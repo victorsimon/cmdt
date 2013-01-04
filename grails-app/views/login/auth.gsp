@@ -52,6 +52,9 @@
 	<oauth:connect provider="facebook" id="facebook-connect-link"><img class="social-login" src="${resource(dir: 'images/social', file: 'f_icon.png')}" alt="Connect with Facebook" /></oauth:connect>
 	<oauth:connect provider="google" id="google-connect-link"><img class="social-login" src="${resource(dir: 'images/social', file: 'g_icon.png')}" alt="Login with Google" /></oauth:connect>
 	<h4>No cogeremos ni utilizaremos tus datos ni tu información personal.</h4>
+	<div class="fieldcontain" style="text-align: center; padding: .5em;">
+		<g:link class="buttons" controller="seleccionInicial" ><g:message code="default.button.volver.label" default="Volver" /></g:link>
+	</div>
 	</fieldset>
 	</form>
 </div>

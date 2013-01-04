@@ -50,9 +50,9 @@
 		<br/>
 		<br/>
 		<g:message code='cmdt.contact.sent' default="Gracias por contactar con nosotros. Encuanto revisemos tu cuestión nos pondremos en contacto contigo."/>
-		<br/>
-		<g:link class="buttons" controller="seleccionInicial"><g:message code="cmdt.contact.salir" default="Salir"/></g:link>
-		<br/>
+		<div class="fieldcontain" style="text-align: center; padding: .5em;">
+			<g:link class="buttons" controller="seleccionInicial"><g:message code="cmdt.contact.salir" default="Salir"/></g:link>
+		</div>
 	</div>
 	</g:if>
 	<g:else>
@@ -68,17 +68,17 @@
 	<br/>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'subject', 'error')}">
 		<label class="property-label" for="subject"><g:message code='cmdt.contact.username' default="Asunto"/><span class="required-indicator">*</span></label>
-		<input class="property-value" style="float:left; width: 17em;" name="subject" id="subject" value="${command.subject}" <g:if test="${lock}">disabled</g:if> />
+		<input class="property-value" style="float:left; width: 17em;" name="subject" id="subject" value="${command?.subject}" <g:if test="${lock}">disabled</g:if> />
 		<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'responseEmail', 'error')}">
 		<label class="property-label" for="responseEmail"><g:message code='cmdt.contact.responseemail' default="E-mail"/><span class="required-indicator">*</span></label>
-		<input class="property-value" style="float:left; width: 17em;" name="responseEmail" id="responseEmail" value="${command.responseEmail}" />
+		<input class="property-value" style="float:left; width: 17em;" name="responseEmail" id="responseEmail" value="${command?.responseEmail}" />
 		<img id="info2" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'body', 'error')}">
 		<label class="property-label" for="body"><g:message code='cmdt.contact.body' default="Detalle"/></label>
-		<g:textArea class="property-value" style="float:left; width: 17em;" name="body" id="body" value="${command.body}" />
+		<g:textArea class="property-value" style="float:left; width: 17em;" name="body" id="body" value="${command?.body}" />
 		<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain">
