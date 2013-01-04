@@ -27,7 +27,7 @@
 				background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
 			    position: fixed;
 			    left: 50%;
-				top: 50%;
+				top: 200px;
 				margin-left: -50px; /* half width of the spinner gif */
 			    margin-top: -50px; /* half height of the spinner gif */
 				text-align: center;
