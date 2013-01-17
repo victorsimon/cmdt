@@ -35,3 +35,4 @@ window.addEventListener("load", function()
 		hideAddressBar();
 	window.addEventListener("orientationchange", hideAddressBar);
 });
+

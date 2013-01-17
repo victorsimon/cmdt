@@ -2,7 +2,11 @@
 	<h2>Trenes disponibles</h2>
 </g:if>
 <g:if test="${!trenes}">
-	<h2>Noy hay trenes disponibles</h2>
+	<g:if test="${ofertas}">
+		<h2>Lo siento. Actualmente, noy tenemos ofertas disponibles.</h2>
+		<h1>¡Permanece atento!, ¡en cualquier momento puede surgir la oportunidad!</h1>
+	</g:if>
+	<g:if test="${!ofertas}"><h2>Lo siento, noy hay trenes disponibles para el día selecionado.</h2></g:if>
 </g:if>
 <g:each in="${trenes}" var="ptren">
 	<g:if test="${!ptren.tren.noValido}">

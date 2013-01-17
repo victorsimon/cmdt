@@ -1,5 +1,7 @@
 package compartirmesadetren
 
+import com.megatome.grails.RecaptchaService
+
 class ContactController {
 
 	// override default value from base class
@@ -8,48 +10,40 @@ class ContactController {
 	def springSecurityService
 	def mailService
 	def grailsApplication
+	def recaptchaService
 	
 	def index() {
 		def copy = [:] + (flash.chainedParams ?: [:])
-		copy.remove 'controller'
-		copy.remove 'action'
+		def ec = new EmailCommand()
 		def lock = false
 		if (params.subject) {
-			copy.subject = params.subject
+			ec.subject = params.subject
 			def user = springSecurityService.currentUser
 			if (user) {
-				copy.user = user
-				copy.responseEmail = user.email
+				ec.user = user
+				ec.responseEmail = user.email
 			}
 			lock = true
 		}
-		[command: new EmailCommand(copy), lock: lock]
+		[command: ec, lock: lock]
 	}
 	
 	def form(EmailCommand command) {
-		if (command.subject) {
-			//command = new EmailCommand()
-			def user = springSecurityService.currentUser
-			if (user) {
-				command.user = user
-				command.responseEmail = user.email
-			}
-			return render (view: 'index', model: [command: command])
-		}
 		
 		if (!command.validate()) {
 			return render (view: 'index', model: [command: command])
 		}
+
+		if (!recaptchaService.verifyAnswer(session, request.getRemoteAddr(), params)) {
+			return render (view: 'index', model: [command: command])
+		}
 		
-		/*println grailsApplication.config.grails.mail.contact
-		println command.responseEmail
-		println command.subject
-		println command.body*/
-		
+		recaptchaService.cleanUp(session)
+
 		mailService.sendMail {
 			to grailsApplication.config.grails.mail.contact
 			subject command.subject
-			html command.body + "<BR/> RESPONSE E-MAIL: " + command.responseEmail
+			html command.body + "<BR/><HR/> RESPONSE E-MAIL: " + command.responseEmail
 		}
 		
 		render view: 'index', model: [emailSent: true]

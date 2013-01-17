@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<meta name="layout" content="main"/>
+		<script type="text/javascript" src="${resource(dir: 'js', file: 'bannerRotator.js')}"></script>
+  		<link href="${resource(dir: 'css', file: 'style.css')}" rel="stylesheet" type="text/css">
 		<style type="text/css" media="screen">
 
 			#page-body {
@@ -24,7 +26,7 @@
 			}
 
 			.spinner {
-				background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
+				background: url("${resource(dir: 'images', file: 'spinner.gif')}") 50% 50% no-repeat transparent;
 			    position: fixed;
 			    left: 50%;
 				top: 200px;
@@ -59,20 +61,26 @@
 				}
 			}
 		</style>
-	    <script type="text/javascript">
-        b = function() {
-        	$("#buscar").click();
-        }
-	    </script>
 	</head>
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main" id="page-body">
 			<g:form action="trenes" method="POST">
+				<div id="bannerRotator">
+    				<ul>
+    					<li>
+	    					<a href="#"><img id="banner-precio" src="${resource(dir: 'images', file: 'banner_mad_pam.png')}" alt="Precio trayecto"></a>
+	  					</li>
+      					<li>
+	    					<a href="#"><img src="${resource(dir: 'images', file: 'banner_secundario.png')}" alt="Ellos tambien lo hacen"></a>
+	  					</li>
+    				</ul>
+  				</div>
+
 				<fieldset class="form property-list">
 					<div class="fieldcontain">
 						<label class="property-label" for="trayecto">Selecciona el trayecto</label>
-						<g:select class="property-value" name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" />
+						<g:select class="property-value" name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" onchange="changeBannerPrecio();"/>
 						<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 					</div>
 					 
@@ -94,6 +102,24 @@
 			</g:form>
 		</div>
 	    <script type="text/javascript">
+        b = function() {
+        	$("#buscar").click();
+        }
+        startBanner = function() {
+			bannerRotator('#bannerRotator', 1500, 20000);
+        }
+        changeBannerPrecio = function() {
+			currentClass = $("#bannerRotator li:visible").attr('rel'); //get the list position of the current image
+  			$("#bannerRotator li[rel="+currentClass+"]").fadeOut(100); //fade out old image
+        	var mad_pam = "${resource(dir: 'images', file: 'banner_mad_pam.png')}";
+        	var pam_mad = "${resource(dir: 'images', file: 'banner_pam_mad.png')}";
+        	if ($("#trayecto").val() == '1') {
+        		$("#banner-precio").attr('src', mad_pam);
+        	} else if ($("#trayecto").val() == '2') {
+        		$("#banner-precio").attr('src', pam_mad);
+        	}
+			$("#bannerRotator li:first").fadeIn(100); //fade in new image
+          }
 	    var info1 = "<p>¡Hola! Mi nombre es SITO ...<img src='images/SITO.png' style='float: right; width: 48px; height: 60px;' /><br/>... y quiero ayudarte " + 
 	    	"a encontrar una mesa para que puedas <b>beneficiarte</b> e del descuento que Renfe" + 
 	    	"ofrece para compartir una mesa. Yo te lo " + 
@@ -112,11 +138,15 @@
 					$(this).hideBalloon();
 				});
 		}
+		setDatePicker = function() {
+            $.datepicker.regional['es'] = {closeText: 'Cerrar',prevText: '&#x3C;Ant',nextText: 'Sig&#x3E;',currentText: 'Hoy',monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],dayNames: ['Domingo','Lunes','Martes','Mi&#xE9;rcoles','Jueves','Viernes','S&#xE1;bado'],dayNamesShort: ['Dom','Lun','Mar','Mi&#xE9;','Juv','Vie','S&#xE1;b'],dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&#xE1;'],weekHeader: 'Sm',dateFormat: 'dd/mm/yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};$.datepicker.setDefaults($.datepicker.regional['es']);
+		}
         $(document).ready(function() { 
-            $.datepicker.regional['es'] = {closeText: 'Cerrar',prevText: '&#x3C;Ant',nextText: 'Sig&#x3E;',currentText: 'Hoy',monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],dayNames: ['Domingo','Lunes','Martes','Mi&#xE9;rcoles','Jueves','Viernes','S&#xE1;bado'],dayNamesShort: ['Dom','Lun','Mar','Mi&#xE9;','Juv','Vie','S&#xE1;b'],dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','S&#xE1;'],weekHeader: 'Sm',dateFormat: 'dd/mm/yy',firstDay: 1,isRTL: false,showMonthAfterYear: false,yearSuffix: ''};$.datepicker.setDefaults($.datepicker.regional['es']);$("#fecha").datepicker($.datepicker.regional[ "es" ]);
+        	setDatePicker();
+        	$("#fecha").datepicker($.datepicker.regional[ "es" ]);
             $.balloon.defaults.classname = 'balloonTip';
 			screenWidth = $(window).width();
-			if (screenWidth > 480) {
+			if (screenWidth > 680) {
 				$.balloon.defaults.position = 'right';
 			} else {
 				$.balloon.defaults.position = 'left';
@@ -136,6 +166,9 @@
 			prepareBalloon('#info1', info1);
 			prepareBalloon('#info2', info2);
 			prepareBalloon('#info3', info3);
+
+			$("#buscar").click();
+			startBanner();
         })
 	    </script>
 	</body>

@@ -2,6 +2,7 @@ package compartirmesadetren
 import grails.plugins.springsecurity.Secured
 import java.text.DateFormat
 import java.text.SimpleDateFormat
+import groovyx.gpars.GParsPool
 
 class SeleccionInicialController {
 
@@ -10,6 +11,7 @@ class SeleccionInicialController {
 	def trenesService
 	def peticionesService
 	def grailsApplication
+	def mailService
 	
 	def trayectos(Integer opcion) {
 		def Date fecha
@@ -22,11 +24,11 @@ class SeleccionInicialController {
 		def Trayecto trayecto
 		List<PeticionesTren> peticionesTren = []
 		if (params.trayecto) {
-			trayecto = Trayecto.get(params.trayecto)
+			trayecto = Trayecto.read(params.trayecto)
 			if (!opcion) {
-				peticionesTren = getPeticionesTrenes([fecha], trayecto)
+				peticionesTren = getPeticionesTrenes([fecha], trayecto, false)
 			} else if (opcion == 1) { //proximos tres dias
-				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3], trayecto)
+				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3, new Date() +4, new Date() +5, new Date() +6, new Date() +7, new Date() +8], trayecto, true)
 			}
 		}
 		[trayectos: Trayecto.list(), trayecto: trayecto, fecha: fecha?.format("dd/MM/yyyy"), trenes: peticionesTren]
@@ -42,15 +44,18 @@ class SeleccionInicialController {
 		}
 		def Trayecto trayecto
 		List<PeticionesTren> peticionesTren = []
+		def ofertas = false
 		if (params.trayecto) {
-			trayecto = Trayecto.get(params.trayecto)
+			trayecto = Trayecto.read(params.trayecto)
 			if (!opcion) {
-				peticionesTren = getPeticionesTrenes([fecha], trayecto)
+				if (fecha > new Date() + 1)
+					peticionesTren = getPeticionesTrenes([fecha], trayecto, false)
 			} else if (opcion == 1) { //proximos tres dias
-				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3], trayecto)
+				ofertas = true
+				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3, new Date() +4, new Date() +5, new Date() +6, new Date() +7, new Date() +8], trayecto, true)
 			}
 		}
-		[trenes: peticionesTren]
+		[trenes: peticionesTren, ofertas: ofertas]
 	}
 
 	def proximos() {
@@ -71,28 +76,49 @@ class SeleccionInicialController {
 	
 	@Secured(['ROLE_USER'])
 	def reserva() {
-		Tren tren = Tren.get(params.id)
+		Tren tren = Tren.read(params.id)
 		PeticionesTren peticionesTren = peticionesService.peticionesTren(tren)
 		List<Date> fechasSugeridas = [tren.salida -1, tren.salida, tren.salida +1]
-		List<PeticionesTren> pt = getPeticionesTrenes(fechasSugeridas, tren.trayecto)
+		List<PeticionesTren> pt = getPeticionesTrenes(fechasSugeridas, tren.trayecto, false)
 		List<PeticionesTren> sugeridos = []
 		pt.each {
-			if (it.oportunidad && it.tren.id != tren.id) {
+			if (it.oferta && it.oportunidad && it.tren.id != tren.id) {
 				sugeridos << it
 			}
 		}
 		def doPayment = grailsApplication.config.cmdt.dopayment
+		def precio = Precio.findByTrayecto(tren.trayecto)
 
-		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos, user: getAuthenticatedUser(), doPayment: doPayment]
+		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos, user: getAuthenticatedUser(), doPayment: doPayment, precio: precio]
 	}
 	
 	@Secured(['ROLE_USER'])
 	def peticion() {
-		println "Creando peticion " + params.id
-		Tren tren = Tren.get(params.id)
-		Peticion peticion = new Peticion(salida: tren.salida, user: getAuthenticatedUser(), trayecto: tren.trayecto, estado: EstadoPeticion.A_LA_ESPERA)
+		Tren tren = Tren.read(params.id)
+		def user = getAuthenticatedUser()
+		Peticion peticion = new Peticion(salida: tren.salida, user: user, trayecto: tren.trayecto, estado: EstadoPeticion.A_LA_ESPERA)
 		peticion.save(flush: true)
-		println peticion.errors
+		
+		GParsPool.withPool {
+			//Mail para la gestion
+			GParsPool.executeAsyncAndWait ({
+				mailService.sendMail {
+					to grailsApplication.config.grails.mail.contact
+					subject "Nueva reserva " + tren.toString() + " " + tren.trayecto
+					html tren.toString() + "|" + tren.trayecto + "|" + user.username + "|" + user.email
+				}
+			})
+			
+			//Mail para el usuario
+			String mailContent = g.render(template:"mailReserva", model:[user: user, tren: tren])
+			GParsPool.executeAsyncAndWait ({
+				mailService.sendMail {
+					to user.email
+					subject "Reserva: " + tren.toString() + " " + tren.trayecto
+					html mailContent
+				}
+			})
+		}
 	}
 	
 	private setLastURI() {
@@ -104,11 +130,16 @@ class SeleccionInicialController {
 		log.debug("Last URL: " + session['lastURL'])
 	}
 
-	private List<PeticionesTren> getPeticionesTrenes(List<Date> fechas, Trayecto trayecto) {
+	private List<PeticionesTren> getPeticionesTrenes(List<Date> fechas, Trayecto trayecto, boolean ofertas) {
 		List<PeticionesTren> peticionesTren = []
 		List<Tren> trenesDia = trenesService.buscarTrenes(fechas, trayecto)
 		trenesDia.each { Tren tren ->
-			peticionesTren << peticionesService.peticionesTren(tren)
+			if (ofertas) {
+				PeticionesTren pt = peticionesService.peticionesTren(tren)
+				if (pt.isOferta())
+					peticionesTren << pt 
+			} else 
+				peticionesTren << peticionesService.peticionesTren(tren)
 		}
 		return peticionesTren
 	}

@@ -68,13 +68,13 @@
 				</div>
 			
 				<div class="fieldcontain" style="text-align: center; padding: .5em;">
-						<g:link class="buttons" controller="cambiarPassword" ><g:message code="default.button.changepassword.label" default="Cambiar clave" /></g:link>
+						<g:link class="buttons" style="margin-right: 1em;" controller="cambiarPassword" ><g:message code="default.button.changepassword.label" default="Cambiar clave" /></g:link>
 						<g:link class="buttons" action="cambiarEmail" ><g:message code="default.button.changeemail.label" default="Cambiar email" /></g:link>
 				</div>
 			
 				<div class="fieldcontain" style="text-align: center; padding: .5em;">
-						<g:link class="buttons" action="listRequest" id="${userInstance?.id}"><g:message code="default.button.listrequest.label" default="Peticiones pendientes" /></g:link>
-						<g:link class="buttons" action="listClosed" id="${userInstance?.id}"><g:message code="default.button.listclosed.label" default="Peticiones anteriores." /></g:link>
+						<g:link class="buttons" style="margin-left: 1em; margin-right: 1em;" action="listClosed" id="${userInstance?.id}"><g:message code="default.button.listclosed.label" default="Historial" /></g:link>
+						<g:link class="buttons" action="listRequest" id="${userInstance?.id}"><g:message code="default.button.listrequest.label" default="Solicitudes" /></g:link>
 				</div>
 
 				<div class="fieldcontain" style="text-align: center; padding: .5em;">

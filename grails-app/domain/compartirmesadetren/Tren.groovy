@@ -8,7 +8,6 @@ class Tren {
 	Date llegada
 	boolean noValido 
 	static belongsTo = [trayecto:Trayecto]
-	static hasMany = [mesas:Mesa]
 	Date dateCreated
 	Date lastUpdated
 	
@@ -18,7 +17,6 @@ class Tren {
 		llegada(validator: {return (it > new Date() - 1)})
 		noValido()
 		trayecto()
-		mesas()
     }
 	
 	static mapping = {

@@ -28,6 +28,18 @@
 			font-size: medium;
 			width: 300px;
 		}
+		
+		.captcha {
+			width: 33%; 
+			margin: 1em 33% 0 33%;
+		}
+
+		@media screen and (max-width: 680px) {
+			.captcha {
+				width: auto; 
+				margin: 1em .5em 0 .5em;
+			}
+		}
 
 		@media screen and (max-width: 480px) {
 			div.balloonTip {
@@ -58,6 +70,7 @@
 	<g:else>
 	<br/>
 	<h4>Solo tienes rellenar el formulario para contactar con nosotros.</h4>
+	<recaptcha:ifFailed><div class="errors">CAPTCHA Failed</div></recaptcha:ifFailed>
 	<g:hasErrors bean="${command}">
 		<ul class="errors" role="alert">
 			<g:eachError bean="${command}" var="error">
@@ -68,7 +81,7 @@
 	<br/>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'subject', 'error')}">
 		<label class="property-label" for="subject"><g:message code='cmdt.contact.username' default="Asunto"/><span class="required-indicator">*</span></label>
-		<input class="property-value" style="float:left; width: 17em;" name="subject" id="subject" value="${command?.subject}" <g:if test="${lock}">disabled</g:if> />
+		<input class="property-value" style="float:left; width: 17em;" name="subject" id="subject" value="${command?.subject}" <g:if test="${lock}">readonly</g:if> />
 		<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'responseEmail', 'error')}">
@@ -77,9 +90,14 @@
 		<img id="info2" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'body', 'error')}">
-		<label class="property-label" for="body"><g:message code='cmdt.contact.body' default="Detalle"/></label>
+		<label class="property-label" for="body"><g:message code='cmdt.contact.body' default="Detalle"/><span class="required-indicator">*</span></label>
 		<g:textArea class="property-value" style="float:left; width: 17em;" name="body" id="body" value="${command?.body}" />
 		<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+	</div>
+	<div class="captcha">
+		<recaptcha:ifEnabled>
+			<recaptcha:recaptcha theme="white"  lang="es"/>
+		</recaptcha:ifEnabled>
 	</div>
 	<div class="fieldcontain">
 	    <g:link class="buttons" controller="seleccionInicial"><g:message code="cmdt.contact.cancel" default="Cancelar"/></g:link>
@@ -108,7 +126,7 @@ $(document).ready(function() {
 	$('#username').focus();
     $.balloon.defaults.classname = 'balloonTip';
 	screenWidth = $(window).width();
-	if (screenWidth > 480) {
+	if (screenWidth > 680) {
 		$.balloon.defaults.position = 'right';
 	} else {
 		$.balloon.defaults.position = 'left';

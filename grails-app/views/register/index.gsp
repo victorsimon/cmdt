@@ -53,6 +53,7 @@
 	<g:else>
 	<br/>
 	<h4>Solo tienes rellenar el formulario para registrarte como nuevo usuario.</h4>
+	<recaptcha:ifFailed><div class="errors">CAPTCHA Failed</div></recaptcha:ifFailed>
 	<g:hasErrors bean="${command}">
 		<ul class="errors" role="alert">
 			<g:eachError bean="${command}" var="error">
@@ -86,6 +87,11 @@
 		<input class="property-value" style="float:left;" name="password2" id="password2" type="password" size="20" />
 		<img id="info5" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
+	<div class="captcha" style="width: 300px; margin: 1em auto 0 auto;">
+		<recaptcha:ifEnabled>
+			<recaptcha:recaptcha theme="white"  lang="es"/>
+		</recaptcha:ifEnabled>
+	</div>
 	<div class="fieldcontain">
 	    <g:link class="buttons" controller="login" action="auth"><g:message code="cmdt.newuser.cancel" default="Cancelar"/></g:link>
 		<g:submitButton class="buttons" value="${message(code: 'cmdt.newuser.submit', default: 'Crea tu cuenta')}" name="create"/>
@@ -115,7 +121,7 @@ $(document).ready(function() {
 	$('#username').focus();
     $.balloon.defaults.classname = 'balloonTip';
 	screenWidth = $(window).width();
-	if (screenWidth > 480) {
+	if (screenWidth > 680) {
 		$.balloon.defaults.position = 'right';
 	} else {
 		$.balloon.defaults.position = 'left';

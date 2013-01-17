@@ -1,6 +1,5 @@
-import compartirmesadetren.Asiento
+import compartirmesadetren.Precio
 import compartirmesadetren.Estacion
-import compartirmesadetren.Mesa
 import compartirmesadetren.Role
 import compartirmesadetren.Trayecto
 import compartirmesadetren.Tren
@@ -44,6 +43,24 @@ class BootStrap {
 					precioMesa:94.2
 					)
 				pamplonaMadrid.save()
+
+				def precioMadridPamplona = new Precio(
+					trayecto:madridPamplona,
+					precioCmdtMin:29.99,
+					precioCmdtMed:34.99,
+					precioCmdtMax:37.99,
+					precioRenfe:58.90
+					)
+				precioMadridPamplona.save()
+
+				def precioPamplonaMadrid = new Precio(
+					trayecto:pamplonaMadrid,
+					precioCmdtMin:29.99,
+					precioCmdtMed:34.99,
+					precioCmdtMax:37.99,
+					precioRenfe:58.90
+					)
+				precioPamplonaMadrid.save()
 
 				/*
 				createTren("00601-ALVIA", madridPamplona)
@@ -123,91 +140,4 @@ class BootStrap {
 			default: break
 		}
     }
-
-	private createTren(String nombre, Trayecto madridPamplona) {
-		def alvia = new Tren(
-				nombre:nombre,
-				salida:new Date(),
-				llegada:new Date(),
-				trayecto:madridPamplona
-				)
-		alvia.save()
-		println alvia.errors
-
-		def mesa1 = new Mesa(tren:alvia)
-		mesa1.save()
-		println mesa1.errors
-
-		def asiento11 = new Asiento(
-				coche:"3",
-				asiento:"7a",
-				mesa:mesa1
-				)
-		asiento11.save()
-		println asiento11.errors
-
-		def asiento12 = new Asiento(
-				coche:"3",
-				asiento:"7b",
-				mesa:mesa1
-				)
-		asiento12.save()
-		println asiento12.errors
-
-		def asiento13 = new Asiento(
-				coche:"3",
-				asiento:"8a",
-				mesa:mesa1
-				)
-		asiento13.save()
-		println asiento13.errors
-
-		def asiento14 = new Asiento(
-				coche:"3",
-				asiento:"8a",
-				mesa:mesa1
-				)
-		asiento14.save()
-		println asiento14.errors
-
-		def mesa2 = new Mesa(tren:alvia)
-		mesa2.save()
-		println mesa2.errors
-
-		def asiento21 = new Asiento(
-				coche:"3",
-				asiento:"7c",
-				mesa:mesa2
-				)
-		asiento21.save()
-		println asiento21.errors
-
-		def asiento22 = new Asiento(
-				coche:"3",
-				asiento:"7d",
-				mesa:mesa2
-				)
-		asiento22.save()
-		println asiento22.errors
-
-		def asiento23 = new Asiento(
-				coche:"3",
-				asiento:"8c",
-				mesa:mesa2
-				)
-		asiento23.save()
-		println asiento23.errors
-
-		def asiento24 = new Asiento(
-				coche:"3",
-				asiento:"8d",
-				mesa:mesa2
-				)
-		asiento24.save()
-		println asiento24.errors
-	}
-	
-    def destroy = {
-    }
-	
 }

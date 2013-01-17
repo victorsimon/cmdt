@@ -8,7 +8,7 @@ public class PeticionesTren {
 	def Tren tren
 	
 	public PeticionesTren (Tren tren) {
-		List<Peticion> peticiones = Peticion.findAllBySalida(tren.salida)
+		List<Peticion> peticiones = Peticion.findAllBySalidaAndTrayecto(tren.salida, tren.trayecto)
 		pasajeros = peticiones.size()
 		this.tren = tren
 	}
@@ -62,13 +62,23 @@ public class PeticionesTren {
     }
 
 	/**
+	 * Comprueba si debe mostrarse dicho tren como oferta para
+	 * el pasajero
+	 * 
+	 * @return true en caso de ser ofertable para el pasajero
+	 */
+	def boolean isOferta() {
+		return pasajeros == 1 || pasajeros == 2
+	}
+	
+	/**
 	 * Comprueba si debe marcarse dicho tren como ocasion para
 	 * el pasajero
 	 * 
 	 * @return true en caso de ser una ocasion para el pasajero
 	 */
 	def boolean isOportunidad() {
-		return pasajeros > 2
+		return pasajeros == 2
 	}
 	
 	/**

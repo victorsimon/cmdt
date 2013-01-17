@@ -6,6 +6,17 @@
 	.property-list {
 		width: auto;
 	}
+	.entrar a {
+		font-size: .75em;
+	}
+	
+	.bienvenida {
+		display: none;
+	}
+
+	#bannerRotator {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 480px) {
@@ -85,13 +96,14 @@
 		/*background: #9C3B8D;*/
 		padding: .5em .5em .5em .5em;
 		margin-bottom: .25em;
-	}
+		padding-left: 10px;
+}
 	
 	#header img {
 		height: 55px;
-		margin-top: 0; 
-		margin-left: 0;	
-	}
+		margin-top: -.5em;
+		margin-left: -.5em;
+}
 	
 	a.header-main:link, a.header-main:visited {
 		font-size: 1em;
@@ -104,7 +116,12 @@
 	}
 	
 	.entrar {
+		margin-top: 1em;
 		float: right;
+		font-size: .75em;
+	}
+	
+	.entrar a {
 		font-size: .75em;
 	}
 	
@@ -130,5 +147,9 @@
 	.social-login {
 		width: 32px;
 		height: 32px;	
+	}
+	
+	#bannerRotator {
+		display: none;
 	}
 }

@@ -9,7 +9,7 @@
 				salida = row.cells[0].innerText; 
 				trayecto = row.cells[1].innerText;
 				subject = escape(trayecto + " - " + salida)
-				window.location.assign("/contact?subject=" + subject);	
+				window.location.assign("../../contact?subject=" + subject);	
 			}
 		</script>
 	</head>

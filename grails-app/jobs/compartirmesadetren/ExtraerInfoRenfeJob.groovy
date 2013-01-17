@@ -7,21 +7,21 @@ class ExtraerInfoRenfeJob {
 	def trenesService
 	
     static triggers = {
-      simple startDelay: 10000, repeatInterval: 300000l // execute job once in 5 seconds
+      simple startDelay: 10000, repeatInterval: 900000l // execute job once in 15 min
     }
 
     def execute() {
-		println "*********** iniciando extraccion de datos ****************"
+		log.debug  "*********** iniciando extraccion de datos ****************"
 		def dia = new Date() + 2
 		def fechas = []
-		30.times {
+		45.times {
 			fechas << dia + it
 		}
 		def trayectos = Trayecto.list()
 		trayectos.each { trayecto ->
-			println "*********** trayecto " + trayecto + " ****************"
+			log.debug "*********** trayecto " + trayecto + " ****************"
 			trenesService.extraerTrenesDisponiblesPorDia(trayecto, fechas)
 		}    
-		println "*********** extraccion de datos finalizada ****************"
+		log.debug "*********** extraccion de datos finalizada ****************"
     }
 }
