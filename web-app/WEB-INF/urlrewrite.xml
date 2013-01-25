@@ -1,0 +1,10 @@
+<urlrewrite>
+    <rule>
+        <name>seo redirect</name>
+        <condition name="host" operator="notequal">^www.compartirmesadetren.com</condition>
+        <condition name="host" operator="notequal">^localhost</condition>
+        <condition name="port" operator="notequal">^8080</condition>
+        <from>^/(.*)</from>
+        <to type="permanent-redirect" last="true">http://www.compartirmesadetren.com/$1</to>
+    </rule>
+</urlrewrite>

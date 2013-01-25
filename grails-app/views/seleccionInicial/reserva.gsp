@@ -15,8 +15,14 @@
 			}
 
 			p {
-				line-height: 1.5;
-				margin: 0.25em 0;
+				font-size: .98em;
+				line-height: 1;
+				margin: 0.75em 0;
+				text-indent: -1em;
+			}
+
+			b {
+				font-size: 1em;
 			}
 
 			#controller-list ul {
@@ -29,6 +35,15 @@
 				margin: 0.25em 0;
 			}
 
+			a.enlace {
+				color: #81005F;
+				font-weight: bold;
+				text-decoration: underline;
+			}
+
+			input[type='image'] {
+				border: 0;
+			}
 			@media screen and (max-width: 680px) {
 				#page-info {
 					display: none;
@@ -57,15 +72,16 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main">
 			<div id="page-info" style="float:right; width: 45%;">
-				<h3>¡ATENCIÓN!</h3>
-				<p><b>Comprueba</b> que los datos de <b>fecha y hora de salida</b> son correctos antes de aceptar la reserva.</p>
-				<p>Recuerda que <b>SITO</b> no hará NUNCA <b>ningún cargo</b> en tu tarjeta de crédito <b>hasta completar las mesas</b>. <b>Este paso es una comprobación de que tu tarjeta es correcta</b>.</p>
-				<p>Comparte la información de tu viaje en tus redes sociales preferidas al terminar la gestión. A más gente, más probabilidad de pagar menos:</p>
-				
-				<p>Por ello, el <b>precio que SITO te ofrece</b> será de tan sólo <b style="color:#81006F;"><g:formatNumber number="${precio.precioCmdtMin}" type="currency" currencyCode="EUR" />, <g:formatNumber number="${precio.precioCmdtMed}" type="currency" currencyCode="EUR" /> o <g:formatNumber number="${precio.precioCmdtMax}" type="currency" currencyCode="EUR" /></b>.</p>
-				
-				<p>El <b>ahorro</b> con el precio original oscila <b>entre los 20 y 30€*</b></p>
-				<p><i>(Precio oficial por trayecto: <g:formatNumber number="${precio.precioRenfe}" type="currency" currencyCode="EUR" />)</i></p>
+				<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 68px; height: 80px; margin: 1em;' />
+				<h3  style="color:#81006F;">¡ATENCIÓN!</h3>
+				<p><b>Comprueba</b> que los datos de fecha y hora de salida son correctos antes de aceptar la reserva.</p>
+				<p><b>Recuerda</b> que sólo pagarás uno de estos tres precios: <b style="color:#81006F;"><g:formatNumber number="${precio.precioCmdtMin}" type="currency" currencyCode="EUR" />, <g:formatNumber number="${precio.precioCmdtMed}" type="currency" currencyCode="EUR" /> o <g:formatNumber number="${precio.precioCmdtMax}" type="currency" currencyCode="EUR" /></b>. <b>Precio final.</b> Sin más comisiones.</p>
+				<p><b>No realizaré ningún cargo</b> en tu tarjeta de crédito hasta tener un mínimo de viajeros.</p>
+				<p><b>Este paso es una comprobación</b> de que tu tarjeta es correcta, y de que podriás pagar el precio máximo del billete <b style="color:#81006F;"><g:formatNumber number="${precio.precioCmdtMax}" type="currency" currencyCode="EUR" /></b>. PayPal no realiza ninguna otra acción. Es el método más seguro de pago por Internet</p>
+				<p><b>Comparte la información</b> de tu viaje en tus redes sociales para que tu trayecto sea más barato.</p>
+				<p><b>El ahorro</b> con el precio original es de <b style="color:#81006F;"><g:formatNumber number="${precio.precioRenfe - precio.precioCmdtMax}" type="currency" currencyCode="EUR" /> a <g:formatNumber number="${precio.precioRenfe - precio.precioCmdtMin}" type="currency" currencyCode="EUR" />*</b></p>
+				<p><i>*(Precio oficial por trayecto: <g:formatNumber number="${precio.precioRenfe}" type="currency" currencyCode="EUR" />)</i></p>
+				<p><b>Si tienes cualquier duda</b>, pincha en <g:link class="enlace" controller="queycomo">¿cómo funciona?</g:link> o revisa las <g:link class="enlace" controller="preguntasfrecuentes">preguntas frecuentes</g:link>. También puedes <g:link class="enlace" controller="contact">escríbeme</g:link>.</p>
 			</div>
 			<fieldset class="property-list">
 				<input type="hidden" name="id" value="${peticionesTren.tren.id}" />
@@ -85,23 +101,11 @@
 						<h2><paypal:button itemName="${peticionesTren.tren}, ${peticionesTren.tren.trayecto}" 
 							itemNumber="${peticionesTren.tren.id}" amount="37,99" buyerId="${user.id}" 
 							discountAmount="0" params="[paymentaction: 'authorization']" 
-							buttonSrc="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_buynowCC_LG.gif"
+							buttonSrc="${resource(dir: 'images', file: 'reservar.png')}"
 							buttonAlt="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif"/></h2>
-						<p style="border: 1px solid black;">Datos de prueba para realizar la compra.<br/>
-						Credit card:<br/>
-						- Visa 4073774447610449<br />
-						- Exp. date 11/2017<br />
-						- CVV2 123<br />
-						</p>
 					</g:if>
 					<g:if test="${!doPayment}">
-						<h2><g:link controller="seleccionInicial" action="peticion" id="${peticionesTren.tren.id}"><img src="https://www.paypalobjects.com/es_ES/ES/i/btn/btn_buynowCC_LG.gif"/></g:link></h2>
-						<p style="border: 1px solid black;">Datos de prueba para realizar la compra.<br/>
-						Credit card:<br/>
-						- Visa 4073774447610449<br />
-						- Exp. date 11/2017<br />
-						- CVV2 123<br />
-						</p>
+						<h2><g:link controller="seleccionInicial" action="peticion" id="${peticionesTren.tren.id}"><img src="${resource(dir: 'images', file: 'reservar.png')}"/></g:link></h2>
 					</g:if>
 				</div>
 			</fieldset>
@@ -111,7 +115,7 @@
 				</g:if>
 				<lu>
 					<g:each in="${sugeridos}" var="ptren">
-						<li style="margin: .75em;"><g:link action="reserva" id="${ptren.tren.id}">${ptren.tren} ${ptren.oportunidad}</g:link></li>
+						<li style="margin: .75em;"><g:link action="reserva" id="${ptren.tren.id}">${ptren.tren}</g:link></li>
 					</g:each>
 				</lu>
 				<div class="fieldcontain" style="text-align: center; padding: .5em;">

@@ -5,7 +5,9 @@
 <!--[if IE 9 ]>    <html lang="es" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="es" class="no-js"><!--<![endif]-->
 	<head>
-		<title><g:layoutTitle default="CMDT"/></title>
+		<title><g:layoutTitle default="Compartir Mesa De Tren - CMDT"/></title>
+		<meta name="robots" content="INDEX, FOLLOW">
+		<meta name="description" content="Bienvenido, en compartir mesa de tren podras acceder a descuentos en tus viajes en tren. Compartir mesa de tren pemite beneficiarse de la tarifa mesa de Renfe en sus trenes Ave, Alvia y Avant. Viaje más barato en AVE, ALVIA y AVANT."/>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">

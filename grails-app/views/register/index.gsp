@@ -52,8 +52,8 @@
 	</g:if>
 	<g:else>
 	<br/>
-	<h4>Solo tienes rellenar el formulario para registrarte como nuevo usuario.</h4>
-	<recaptcha:ifFailed><div class="errors">CAPTCHA Failed</div></recaptcha:ifFailed>
+	<h4>Sólo tienes rellenar el formulario para registrarte como nuevo usuario.</h4>
+	<recaptcha:ifFailed><div class="errors">CAPTCHA erroneo. Por favor, vuelva a intentarlo.</div></recaptcha:ifFailed>
 	<g:hasErrors bean="${command}">
 		<ul class="errors" role="alert">
 			<g:eachError bean="${command}" var="error">
@@ -74,7 +74,7 @@
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'phoneNumber', 'error')}">
 		<label class="property-label" for="phoneNumber"><g:message code='cmdt.newuser.phoneNumber' default="Tel&eacute;fono"/></label>
-		<input class="property-value" style="float:left;" name="phoneNumber" id="phoneNumber" value="${command.email}" size="20" />
+		<input class="property-value" style="float:left;" name="phoneNumber" id="phoneNumber" value="${command.phoneNumber}" size="20" />
 		<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'password', 'error')}">

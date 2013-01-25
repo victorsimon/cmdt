@@ -17,9 +17,22 @@
 	#bannerRotator {
 		display: none;
 	}
+	
+	#masInfo {
+		display: none;
+	}
+
+	#menu-principal {
+		font-size: .75em;
+	}
+
 }
 
 @media screen and (max-width: 480px) {
+	#menu-principal {
+		display: none;
+	}
+
 	.nav {
 		padding: 0.15em;
 	}
@@ -97,6 +110,7 @@
 		padding: .5em .5em .5em .5em;
 		margin-bottom: .25em;
 		padding-left: 10px;
+		background-image: url('../images/header_bg_small.png');
 }
 	
 	#header img {

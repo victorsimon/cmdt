@@ -1,6 +1,6 @@
 package compartirmesadetren
-import grails.plugins.springsecurity.Secured
 import org.springframework.web.servlet.ModelAndView
+import grails.plugins.springsecurity.Secured
 
 @Secured(['ROLE_ADMIN'])
 class EstacionController {

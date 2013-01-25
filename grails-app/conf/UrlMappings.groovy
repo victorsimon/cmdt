@@ -9,6 +9,8 @@ class UrlMappings {
 
 		"/"(controller: "seleccionInicial", action="trayectos")
 		"/mantenimiento"(view:"/mantenimiento")
+		"/preguntasfrecuentes"(view:"/preguntasfrecuentes")
+		"/queycomo"(view:"/queycomo")
 		"500"(view:'/error')
 	}
 }

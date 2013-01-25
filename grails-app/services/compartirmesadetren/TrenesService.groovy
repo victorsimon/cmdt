@@ -22,10 +22,13 @@ class TrenesService {
 			def contenidoLimpio = limpiarContenido(conexion.content.text)
 			if (haCambiado(salida, trayecto, contenidoLimpio)) {
 				def Map<String, String> trenesProgramados = extraerTrenes(contenidoLimpio)
+				List<Tren> trenes = []
 				trenesProgramados.each {
-					convertirLineasEnTrenes(it.value, salida, trayecto)
+					List<Tren> tmp = convertirLineasEnTrenes(it.value, salida, trayecto)
+					if (tmp) trenes.addAll(tmp)
 				}
 				guardarReferenciaDeCambio(salida, trayecto, contenidoLimpio)
+				marcarTrenesObsoletos(salida, trayecto, trenes)
 			}
 		}
 	}
@@ -44,7 +47,7 @@ class TrenesService {
 		if (!tren) {
 			tren = crearTren (trenProgramado[4] + "-" + trenProgramado[1], horaSalida.time, horaLlegada.time, trayecto)
 		}
-		if (tren)
+		if (tren) 
 			trenes.add(tren)
 		return trenes
 	}
@@ -53,6 +56,7 @@ class TrenesService {
 		Tren tren = new Tren(nombre: nombre,
 			salida: salida,
 			llegada: llegada,
+			noValido: false,
 			trayecto: trayecto);
 		tren.save(flush: true)
 		if (tren.hasErrors())
@@ -118,8 +122,8 @@ class TrenesService {
 		trenesBorrar.each { Tren tren ->
 			if (!trenesAMantener.contains(tren)) {
 				tren.noValido = true
+				tren.save(flush: true)
 			}
-			tren.save(flush: true)
 		}
 	}
 	

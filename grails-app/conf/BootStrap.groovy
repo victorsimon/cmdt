@@ -5,138 +5,153 @@ import compartirmesadetren.Trayecto
 import compartirmesadetren.Tren
 import compartirmesadetren.User
 import compartirmesadetren.UserRole
+import compartirmesadetren.FAQ
 import grails.util.GrailsUtil;
 import java.sql.Time
 
 class BootStrap {
 
     def init = { servletContext ->
+    	//Aqui inicializo los datos comunes. Mas abajo pongo los especificos de cada entorno
+    	def adminRole = Role.findByAuthority('ROLE_ADMIN')
+    	def userRole = Role.findByAuthority('ROLE_USER')
+		if (!adminRole) {
+			adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+			userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+		}
+		def madridPamplona
+		def pamplonaMadrid
+		if (!Estacion.findByNombre("Madrid (*)")) {
+			def madrid = new Estacion(nombre:"Madrid (*)", code:"MADRI")
+			madrid.save()
+
+			def pamplona = new Estacion(nombre:"Pamplona", code:"80100")
+			pamplona.save()
+			
+			madridPamplona = new Trayecto(
+				origen:madrid,
+				destino:pamplona,
+				precioMesa:94.2
+				)
+			madridPamplona.save()
+			
+			pamplonaMadrid = new Trayecto(
+				origen:pamplona,
+				destino:madrid,
+				precioMesa:94.2
+				)
+			pamplonaMadrid.save()
+			def precioMadridPamplona = new Precio(
+				trayecto:madridPamplona,
+				precioCmdtMin:29.99,
+				precioCmdtMed:34.99,
+				precioCmdtMax:37.99,
+				precioRenfe:58.90
+				)
+			precioMadridPamplona.save()
+
+			def precioPamplonaMadrid = new Precio(
+				trayecto:pamplonaMadrid,
+				precioCmdtMin:29.99,
+				precioCmdtMed:34.99,
+				precioCmdtMax:37.99,
+				precioRenfe:58.90
+				)
+			precioPamplonaMadrid.save()
+		}
+    	if (!FAQ.findByPreguntaLike('%incluye el precio?')) {
+			def faq1 = new FAQ(
+				pregunta: '¿Qué incluye el precio?', 
+				respuesta: """
+Nosotros nos ocupamos de conseguirte el mejor precio. Por ello, incluye:<ul>
+<li>Gestión de asignación de los pasajeros a las mesas y la comunicación en Redes Sociales y demás medios para poder completarlas. Recuerda que CONSEGUIRTE EL MEJOR PRECIO POSIBLE es nuestro objetivo.</li>
+<li>La compra de billetes y la <b>venta por individual</b> a cada uno de los miembros de la mesa así como el cobro del billete de forma totalmente segura gracias a PayPal. SIN COMPLICACIONES.</li></ul>
+				"""
+				)		
+			faq1.save()		
+
+			def faq2 = new FAQ(
+				pregunta: '¿Cobráis gastos de gestión sobre los 3 precios marcados al inicio?', 
+				respuesta: """
+No, los 3 precios que aparecen son cerrados e incluyen todos los gastos expuestos en la primera pregunta.					
+				"""
+				)				
+			faq2.save()		
+
+			def faq3 = new FAQ(
+				pregunta: '¿El sistema me cobra el billete en el momento que lo reservo?', 
+				respuesta: """
+Al introducir tus datos de tarjeta en Paypal, tan sólo estás confirmando que estás interesado en el billete y que tu tarjeta es real. Es una manera de verificar los datos, como realizan webs tan conocidas como www.booking.com.<br/>
+Insistimos que el cobro del billete se realizará SÓLO cuando dispongamos de tu billete, y siempre se informará del precio que finalmente deberás pagar, que como máximo será el mayor de los 3 únicos precios que ofertamos en cada trayecto.<br/>
+<br/>
+CON CMDT SALDRÁS GANANDO PORQUE <b>SIEMPRE</b> SERÁ MÁS ECÓNOMICO QUE LA TARIFA NORMAL DEL BILLETE DE RENFE.
+				"""
+				)				
+			faq3.save()		
+
+			def faq4 = new FAQ(
+				pregunta: '¿Puedo hacer una reserva sin tarjeta de crédito?', 
+				respuesta: """
+<b>No se puede realizar una reserva sin tarjeta de crédito</b>. Al realizar la reserva se acepta que el precio máximo a pagar puede ser el indicado sobre las tres opciones.<br/>
+Cuando introduces tu número de tarjeta, se comprueba la validez de la tarjeta y la disponibilidad de fondos, que en este último caso, será sobre el precio máximo a pagar. <b>PayPal es el método más seguro de pago</b> y no realizará ningún otro tipo de comprobación en tu cuenta.<br/>
+<br/>
+Sin embargo, recuerda que SITO en CMDT, siempre intentará conseguir el mejor precio. <b>A más viajeros, menos pagas.</b>
+				"""
+				)				
+			faq4.save()		
+
+			def faq5 = new FAQ(
+				pregunta: '¿Cómo sé si mi reserva está confirmada? Y ¿cuándo pago?', 
+				respuesta: """
+La reserva queda confirmada cuando se completa la mesa, y el cobro SÓLO se realizará cuando dispongamos del billete, el cual te enviaremos al momento.
+					"""
+				)				
+			faq5.save()		
+
+			def faq6 = new FAQ(
+				pregunta: '¿Puedo cancelar o modificar mi reserva?', 
+				respuesta: """
+En cualquier momento puedes ponerte en contacto con nosotros para comunicarnos cualquier incidencia sobre tu reserva. <br/>
+Podrás acceder a tu cuenta, en la que podrás ver tu lista de reservas pendientes. Al clickar sobre una en concreto, podrás enviarnos un e-mail con tus comentarios. <br>
+Nosotros intentaremos realizar los cambios siempre que no influyan en otros viajeros, y te atenderemos y responderemos a todas las cuestiones planteadas.
+				"""
+				)				
+			faq6.save()		
+
+			def faq7 = new FAQ(
+				pregunta: '¿Puedo hacer una reserva/compra 24 hrs antes de la salida?', 
+				respuesta: """
+No. Las reservas y la gestión del billete se realiza como mínimo 48 hrs. antes de la salida, para poder ofrecerte el mejor servicio y conseguirte el mejor precio.
+"""
+				).save()
+		}
 		switch (GrailsUtil.environment) {
 			case "development":
-				def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-				def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
-				def testUser = new User(username: 'me', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
+				def testUser = new User(username: 'admin', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
 				testUser.save(flush: true)
 				UserRole.create testUser, adminRole, true
 				UserRole.create testUser, userRole, true
 				
-				def testUser1 = new User(username: 'you', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
+				def testUser1 = new User(username: 'user', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
 				testUser1.save(flush: true)
 				UserRole.create testUser1, userRole, true
-
-				def madrid = new Estacion(nombre:"Madrid (*)", code:"MADRI")
-				madrid.save()
-
-				def pamplona = new Estacion(nombre:"Pamplona", code:"80100")
-				pamplona.save()
-				
-				def madridPamplona = new Trayecto(
-					origen:madrid,
-					destino:pamplona,
-					precioMesa:94.2
-					)
-				madridPamplona.save()
-				
-				def pamplonaMadrid = new Trayecto(
-					origen:pamplona,
-					destino:madrid,
-					precioMesa:94.2
-					)
-				pamplonaMadrid.save()
-
-				def precioMadridPamplona = new Precio(
-					trayecto:madridPamplona,
-					precioCmdtMin:29.99,
-					precioCmdtMed:34.99,
-					precioCmdtMax:37.99,
-					precioRenfe:58.90
-					)
-				precioMadridPamplona.save()
-
-				def precioPamplonaMadrid = new Precio(
-					trayecto:pamplonaMadrid,
-					precioCmdtMin:29.99,
-					precioCmdtMed:34.99,
-					precioCmdtMax:37.99,
-					precioRenfe:58.90
-					)
-				precioPamplonaMadrid.save()
-
-				/*
-				createTren("00601-ALVIA", madridPamplona)
-				createTren("00602-ALVIA", madridPamplona)
-				createTren("00603-ALVIA", madridPamplona)
-				createTren("00604-ALVIA", madridPamplona)
-				
-				createTren("00605-ALVIA", pamplonaMadrid)
-				createTren("00606-ALVIA", pamplonaMadrid)
-				createTren("00607-ALVIA", pamplonaMadrid)
-				createTren("00608-ALVIA", pamplonaMadrid)
-				*/
-				
 			break
 			case "production":
-				if (!Role.findByAuthority('ROLE_ADMIN')) {
-					def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-					def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
-					def testUser = new User(username: 'me', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
+				if(!User.findByUsername('admin')) {
+					def testUser = new User(username: 'admin', enabled: true, password: 'X12dpi', email: 'vsimon.batanero@gmail.com')
 					testUser.save(flush: true)
 					UserRole.create testUser, adminRole, true
 					UserRole.create testUser, userRole, true
 				}
-				if (!Estacion.findByNombre("Madrid (*)")) {
-					def madrid = new Estacion(nombre:"Madrid (*)", code:"MADRI")
-					madrid.save()
-	
-					def pamplona = new Estacion(nombre:"Pamplona", code:"80100")
-					pamplona.save()
-					
-					def madridPamplona = new Trayecto(
-						origen:madrid,
-						destino:pamplona,
-						precioMesa:94.2
-						)
-					madridPamplona.save()
-					
-					def pamplonaMadrid = new Trayecto(
-						origen:pamplona,
-						destino:madrid,
-						precioMesa:94.2
-						)
-					pamplonaMadrid.save()
-				}
-				break
+			break
 			case "sandbox":
-				if (!Role.findByAuthority('ROLE_ADMIN')) {
-					def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-					def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
-					def testUser = new User(username: 'me', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
+				if(!User.findByUsername('admin')) {
+					def testUser = new User(username: 'admin', enabled: true, password: 'X12dpi', email: 'vsimon.batanero@gmail.com')
 					testUser.save(flush: true)
 					UserRole.create testUser, adminRole, true
 					UserRole.create testUser, userRole, true
 				}
-				if (!Estacion.findByNombre("Madrid (*)")) {
-					def madrid = new Estacion(nombre:"Madrid (*)", code:"MADRI")
-					madrid.save()
-	
-					def pamplona = new Estacion(nombre:"Pamplona", code:"80100")
-					pamplona.save()
-					
-					def madridPamplona = new Trayecto(
-						origen:madrid,
-						destino:pamplona,
-						precioMesa:94.2
-						)
-					madridPamplona.save()
-					
-					def pamplonaMadrid = new Trayecto(
-						origen:pamplona,
-						destino:madrid,
-						precioMesa:94.2
-						)
-					pamplonaMadrid.save()
-				}
-				break
+			break
 			default: break
 		}
     }

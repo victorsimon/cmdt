@@ -7,13 +7,13 @@ import groovyx.gpars.GParsPool
 class SeleccionInicialController {
 
 	static defaultAction = "trayectos"
-	def beforeInterceptor = [action: this.&setLastURI]
 	def trenesService
 	def peticionesService
 	def grailsApplication
 	def mailService
 	
 	def trayectos(Integer opcion) {
+		setLastURI()
 		def Date fecha
 		if (params?.time)
 			fecha = new Date(params.time.toLong())
@@ -71,6 +71,7 @@ class SeleccionInicialController {
 	 * @return redirect to reserva action
 	 */
 	def detalle() {
+		setLastURI()
 		redirect action: 'reserva', params: params
 	}
 	
@@ -114,11 +115,17 @@ class SeleccionInicialController {
 			GParsPool.executeAsyncAndWait ({
 				mailService.sendMail {
 					to user.email
-					subject "Reserva: " + tren.toString() + " " + tren.trayecto
+					subject "Reserva: " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
 					html mailContent
 				}
 			})
 		}
+	}
+	
+	@Secured(['ROLE_USER'])
+	def cancel() {
+		Tren tren = Tren.read(params.id)
+		def user = getAuthenticatedUser()
 	}
 	
 	private setLastURI() {

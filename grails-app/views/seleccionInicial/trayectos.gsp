@@ -42,6 +42,29 @@
 				width: 300px;
 			}
 
+			.banners {
+				float: right;
+				width: 47%;
+			}
+
+			a.mas-info {
+				color: #81005F;
+				font-size: 1.2em;
+				font-weight: bold;
+			}
+			a.mas-info:link {
+				text-decoration:underline;
+			}
+			a.mas-info:hover {
+				text-decoration:underline;
+			}
+			a.mas-info:active {
+				text-decoration:underline;
+			}
+			a.mas-info:visited {
+				text-decoration:underline;
+			}
+
 			@media screen and (max-width: 480px) {
 				#status {
 					display: none;
@@ -66,17 +89,19 @@
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main" id="page-body">
 			<g:form action="trenes" method="POST">
-				<div id="bannerRotator">
-    				<ul>
-    					<li>
-	    					<a href="#"><img id="banner-precio" src="${resource(dir: 'images', file: 'banner_mad_pam.png')}" alt="Precio trayecto"></a>
-	  					</li>
-      					<li>
-	    					<a href="#"><img src="${resource(dir: 'images', file: 'banner_secundario.png')}" alt="Ellos tambien lo hacen"></a>
-	  					</li>
-    				</ul>
-  				</div>
-
+				<div class="banners">
+					<div id="bannerRotator">
+	    				<ul>
+	    					<li>
+		    					<a href="#"><img id="banner-precio" src="${resource(dir: 'images', file: 'banner_mad_pam.png')}" alt="Precio trayecto"></a>
+		  					</li>
+	      					<li>
+		    					<a href="#"><img src="${resource(dir: 'images', file: 'banner_secundario.png')}" alt="Ellos tambien lo hacen"></a>
+		  					</li>
+	    				</ul>
+	  				</div>
+	   				<center id="masInfo"><g:link controller="queycomo" class="mas-info">MÁS INFORMACIÓN...</g:link></center>
+   				</div>
 				<fieldset class="form property-list">
 					<div class="fieldcontain">
 						<label class="property-label" for="trayecto">Selecciona el trayecto</label>
@@ -119,15 +144,15 @@
         		$("#banner-precio").attr('src', pam_mad);
         	}
 			$("#bannerRotator li:first").fadeIn(100); //fade in new image
-          }
-	    var info1 = "<p>¡Hola! Mi nombre es SITO ...<img src='images/SITO.png' style='float: right; width: 48px; height: 60px;' /><br/>... y quiero ayudarte " + 
+        }
+	    var info1 = "<p>¡Hola! Mi nombre es SITO ...<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>... y quiero ayudarte " + 
 	    	"a encontrar una mesa para que puedas <b>beneficiarte</b> e del descuento que Renfe" + 
 	    	"ofrece para compartir una mesa. Yo te lo " + 
 	    	"<b>gestionaré y venderé</b> de forma <b>individual</b>.</p>";
-	    var info2 = "Elige la fecha que más te convenga.<img src='images/SITO.png' style='float: right; width: 48px; height: 60px;' /><br/>" +  
+	    var info2 = "Elige la fecha que más te convenga.<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>" +  
 	    	"Recuerda realizarlo con cierta antelación, así…<br/>" +
 	    	"<b>¡Te ofreceré MEJOR servicio y MEJOR precio!</b>";
-	    var info3 = "Si tienes flexibilidad de fechas…<img src='images/SITO.png' style='float: right; width: 48px; height: 60px;' /><br/>" +
+	    var info3 = "Si tienes flexibilidad de fechas…<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>" +
 	    	"¡este es tu apartado! No dejes de mirar las<br/>" + 
 	    	"<b>OPORTUNIDADES YA DISPONIBLES</b>.";
 		prepareBalloon = function(id, text) {

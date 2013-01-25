@@ -4,14 +4,15 @@ dataSource {
     username = "sa"
     password = ""
 	properties {
-		maxActive = 50
-		maxIdle = 25
-		minIdle = 5
-		initialSize = 5
-		minEvictableIdleTimeMillis = 1000 * 60 * 10
-		timeBetweenEvictionRunsMillis = 1000 * 60 * 10
-		maxWait = 10000
 		validationQuery = "SELECT 1"
+        testOnBorrow=true
+        testOnReturn=true
+        testWhileIdle=true
+        initialSize=0
+        maxActive=10
+        maxIdle=10
+        minIdle=0
+        maxWait=-1
 	}
 }
 hibernate {
@@ -25,6 +26,7 @@ environments {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            autoreconnect = true
         }
     }
     test {
@@ -40,7 +42,6 @@ environments {
 		    password = "sk3514"
             dbCreate = "update"
             url = "jdbc:mysql://compartirmesadetren.com:3306/vsimon_cmdt?autoreconnect=true"
-			dialect=org.hibernate.dialect.MySQLInnoDBDialect
 			autoreconnect = true
             pooled = true
         }
@@ -52,7 +53,6 @@ environments {
 		    password = "sk3514"
             dbCreate = "update"
             url = "jdbc:mysql://compartirmesadetren.com:3306/vsimon_cmdt_sandbox?autoreconnect=true"
-			dialect=org.hibernate.dialect.MySQLInnoDBDialect
 			autoreconnect = true
             pooled = true
         }

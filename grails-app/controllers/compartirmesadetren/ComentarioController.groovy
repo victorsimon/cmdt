@@ -1,18 +1,23 @@
 package compartirmesadetren
+import grails.plugins.springsecurity.Secured
 
+@Secured(['ROLE_ADMIN'])
 class ComentarioController {
 	
+	def scaffold = true
+
+	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 	def enviar (Comentario command) {
-		println "1"
 		if (!command.validate()) {
-		println "2"
 			return
 		}
-		
-		println "3"
+		def user = getAuthenticatedUser()		
+
+		if (user) {
+			command.user = user
+		}
 		command.save()
 		
-		println "4"
 		flash.message = "Tu comentario ha sido enviado correctamente" 
 	}
 	

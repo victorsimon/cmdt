@@ -70,7 +70,7 @@
 	<g:else>
 	<br/>
 	<h4>Solo tienes rellenar el formulario para contactar con nosotros.</h4>
-	<recaptcha:ifFailed><div class="errors">CAPTCHA Failed</div></recaptcha:ifFailed>
+	<recaptcha:ifFailed><div class="errors">CAPTCHA erroneo. Por favor, vuelva a intentarlo.</div></recaptcha:ifFailed>
 	<g:hasErrors bean="${command}">
 		<ul class="errors" role="alert">
 			<g:eachError bean="${command}" var="error">

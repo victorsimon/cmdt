@@ -22,5 +22,14 @@ class PaypalFilters {
 			}
 		}
 
+		paymentReceivedFilter(controller:'paypal', action:'cancel') {
+			after = {
+				def payment = request.payment
+				if(payment && payment.status == org.grails.paypal.Payment.CANCELLED) {
+					redirect (controller: "seleccionInicial")
+				}
+			}
+		}
+
     }
 }

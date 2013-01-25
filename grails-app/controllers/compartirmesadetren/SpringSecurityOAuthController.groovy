@@ -366,14 +366,14 @@ class CMDTCreateAccountCommand {
         username blank: false, validator: { String username, command ->
             User.withNewSession { session ->
                 if (username && User.countByUsername(username)) {
-                    return 'OAuthCreateAccountCommand.username.error.unique'
+                    return 'CMDTCreateAccountCommand.username.error.unique'
                 }
             }
         }
         email blank: false, email: true
-        email2 nullable: true, blank: true, validator: { email2, command ->
+        email2 validator: { email2, command ->
             if (command.email != email2) {
-                return 'OAuthCreateAccountCommand.password.error.mismatch'
+                return 'CMDTCreateAccountCommand.email2.error.mismatch'
             }
         }
 		

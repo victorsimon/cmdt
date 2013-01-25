@@ -59,7 +59,7 @@ class EmailCommand {
 	
 	static constraints = {
 		user nullable: true
-		subject nullable: false
+		subject nullable: false, blank: false
 		body nullable: false, blank: false 
 		responseEmail blank: false, nullable: false, email: true
 	}

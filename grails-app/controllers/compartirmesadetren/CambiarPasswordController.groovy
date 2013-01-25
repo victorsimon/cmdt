@@ -51,14 +51,14 @@ class CambiarPasswordController extends AbstractS2UiController {
 			return 'command.password.error.username'
 		}
 
-		if (!checkPasswordMinLength(password, command) ||
-		    !checkPasswordMaxLength(password, command) ||
-		    !checkPasswordRegex(password, command)) {
+		if (!checkPasswordMinLength(password) ||
+		    !checkPasswordMaxLength(password) ||
+		    !checkPasswordRegex(password)) {
 			return 'command.password.error.strength'
 		}
 	}
 
-	static boolean checkPasswordMinLength(String password, command) {
+	static boolean checkPasswordMinLength(String password) {
 		def conf = SpringSecurityUtils.securityConfig
 
 		int minLength = conf.ui.password.minLength instanceof Number ? conf.ui.password.minLength : 8
@@ -66,7 +66,7 @@ class CambiarPasswordController extends AbstractS2UiController {
 		password && password.length() >= minLength
 	}
 
-	static boolean checkPasswordMaxLength(String password, command) {
+	static boolean checkPasswordMaxLength(String password) {
 		def conf = SpringSecurityUtils.securityConfig
 
 		int maxLength = conf.ui.password.maxLength instanceof Number ? conf.ui.password.maxLength : 64
@@ -74,7 +74,7 @@ class CambiarPasswordController extends AbstractS2UiController {
 		password && password.length() <= maxLength
 	}
 
-	static boolean checkPasswordRegex(String password, command) {
+	static boolean checkPasswordRegex(String password) {
 		def conf = SpringSecurityUtils.securityConfig
 
 		String passValidationRegex = conf.ui.password.validationRegex ?:

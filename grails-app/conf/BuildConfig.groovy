@@ -34,7 +34,8 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        runtime 'mysql:mysql-connector-java:5.1.22'
+        runtime 'mysql:mysql-connector-java:5.1.22',
+                'org.tuckey:urlrewritefilter:4.0.3'
 		compile 'xerces:xercesImpl:2.9.1',
 				'net.sourceforge.nekohtml:nekohtml:1.9.15'
     }
