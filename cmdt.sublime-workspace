@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"com",
+				"com"
+			],
+			[
+				"float",
+				"float:right"
+			],
+			[
 				"admin",
 				"adminRole"
 			],
@@ -116,27 +124,75 @@
 	"buffers":
 	[
 		{
-			"file": "grails-app/conf/BootStrap.groovy",
+			"file": "grails-app/views/queycomo.gsp",
 			"settings":
 			{
-				"buffer_size": 6502,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "grails-app/views/seleccionInicial/reserva.gsp",
-			"settings":
-			{
-				"buffer_size": 5141,
+				"buffer_size": 8532,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "grails-app/conf/Config.groovy",
+			"file": "grails-app/views/contact/index.gsp",
 			"settings":
 			{
-				"buffer_size": 10895,
+				"buffer_size": 5218,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "grails-app/views/layouts/_footer.gsp",
+			"settings":
+			{
+				"buffer_size": 3535,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "grails-app/views/layouts/_header.gsp",
+			"settings":
+			{
+				"buffer_size": 2313,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "grails-app/views/login/auth.gsp",
+			"settings":
+			{
+				"buffer_size": 4197,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "grails-app/views/register/index.gsp",
+			"settings":
+			{
+				"buffer_size": 6077,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "grails-app/views/seleccionInicial/peticion.gsp",
+			"settings":
+			{
+				"buffer_size": 1719,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "grails-app/views/seleccionInicial/trayectos.gsp",
+			"settings":
+			{
+				"buffer_size": 8075,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "grails-app/views/seleccionInicial/trenes.gsp",
+			"settings":
+			{
+				"buffer_size": 1934,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -188,17 +244,28 @@
 	},
 	"file_history":
 	[
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/css/mobile.css",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/LoginController.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/CambiarPasswordController.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/layouts/_footer.gsp",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/src/templates/war/web.xml",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/WEB-INF/urlrewrite.xml",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/BuildConfig.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/services/compartirmesadetren/TrenesService.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/trenes.gsp",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/Config.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/domain/compartirmesadetren/Tren.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/trayectos.gsp",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/SeleccionInicialController.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/layouts/_header.gsp",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/layouts/main.gsp",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/BootStrap.groovy",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/reserva.gsp",
+		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/_mailReserva.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/UserController.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/user/create.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/reserva.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/trayectos.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/queycomo.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/layouts/main.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/layouts/_footer.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/Config.groovy",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/SeleccionInicialController.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/peticion.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/layouts/_header.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/css/main.css",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/compartirmesadetren/PaypalFilters.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/cancel.gsp",
@@ -207,15 +274,12 @@
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/SpringSecurityOAuthController.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/contact/index.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/ContactController.groovy",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/BootStrap.groovy",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/LoginController.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/login/auth.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/preguntasfrecuentes.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/DataSource.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/register/index.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/i18n/messages.properties",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/cmdt.sublime-workspace",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/css/mobile.css",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/conf/UrlMappings.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/src/templates/scaffolding/list.gsp",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/ComentarioController.groovy",
@@ -239,15 +303,12 @@
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/js/application.js",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/src/groovy/compartirmesadetren/PeticionesTren.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/controllers/compartirmesadetren/TrenController.groovy",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/domain/compartirmesadetren/Tren.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/test/unit/compartirmesadetren/MesaTests.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/domain/compartirmesadetren/Asiento.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/domain/compartirmesadetren/Billete.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/domain/compartirmesadetren/Mesa.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/domain/compartirmesadetren/Precio.groovy",
 		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/layouts/admin.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/trenes.gsp",
-		"/C/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/grails-app/views/seleccionInicial/_mailReserva.gsp",
 		"/C/Program Files/Sublime Text 2/sublime_text - bueno - copia.exe",
 		"/C/Program Files/Sublime Text 2/sublime_text.exe",
 		"/C/Program Files/Sublime Text 2/sublime_text - copia.exe"
@@ -258,7 +319,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			""
@@ -269,6 +330,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"24",
+			".5",
+			"32",
+			"<img",
+			"img",
+			"log",
+			"guardarReferenciaDeCambio",
+			"convertirLineasEnTrenes",
+			"marcarTrenesObsoletos",
+			"noValido",
+			"haCambiado",
+			"img",
+			"localhost:8080",
 			"header-main",
 			"setLastURI",
 			"lastURL",
@@ -351,50 +425,103 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "grails-app/conf/BootStrap.groovy",
+					"file": "grails-app/views/queycomo.gsp",
 					"settings":
 					{
-						"buffer_size": 6502,
+						"buffer_size": 8532,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5625,
-								5625
+								7656,
+								7656
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Groovy/Groovy.tmLanguage",
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1794.0,
+						"translation.y": 2147.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "grails-app/views/seleccionInicial/reserva.gsp",
+					"file": "grails-app/views/contact/index.gsp",
 					"settings":
 					{
-						"buffer_size": 5141,
+						"buffer_size": 5218,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								72,
-								110
+								2223,
+								2227
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1007.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "grails-app/views/layouts/_footer.gsp",
+					"settings":
+					{
+						"buffer_size": 3535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								458,
+								462
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "grails-app/views/layouts/_header.gsp",
+					"settings":
+					{
+						"buffer_size": 2313,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								558,
+								558
 							]
 						],
 						"settings":
@@ -409,27 +536,136 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "grails-app/conf/Config.groovy",
+					"buffer": 4,
+					"file": "grails-app/views/login/auth.gsp",
 					"settings":
 					{
-						"buffer_size": 10895,
+						"buffer_size": 4197,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9079,
-								9079
+								3063,
+								3067
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Groovy/Groovy.tmLanguage"
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2745.0,
+						"translation.y": 1112.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "grails-app/views/register/index.gsp",
+					"settings":
+					{
+						"buffer_size": 6077,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1834,
+								1838
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 737.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "grails-app/views/seleccionInicial/peticion.gsp",
+					"settings":
+					{
+						"buffer_size": 1719,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								857,
+								861
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 422.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "grails-app/views/seleccionInicial/trayectos.gsp",
+					"settings":
+					{
+						"buffer_size": 8075,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5697,
+								5697
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1819.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "grails-app/views/seleccionInicial/trenes.gsp",
+					"settings":
+					{
+						"buffer_size": 1934,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								455,
+								459
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -501,6 +737,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 227.0,
+	"side_bar_width": 225.0,
 	"status_bar_visible": true
 }

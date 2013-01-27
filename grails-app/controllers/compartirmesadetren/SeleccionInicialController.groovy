@@ -55,7 +55,7 @@ class SeleccionInicialController {
 				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3, new Date() +4, new Date() +5, new Date() +6, new Date() +7, new Date() +8], trayecto, true)
 			}
 		}
-		[trenes: peticionesTren, ofertas: ofertas]
+		[trenes: peticionesTren, ofertas: ofertas, trayecto: trayecto]
 	}
 
 	def proximos() {

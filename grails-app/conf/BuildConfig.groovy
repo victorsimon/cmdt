@@ -37,7 +37,8 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.22',
                 'org.tuckey:urlrewritefilter:4.0.3'
 		compile 'xerces:xercesImpl:2.9.1',
-				'net.sourceforge.nekohtml:nekohtml:1.9.15'
+				'net.sourceforge.nekohtml:nekohtml:1.9.15',
+                ":cache-headers:1.0.4 > *"
     }
 
     plugins {

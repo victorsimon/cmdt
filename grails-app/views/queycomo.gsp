@@ -57,7 +57,7 @@
 		<div class="seccion" id="s1" style="display: inline;">
 			<div class="contenido">
 				<h1>¿Qué es CompartirMesaDeTren?</h1>
-				<p>¡Hola! Mi nombre es SITO ...<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: left; width: 68px; height: 80px;' /></p>
+				<p>¡Hola! Mi nombre es SITO ...<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'SITO.png')}' style='float: left; width: 68px; height: 80px;' /></p>
 				<p>... CompartirMesaDeTren es el portal en el que gestionaré (de forma integral e individual) la venta de billetes con dos días de antelación. Está basada en el descuento que Renfe ofrece; aquel en el que compartiendo una mesa de 4 personas, <b>podéis conseguir un precio inmejorable entre los 3 precios que os ofrecemos</b>.</p>
 				<p><b>Recordad: contra más gente viajéis, más barato os puede salir.</b>
 				</p>
@@ -72,13 +72,13 @@
 		</div>
 		<div class="seccion" id="s2" style="display: none;">
 			<div class="contenido">
-				<img src='${resource(dir: 'images', file: 'como_1.png')}' style='float: right; width: 40%;' />
+				<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'como_1.png')}' style='float: right; width: 40%;' />
 				<h1>¿Cómo se usa?</h1>
 				<h2>Simulemos una venta...</h2>
 				<p>Supón que quieres viajar el en una fecha concreta, por ejemplo, el 22 de Enero de 2013, desde Madrid a Pamplona:</p>
 				<p><b>1º Elijo la fecha y/o veo las oportunidades* disponibles. ¡Me apunto!</b></p>
 				<p><i>*No dejes de ver las ofertas disponibles, podrás obtener el billete asegurado</i></p>
-				<img src='${resource(dir: 'images', file: 'como_2.png')}' style='float: left; width: 40%;' />
+				<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'como_2.png')}' style='float: left; width: 40%;' />
 				<br/>
 				<p><b>2º Si aún no lo he hecho, introduzco mi usuario y clave. Si todavía no soy un usuario registrado, creo una nueva cuenta en Compartir Mesa de Tren.</b></p>
 				<p>También puedo entrar con alguna de mis cuentas* en Twitter, Facebook o Google+. </p>
@@ -98,7 +98,7 @@
 							<div style="padding: 1em; margin: 0;">
 								<p><b>3º a) Si decidimos crear una cuenta nueva, veremos la siguiente pantalla en la que rellenaremos el usuario, email y una contraseña.</b></p> 
 								<p>El teléfono lo puedes poner para que nos comuniquemos o enviemos el billete si así lo deseas, pero no es obligatorio.</p>
-								<img src='${resource(dir: 'images', file: 'como_3.png')}' style="width: 90%;"/>
+								<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'como_3.png')}' style="width: 90%;"/>
 								<p>Después de completar el formulario y crear la cuenta, te enviaremos un e-mail que deberás confirmar.</p>
 							</div>
 						</td>
@@ -107,7 +107,7 @@
 								<p><b>3º b) Si entramos por medio de una de nuestras cuentas de usuario en redes sociales, veremos la siguiente pantalla.</b></p> 
 								<p>Te pediremos el email que deseas que usemos para comunicarnos contigo.</p>
 								<p>El teléfono lo puedes poner para que nos comuniquemos o enviemos el billete si así lo deseas, pero no es obligatorio.</p>
-								<img src='${resource(dir: 'images', file: 'como_4.png')}' style="width: 90%;" />
+								<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'como_4.png')}' style="width: 90%;" />
 							</div>
 						</td>
 					</tr>
@@ -120,7 +120,7 @@
 		</div>
 		<div class="seccion" id="s4" style="display: none;">
 			<div class="contenido">
-				<img src='${resource(dir: 'images', file: 'como_5.png')}' style='float: right; width: 60%;' />
+				<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'como_5.png')}' style='float: right; width: 60%;' />
 				<p><b>4º Si ya disponias de usuario o te has podido crear una cuenta, llegarás a la pantalla de reserva. Comprueba que es el tren deseado antes de proceder a reservar.</b></p>
 				<p><i>Recuerda que <b>LA RESERVA NO IMPLICA EL CARGO EN TU CUENTA</b>. Tan solo se comprueba la disponibilidad de fondos.</i></p>
 				<p>Este paso es una confirmación de  tu interés por el billete y por los tres tipos de precios que te ofrecemos. El cargo final no será ni más ni menos. Son precios finales.</p>
@@ -135,7 +135,7 @@
 		</div>
 		<div class="seccion" id="s5" style="display: none;">
 			<div class="contenido">
-				<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 88px; height:100px;' />
+				<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 88px; height:100px;' />
 				<p><b>Deja que te gestione tu billete en el mínimo tiempo posible. Intentaré conseguirte el mejor de los tres precios. A más pasajeros, más posibilidades.</b></p>
 				<p>Por ello, no dejes de compartir tu trayecto en tus redes sociales preferidas.</p>
 				<p>YA PODÉIS COMPARTIR LA EXPERIENCIA DE AHORRAR VIAJANDO EN UNO DE LOS MEDIOS MÁS RÁPIDOS Y CÓMODOS.</p>

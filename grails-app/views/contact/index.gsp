@@ -82,17 +82,17 @@
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'subject', 'error')}">
 		<label class="property-label" for="subject"><g:message code='cmdt.contact.username' default="Asunto"/><span class="required-indicator">*</span></label>
 		<input class="property-value" style="float:left; width: 17em;" name="subject" id="subject" value="${command?.subject}" <g:if test="${lock}">readonly</g:if> />
-		<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'responseEmail', 'error')}">
 		<label class="property-label" for="responseEmail"><g:message code='cmdt.contact.responseemail' default="E-mail"/><span class="required-indicator">*</span></label>
 		<input class="property-value" style="float:left; width: 17em;" name="responseEmail" id="responseEmail" value="${command?.responseEmail}" />
-		<img id="info2" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info2" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'body', 'error')}">
 		<label class="property-label" for="body"><g:message code='cmdt.contact.body' default="Detalle"/><span class="required-indicator">*</span></label>
 		<g:textArea class="property-value" style="float:left; width: 17em;" name="body" id="body" value="${command?.body}" />
-		<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
 	</div>
 	<div class="captcha">
 		<recaptcha:ifEnabled>

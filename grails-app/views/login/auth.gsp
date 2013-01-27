@@ -56,7 +56,7 @@
 					<div class="fieldcontain" style="height: 2em; padding: 1em;">
 						<g:link class="buttons" name='register' controller='register'>${message(code: 'cmdt.login.button.label', default: 'Crear cuenta')}</g:link>
 					</div>
-					<img src='${resource(dir: 'images', file: 'SITO.png')}' style='width: 65px; height: 85px;' />
+					<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'SITO.png')}' style='width: 65px; height: 85px;' />
 					<p><b>Yo te guiaré en todo momento.</b></p>
 				</fieldset>
 			</td><td>
@@ -86,9 +86,9 @@
 		</table>
 		<div class="fieldcontain" style="text-align: center; padding: .5em;">
 			<h4>O utiliza alguna de tus cuentas en ...</h4>
-			<oauth:connect provider="twitter" id="twitter-connect-link"><img class="social-login" src="${resource(dir: 'images/social', file: 't_icon.png')}" alt="Sig in with Twitter" /></oauth:connect>
-			<oauth:connect provider="facebook" id="facebook-connect-link"><img class="social-login" src="${resource(dir: 'images/social', file: 'f_icon.png')}" alt="Connect with Facebook" /></oauth:connect>
-			<oauth:connect provider="google" id="google-connect-link"><img class="social-login" src="${resource(dir: 'images/social', file: 'g_icon.png')}" alt="Login with Google" /></oauth:connect>
+			<oauth:connect provider="twitter" id="twitter-connect-link"><img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" class="social-login" src="${resource(dir: 'images/social', file: 't_icon.png')}"/></oauth:connect>
+			<oauth:connect provider="facebook" id="facebook-connect-link"><img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" class="social-login" src="${resource(dir: 'images/social', file: 'f_icon.png')}"/></oauth:connect>
+			<oauth:connect provider="google" id="google-connect-link"><img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" class="social-login" src="${resource(dir: 'images/social', file: 'g_icon.png')}"/></oauth:connect>
 			<h4>No cogeremos ni utilizaremos tus datos ni tu información personal.</h4>
 		</div>
 		<fieldset class="property-list">

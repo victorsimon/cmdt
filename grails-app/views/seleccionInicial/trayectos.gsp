@@ -93,10 +93,10 @@
 					<div id="bannerRotator">
 	    				<ul>
 	    					<li>
-		    					<a href="#"><img id="banner-precio" src="${resource(dir: 'images', file: 'banner_mad_pam.png')}" alt="Precio trayecto"></a>
+		    					<a href="#"><img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="banner-precio" src="${resource(dir: 'images', file: 'banner_mad_pam.png')}"></a>
 		  					</li>
 	      					<li>
-		    					<a href="#"><img src="${resource(dir: 'images', file: 'banner_secundario.png')}" alt="Ellos tambien lo hacen"></a>
+		    					<a href="#"><img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src="${resource(dir: 'images', file: 'banner_secundario.png')}"></a>
 		  					</li>
 	    				</ul>
 	  				</div>
@@ -105,21 +105,21 @@
 				<fieldset class="form property-list">
 					<div class="fieldcontain">
 						<label class="property-label" for="trayecto">Selecciona el trayecto</label>
-						<g:select class="property-value" name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" onchange="changeBannerPrecio();"/>
-						<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+						<g:select class="property-value" name="trayecto" from="${trayectos}" optionKey="id" value="${trayecto?.id}" onchange="changeBannerPrecio(); b();"/>
+						<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 					</div>
 					 
 					<div class="fieldcontain">
 						<label class="property-label" for="fecha">Buscar para el día</label>
 						<input class="property-value" type="text" id="fecha" name="fecha" readonly value="${fecha ? fecha: new Date().plus(2).format('dd/MM/yyyy')}" onchange="b();" size="10" maxLength="10"/>
-						<img id="info2"  class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info"/>
+						<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info2"  class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 					</div>
 					<div  style="display: none;"><g:submitToRemote id="buscar" url="[action: 'trenes']" update="panel" name="buscar" value="fecha" /></div>
 					
 					<div class="fieldcontain">
 						<label class="property-label" for="ofertas">O vea </label>
 						<g:submitToRemote class="property-value" name="ofertas" url="[action: 'proximos']" update="panel" value="las ofertas disponibles" />
-						<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info"/>
+						<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 					</div>
 				</fieldset>
 				<fieldset id="panel" class="buttons">
@@ -145,14 +145,14 @@
         	}
 			$("#bannerRotator li:first").fadeIn(100); //fade in new image
         }
-	    var info1 = "<p>¡Hola! Mi nombre es SITO ...<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>... y quiero ayudarte " + 
+	    var info1 = "<p>¡Hola! Mi nombre es SITO ...<img alt='tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-' src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>... y quiero ayudarte " + 
 	    	"a encontrar una mesa para que puedas <b>beneficiarte</b> e del descuento que Renfe" + 
 	    	"ofrece para compartir una mesa. Yo te lo " + 
 	    	"<b>gestionaré y venderé</b> de forma <b>individual</b>.</p>";
-	    var info2 = "Elige la fecha que más te convenga.<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>" +  
+	    var info2 = "Elige la fecha que más te convenga.<img alt='tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-' src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>" +  
 	    	"Recuerda realizarlo con cierta antelación, así…<br/>" +
 	    	"<b>¡Te ofreceré MEJOR servicio y MEJOR precio!</b>";
-	    var info3 = "Si tienes flexibilidad de fechas…<img src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>" +
+	    var info3 = "Si tienes flexibilidad de fechas…<img alt='tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-' src='${resource(dir: 'images', file: 'SITO.png')}' style='float: right; width: 48px; height: 60px;' /><br/>" +
 	    	"¡este es tu apartado! No dejes de mirar las<br/>" + 
 	    	"<b>OPORTUNIDADES YA DISPONIBLES</b>.";
 		prepareBalloon = function(id, text) {

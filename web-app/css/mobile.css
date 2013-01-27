@@ -2,6 +2,9 @@
 
 @media screen and (max-width: 660px) {
 /* slightly smaller margin around content body */
+	.icono_rrss {
+		display: none;
+	}
 	fieldset,
 	.property-list {
 		width: auto;

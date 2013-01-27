@@ -65,27 +65,27 @@
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'username', 'error')}">
 		<label class="property-label" for="username"><g:message code='cmdt.newuser.username' default="Usuario"/><span class="required-indicator">*</span></label>
 		<input class="property-value" style="float:left;" name="username" id="username" value="${command.username}" size="20" />
-		<img id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info1" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'email', 'error')}">
 		<label class="property-label" for="email"><g:message code='cmdt.newuser.email' default="E-mail"/><span class="required-indicator">*</span></label>
 		<input class="property-value" style="float:left;" name="email" id="email" value="${command.email}" size="20" />
-		<img id="info2" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info2" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'phoneNumber', 'error')}">
 		<label class="property-label" for="phoneNumber"><g:message code='cmdt.newuser.phoneNumber' default="Tel&eacute;fono"/></label>
 		<input class="property-value" style="float:left;" name="phoneNumber" id="phoneNumber" value="${command.phoneNumber}" size="20" />
-		<img id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info3" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'password', 'error')}">
 		<label class="property-label" for="password"><g:message code='cmdt.newuser.password' default="Clave"/><span class="required-indicator">*</span></label>
 		<input class="property-value" style="float:left;" name="password" id="password" type="password" size="20" />
-		<img id="info4" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info4" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 	</div>
 	<div class="fieldcontain ${hasErrors(bean: command, field: 'password2', 'error')}">
 		<label class="property-label" for="password2"><g:message code='cmdt.newuser.password2' default="Repita la clave"/><span class="required-indicator">*</span></label>
 		<input class="property-value" style="float:left;" name="password2" id="password2" type="password" size="20" />
-		<img id="info5" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}" alt="info" />
+		<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" id="info5" class="property-info" src="${resource(dir: 'images', file: 'info.gif')}"/>
 	</div>
 	<div class="captcha" style="width: 300px; margin: 1em auto 0 auto;">
 		<recaptcha:ifEnabled>

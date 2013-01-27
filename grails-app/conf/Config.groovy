@@ -266,3 +266,7 @@ grails.plugins.springsecurity.ui.forgotPassword.emailBody = '''\
 	</div>
 </div>
 '''
+grails.plugins.springsecurity.controllerAnnotations.staticRules = [
+   '/runtimeLogging/**': ['ROLE_ADMIN'],
+   '/runtimelogging/**': ['ROLE_ADMIN']
+]

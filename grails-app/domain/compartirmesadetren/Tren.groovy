@@ -13,8 +13,8 @@ class Tren {
 	
     static constraints = {
 		nombre(blank:false)
-		salida(unique: true, validator: {return (it > new Date() - 1)})
-		llegada(validator: {return (it > new Date() - 1)})
+		salida(validator: {return (it > new Date() - 2)})
+		llegada(validator: {return (it > new Date() - 2)})
 		noValido()
 		trayecto()
     }

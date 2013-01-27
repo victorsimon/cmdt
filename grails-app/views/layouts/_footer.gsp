@@ -1,7 +1,7 @@
 <div id="footer" style="padding-bottom: .5em;">
 <hr>
 	<div style="display: block;">
-		<!-- PayPal Logo --><div style="float:right; text-align:center;"><i>Esta página utiliza </i><br/><a href="#" onclick="javascript:window.open('https://www.paypal.com/es/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=500');"><img src="https://www.paypal.com/es_ES/ES/Marketing/i/logo/PayPal_logo_80x35.gif" border="0" alt="Logotipo de Pago estándar"></a></div><!-- PayPal Logo -->
+		<!-- PayPal Logo --><div style="float:right; text-align:center;"><i>Esta página utiliza </i><br/><a href="#" onclick="javascript:window.open('https://www.paypal.com/es/cgi-bin/webscr?cmd=xpt/Marketing/popup/OLCWhatIsPayPal-outside','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=500');"><img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src="https://www.paypal.com/es_ES/ES/Marketing/i/logo/PayPal_logo_80x35.gif" border="0"></a></div><!-- PayPal Logo -->
 		<!-- Boton follow twitter -->
 		<div style="heght: 23px; wdth: 183px; margin: 5px; float: left;"><a href="https://twitter.com/CompartirMesaDe" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @CompartirMesaDe</a></div>
 		<!-- Boton de me gusta para facebook -->

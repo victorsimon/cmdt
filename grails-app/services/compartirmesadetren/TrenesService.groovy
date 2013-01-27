@@ -24,8 +24,8 @@ class TrenesService {
 				def Map<String, String> trenesProgramados = extraerTrenes(contenidoLimpio)
 				List<Tren> trenes = []
 				trenesProgramados.each {
-					List<Tren> tmp = convertirLineasEnTrenes(it.value, salida, trayecto)
-					if (tmp) trenes.addAll(tmp)
+					Tren tmp = convertirLineasEnTrenes(it.value, salida, trayecto)
+					if (tmp) trenes.add(tmp)
 				}
 				guardarReferenciaDeCambio(salida, trayecto, contenidoLimpio)
 				marcarTrenesObsoletos(salida, trayecto, trenes)
@@ -33,8 +33,7 @@ class TrenesService {
 		}
 	}
 
-	private List convertirLineasEnTrenes(String source, Date salida, Trayecto trayecto) {
-		List trenes = []
+	private Tren convertirLineasEnTrenes(String source, Date salida, Trayecto trayecto) {
 		def trenProgramado = source.split ("\\|")
 		def horaSalida = setHora(salida, trenProgramado[7].split("\\.")[0].toInteger(),
 				trenProgramado[7].split("\\.")[1].toInteger())
@@ -43,13 +42,13 @@ class TrenesService {
 		if (horaLlegada < horaSalida) //Ajustamos el dia si llega al d�a siguiente (la programaci�n no da la info necesaria)
 			horaLlegada = horaLlegada + 1
 
-		Tren tren = Tren.findBySalida(horaSalida.time)
+		log.debug "Convirtiendo " + source
+		Tren tren = Tren.findBySalidaAndTrayecto(horaSalida.time, trayecto)
+		//Tren tren = Tren.buscarPorDiaSalida(horaSalida.time.time, trayecto)
 		if (!tren) {
 			tren = crearTren (trenProgramado[4] + "-" + trenProgramado[1], horaSalida.time, horaLlegada.time, trayecto)
 		}
-		if (tren) 
-			trenes.add(tren)
-		return trenes
+		return tren
 	}
 
 	private Tren crearTren(String nombre, Date salida, Date llegada, Trayecto trayecto){
@@ -118,12 +117,15 @@ class TrenesService {
 	}
 
 	private marcarTrenesObsoletos(Date salida, Trayecto trayecto, List<Tren> trenesAMantener) {
+		log.debug "Marcando trenes obsoletos"
 		def trenesBorrar = Tren.buscarPorDiaSalida(salida.time, trayecto)
 		trenesBorrar.each { Tren tren ->
+			log.debug tren
 			if (!trenesAMantener.contains(tren)) {
+				log.debug "MARCANDO COMO NO VALIDO"
 				tren.noValido = true
-				tren.save(flush: true)
 			}
+			tren.save(flush: true)
 		}
 	}
 	
@@ -145,7 +147,7 @@ class TrenesService {
 		def htmlParser = slurper.parse(busqueda.content)
 
 		def Map<String, String> trenes = [:]
-		htmlParser.'**'.findAll { it.@id.toString() ==~ /trenClaseOcupacion[1-9]00/ }.each {
+		htmlParser.'**'.findAll { it.@id.toString() ==~ /trenClaseOcupacion[0-9]00/ }.each {
 			trenes.put(it.@id.toString(), it.@value.toString() + '|' + it.parent().text().trim().replaceAll(",", "."))
 		}
 		return trenes
@@ -159,7 +161,7 @@ class TrenesService {
 		def htmlParser = slurper.parseText(busqueda)
 
 		def Map<String, String> trenes = [:]
-		htmlParser.'**'.findAll { it.@id.toString() ==~ /trenClaseOcupacion[1-9]00/ }.each {
+		htmlParser.'**'.findAll { it.@id.toString() ==~ /trenClaseOcupacion[0-9]00/ }.each {
 			trenes.put(it.@id.toString(), it.@value.toString() + '|' + it.parent().text().trim().replaceAll(",", "."))
 		}
 		return trenes

@@ -48,7 +48,7 @@
 	<body>
 		<a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 		<div id="page-body" role="main">
-			<img src="${resource (dir: 'images', file: 'SITO.png')}" style="float: left; margin-right: 20px;"/>
+			<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src="${resource (dir: 'images', file: 'SITO.png')}" style="float: left; margin-right: 20px;"/>
 			<h3>¡Tu reserva se ha realizado con éxito!</h3><br/>
 			<p>Recuerda que <b>el cobro</b> del billete <b>no se realizará</b> hasta cerrar el cupo de viajeros de las mesas y dependerá del número total de pasajeros.</p>
 			<p>Podrás realizar el seguimiento de tu viaje desde el panel de <g:link controller="miCuenta" action="listRequest" style="color: #81005F;" >historial de tu cuenta.</g:link></p>

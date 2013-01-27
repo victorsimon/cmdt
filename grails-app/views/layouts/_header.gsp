@@ -1,13 +1,19 @@
 <div id="header">
-	<img src="${resource(dir: 'images', file: 'cmdt_logo.png')}" style="float: left;"/>
+	<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src="${resource(dir: 'images', file: 'cmdt_logo.png')}" style="float: left;"/>
 	<div>
-	<span><h1 style="line-height: 1; margin: 0;"><a class="header-main" href="${resource(dir:'/')}"><b>C</b>ompartir<b>M</b>esa<b>D</b>e<b>T</b>ren</a></h1></span>
-	<span class="entrar">
-	</span>
+		<a class="header-main" href="${resource(dir:'/')}"><b>C</b>ompartir<b>M</b>esa<b>D</b>e<b>T</b>ren</a>
 	</div>
 	<div>
 	<span class="header-sub">Viajar ahorrando</span>
 	<span class="entrar">
+		<div class="icono_rrss" style="border-bottom: 1px solid #777777; border-left: 1px solid #777777; border-right: 1px solid #777777; border-radius: 30px; position: fixed; top: 0px; right: 0px; padding: .2em; background-color: #EEEEEE;">
+		<a style="color: #81005F;" href="http://www.facebook.com/compartirtumesadetren" target="_blank">
+			<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" style="width: 18px; height: 18px; margin: 0 .2em;" src="http://www.compartirmesadetren.com/images/Facebook.png" /></a>
+		<a style="color: #81005F;" href="https://plus.google.com/u/0/b/112375915542570953380/112375915542570953380/posts" target="_blank">
+			<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" style="width: 18px; height: 18px; margin: 0 .2em;" src="http://www.compartirmesadetren.com/images/Twitter.png" /></a>
+		<a style="color: #81005F;" href="https://twitter.com/CompartirMesaDe" target="_blank">
+			<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" style="width: 18px; height: 18px; margin: 0 .2em;" src="http://www.compartirmesadetren.com/images/Google+.png" /></a>
+		</div>
 		<sec:ifNotLoggedIn>
 			<g:link class="buttons" controller='login' action='auth'>Entrar</g:link>
 		</sec:ifNotLoggedIn>
@@ -22,5 +28,6 @@
 	<g:link elementId="inicio" controller="seleccionInicial">Inicio</g:link> |
 	<g:link elementId="queycomo" controller="queycomo">Qué es y cómo funciona</g:link> |
 	<g:link elementId="preguntasfrecuentes" controller="preguntasfrecuentes">Preguntas frecuentes</g:link> |
+	<g:link elementId="blog" url="http://compartirmesadetren.blogspot.com.es/">Blog</g:link> | 
 	<g:link elementId="contacto" controller="contact">Contactar</g:link> 
 </div>
