@@ -68,6 +68,7 @@ environments {
 		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
 		grails.mail.contact = "vsimon.batanero@gmail.com"
 		cmdt.dopayment = false
+		jasper.dir.reports = 'C:/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/reports'
     }
     production {
         grails.logging.jul.usebridge = false
@@ -77,6 +78,7 @@ environments {
 		grails.paypal.email = "vsimon.batanero@gmail.com"    
 		grails.mail.contact = "contacto@compartirmesadetren.com"
 		cmdt.dopayment = true
+		jasper.dir.reports = '/home/vsimon/reports'
 	}
     sandbox {
         grails.logging.jul.usebridge = false
@@ -86,6 +88,7 @@ environments {
 		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
 		grails.mail.contact = "contacto@compartirmesadetren.com"
 		cmdt.dopayment = true
+		jasper.dir.reports = '/home/vsimon/reports'
     }
 }
 
@@ -167,6 +170,17 @@ oauth {
 	}
 	debug = true
 	registration.roleNames = ['ROLE_USER']
+}
+
+twitter {
+    disableTwitter4jController = false  // To avoid intruders to use controller alltogether.
+    'default' {
+      debugEnabled          = false
+      OAuthConsumerKey       = 'cjAf40dFHzj0Gk0m1vy6Kw'
+      OAuthConsumerSecret    = 'Aclu3EkYqJRwVaxgXiv8L688UEG207Xqd0O3usIq0W4'
+      OAuthAccessToken       = '931646035-ZP2xVhX9Nxlz98FTnxb6S1dYcT1zoK6gYWx27yYZ'
+      OAuthAccessTokenSecret = 'AqTUGVMccpRnXPxNA2yNyJjGeHFwrP2LGPiM5B3TPM'
+    }
 }
 
 grails.resources.mappers.googleclosurecompiler.compilation_level = 'SIMPLE_OPTIMIZATIONS'

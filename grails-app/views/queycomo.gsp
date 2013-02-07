@@ -59,7 +59,7 @@
 				<h1>¿Qué es CompartirMesaDeTren?</h1>
 				<p>¡Hola! Mi nombre es SITO ...<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'SITO.png')}' style='float: left; width: 68px; height: 80px;' /></p>
 				<p>... CompartirMesaDeTren es el portal en el que gestionaré (de forma integral e individual) la venta de billetes con dos días de antelación. Está basada en el descuento que Renfe ofrece; aquel en el que compartiendo una mesa de 4 personas, <b>podéis conseguir un precio inmejorable entre los 3 precios que os ofrecemos</b>.</p>
-				<p><b>Recordad: contra más gente viajéis, más barato os puede salir.</b>
+				<p><b>Recordad: cuanta más gente viajéis, más barato os puede salir.</b>
 				</p>
 				<h1>¿Cómo funciona?</h1>
 				<p><b>Lo primero de todo, debes recordar que gestiono la venta de billetes siempre que sea con dos días de antelación. (Para poder gestionar el billete y conseguirte el mejor precio posible).</b></p>
@@ -75,7 +75,7 @@
 				<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'como_1.png')}' style='float: right; width: 40%;' />
 				<h1>¿Cómo se usa?</h1>
 				<h2>Simulemos una venta...</h2>
-				<p>Supón que quieres viajar el en una fecha concreta, por ejemplo, el 22 de Enero de 2013, desde Madrid a Pamplona:</p>
+				<p>Supón que quieres viajar en una fecha concreta, por ejemplo, el 22 de Enero de 2013, desde Madrid a Pamplona:</p>
 				<p><b>1º Elijo la fecha y/o veo las oportunidades* disponibles. ¡Me apunto!</b></p>
 				<p><i>*No dejes de ver las ofertas disponibles, podrás obtener el billete asegurado</i></p>
 				<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src='${resource(dir: 'images', file: 'como_2.png')}' style='float: left; width: 40%;' />

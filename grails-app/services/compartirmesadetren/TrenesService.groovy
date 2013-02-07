@@ -47,6 +47,8 @@ class TrenesService {
 		//Tren tren = Tren.buscarPorDiaSalida(horaSalida.time.time, trayecto)
 		if (!tren) {
 			tren = crearTren (trenProgramado[4] + "-" + trenProgramado[1], horaSalida.time, horaLlegada.time, trayecto)
+		} else {
+			tren.noValido = false
 		}
 		return tren
 	}

@@ -30,6 +30,8 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://repository.springsource.com/maven/bundles/release/"
+        mavenRepo "http://repository.springsource.com/maven/bundles/external/"
     }
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
@@ -37,8 +39,7 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.22',
                 'org.tuckey:urlrewritefilter:4.0.3'
 		compile 'xerces:xercesImpl:2.9.1',
-				'net.sourceforge.nekohtml:nekohtml:1.9.15',
-                ":cache-headers:1.0.4 > *"
+				'net.sourceforge.nekohtml:nekohtml:1.9.15'
     }
 
     plugins {

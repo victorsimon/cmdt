@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="comentarios" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="28657f50-1d31-478d-a920-6f9cfb01ee40">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     comentario.`id` AS comentario_id,
+     comentario.`texto` AS comentario_texto,
+     user.`username` AS user_username,
+     user.`phone_number` AS user_phone_number,
+     user.`email` AS user_email
+FROM
+     `user` user RIGHT JOIN `comentario` comentario ON user.`id` = comentario.`user_id`]]>
+	</queryString>
+	<field name="comentario_id" class="java.lang.Long"/>
+	<field name="comentario_texto" class="java.lang.String"/>
+	<field name="user_username" class="java.lang.String"/>
+	<field name="user_phone_number" class="java.lang.String"/>
+	<field name="user_email" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="74" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="49" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a49581b2-ce0e-4bda-ac9c-d45f4fac6ee9" x="0" y="20" width="100" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e0cde0e0-ff32-4a53-8710-488f8e4b966c" x="114" y="20" width="100" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comentario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ab5b9313-6d62-4949-909f-7249dea0c7f4" x="554" y="0" width="100" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a255430a-8256-43b0-a2cc-3319f569c82b" x="554" y="20" width="100" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0da0a6e2-8c4f-462e-af6f-5bdb7843fad5" x="702" y="20" width="100" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movil]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="66fe9ac0-3cba-4f8b-86e1-030017329068" x="0" y="44" width="802" height="1"/>
+			</line>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="51" splitType="Stretch">
+			<textField>
+				<reportElement uuid="f6050a50-ae24-4d54-93fa-486e22d01f5b" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comentario_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0f6d52e0-b345-4a5d-8dfc-fef69a8acd00" x="114" y="0" width="430" height="40"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comentario_texto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8281cdf9-94ec-407c-93f3-7cc7b8252a9d" x="554" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_username}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="98a7e5d3-5725-4f1e-9934-11095d875be5" x="554" y="20" width="148" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="208bb781-e04a-4fa8-b5cd-eafff596593f" x="702" y="20" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_phone_number}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="66fe9ac0-3cba-4f8b-86e1-030017329068" x="1" y="45" width="802" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

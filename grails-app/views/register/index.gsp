@@ -48,6 +48,7 @@
 	<g:if test='${emailSent}'>
 	<br/>
 	<g:message code='cmdt.newuser.sent' default="Te hemos eviado un email con un link para asegurarnos que la dirección es correcta. Pulsa en el para completar el registro."/>
+	<i><g:message code='cmdt.newuser.spam' default="Si no recibes un mail nuestro en los próximos cinco minutos, puedes comprobar que no esté tu bandeja de spam."/></i>
 	<br/>
 	</g:if>
 	<g:else>

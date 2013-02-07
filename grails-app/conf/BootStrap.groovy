@@ -124,6 +124,33 @@ Nosotros intentaremos realizar los cambios siempre que no influyan en otros viaj
 No. Las reservas y la gestión del billete se realiza como mínimo 48 hrs. antes de la salida, para poder ofrecerte el mejor servicio y conseguirte el mejor precio.
 """
 				).save()
+
+		}
+
+		if (!FAQ.findByPreguntaLike('Se supone que me debería llegar un email, pero no lo veo...')) {
+		 new FAQ(
+			pregunta: 'Se supone que me debería llegar un email, pero no lo veo...', 
+			respuesta: """
+Algunos de nuestros procesos implican notificaciones por email. <br/>
+Si esperas una notificación nuestra y no te llega, en algunos casos es porque tu cliente de correo lo guarda como spam. Comprueba que no esté como spam en tu correo. <br/>
+Si encuentras que tu cliente de correo a guardado la notificación como spam, te aconsejamos que selecciones el email y establezcas en tus opciones que no es spam.
+"""
+			).save()
+		}
+		if (!FAQ.findByPreguntaLike('¿En qué casos recibiré un email vuestro?')) {
+		 new FAQ(
+			pregunta: '¿En qué casos recibiré un email vuestro?', 
+			respuesta: """
+Recibiras notificaciones de SITO relacionadas con la gestión y el funcionamiento del sistema: 
+<ul>
+	<li>Cuando crees un nuevo usuario no vinculado a ninguna red social, se te enviará un email para confirmar la dirección de email que nos has dado.</li>
+	<li>Si olvidas tu clave, te enviaremos un email a tu correo con un link desde el que podras cambiarla.</li>
+	<li>Al realizar la reserva para un viaje, te enviaremos un email de confirmación de la misma.</li>
+	<li>También te enviaremos un email con tu billete para que puedas viajar</li>
+	<li>Si hay alguna comunicación que realizar durante nuestro proceso de gestión de la reserva, lo haremos vía email; o en casos de urgencia, y si disponemos de el, te llamaremos a tu movil.</li>
+</ul>
+"""
+			).save()
 		}
 		switch (GrailsUtil.environment) {
 			case "development":

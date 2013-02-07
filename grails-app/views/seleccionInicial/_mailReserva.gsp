@@ -17,7 +17,7 @@
 			<div style="margin: 0; height: 1px; width: 100%; color: #777777; background-color: #777777;"></div>
 			<img alt="SITO" style="height: 120px; margin: 1em; float: left;" src="http://www.compartirmesadetren.com/images/sito_mail.png"/>
 			<div style="padding: 1em 0; width: 100%; font-size: .9em; color: #81005F; min-height: 160px; border: 0; background-color: #ffffff;">
-				<p style="margin: 0; padding: .5em;">¡Hola $user.username! Soy <strong>SITO</strong>, </p>
+				<p style="margin: 0; padding: .5em;">¡Hola ${user.username}! Soy <strong>SITO</strong>, </p>
 				<p style="margin: 0; padding: .5em;">Te escribo para confirmarte tu solicitud de reserva en <a style="color: #81005F;" href="www.compartirmesadetren.com"><b>Compartir Mesa De Tren</b></a> para</p>
 				<p style="margin: 0; padding: .5em;"><b>Tren ${tren} con trayecto ${tren.trayecto}</b></a>
 				<p style="margin: 0; padding: .5em;">Viaja en tren ahorrando y vive la experiencia de compartir mesa con otros usuarios.</p>

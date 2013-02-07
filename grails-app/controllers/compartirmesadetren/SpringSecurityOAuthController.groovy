@@ -39,6 +39,7 @@ class SpringSecurityOAuthController {
     def grailsApplication
     def oauthService
     def springSecurityService
+    def actionService
 
     /**
      * This can be used as a callback for a successful OAuth authentication
@@ -168,6 +169,9 @@ class SpringSecurityOAuthController {
 
                     oAuthToken = updateOAuthToken(oAuthToken, user)
 					
+                    actionService.nuevoRegistro (user, oAuthToken.providerName)
+                    actionService.registroCompletado (user)
+
                     return true
                 }
 

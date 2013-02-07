@@ -4,11 +4,15 @@ import org.grails.paypal.Payment
 
 class PaypalFilters {
 
+    def springSecurityService
+	def actionService
+
     def filters = {
 		
 		buyFilter(controller:"paypal", action:"buy") {
 			after = {
 				new PaypalTren(payment: request.payment, tren: Tren.get(params.itemNumber)).save()
+				actionService.inicioReserva(springSecurityService.getCurrentUser(), params.itemName)
 			}
 		}
 	

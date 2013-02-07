@@ -6,6 +6,8 @@ class ComentarioController {
 	
 	def scaffold = true
 
+	def actionService
+
 	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 	def enviar (Comentario command) {
 		if (!command.validate()) {
@@ -17,7 +19,8 @@ class ComentarioController {
 			command.user = user
 		}
 		command.save()
-		
+		actionService.nuevoComentario(user)
+
 		flash.message = "Tu comentario ha sido enviado correctamente" 
 	}
 	

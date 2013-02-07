@@ -11,6 +11,8 @@ class SeleccionInicialController {
 	def peticionesService
 	def grailsApplication
 	def mailService
+	def actionService
+	def twitter4jService
 	
 	def trayectos(Integer opcion) {
 		setLastURI()
@@ -52,9 +54,11 @@ class SeleccionInicialController {
 					peticionesTren = getPeticionesTrenes([fecha], trayecto, false)
 			} else if (opcion == 1) { //proximos tres dias
 				ofertas = true
+				fecha = new Date() + 2
 				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3, new Date() +4, new Date() +5, new Date() +6, new Date() +7, new Date() +8], trayecto, true)
 			}
 		}
+		actionService.consultaTrenes(getAuthenticatedUser(), trayecto, fecha, ofertas)
 		[trenes: peticionesTren, ofertas: ofertas, trayecto: trayecto]
 	}
 
@@ -90,6 +94,8 @@ class SeleccionInicialController {
 		def doPayment = grailsApplication.config.cmdt.dopayment
 		def precio = Precio.findByTrayecto(tren.trayecto)
 
+		actionService.seleccionTren(getAuthenticatedUser(), tren.toString())
+
 		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos, user: getAuthenticatedUser(), doPayment: doPayment, precio: precio]
 	}
 	
@@ -120,6 +126,10 @@ class SeleccionInicialController {
 				}
 			})
 		}
+
+		twitter4jService.updateStatus("He reservado el trayecto #" + tren.trayecto + " " + tren.toString() + ". ¿Te interesa? #tarifamesa #alvia compartirmesadetren.com")
+
+		actionService.reservaCompletada(user, peticion)
 	}
 	
 	@Secured(['ROLE_USER'])

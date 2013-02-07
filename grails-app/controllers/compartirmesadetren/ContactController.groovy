@@ -11,6 +11,7 @@ class ContactController {
 	def mailService
 	def grailsApplication
 	def recaptchaService
+	def actionService
 	
 	def index() {
 		def copy = [:] + (flash.chainedParams ?: [:])
@@ -46,6 +47,8 @@ class ContactController {
 			html command.body + "<BR/><HR/> RESPONSE E-MAIL: " + command.responseEmail
 		}
 		
+		actionService.nuevoContactar(command.user)
+
 		render view: 'index', model: [emailSent: true]
 
 	}

@@ -4,14 +4,16 @@ dataSource {
     username = "sa"
     password = ""
 	properties {
-		validationQuery = "SELECT 1"
+        maxActive = 10
+        maxIdle = 1
+        minIdle = 1
+        initialSize = 1
+        minEvictableIdleTimeMillis = 60000
+        timeBetweenEvictionRunsMillis = 60000
+        validationQuery = "SELECT 1 FROM trayecto"
         testOnBorrow=true
         testOnReturn=true
         testWhileIdle=true
-        initialSize=0
-        maxActive=10
-        maxIdle=10
-        minIdle=0
         maxWait=-1
 	}
 }
@@ -25,14 +27,14 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
             autoreconnect = true
         }
     }
     test {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
     production {
