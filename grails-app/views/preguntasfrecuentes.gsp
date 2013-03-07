@@ -1,5 +1,6 @@
 <html> 
 	<head>
+		<title>Preguntas frecuentes - Compartir Mesa De Tren</title>
 		<meta name="layout" content="main"/>
 		<style type="text/css">
 			#faq {

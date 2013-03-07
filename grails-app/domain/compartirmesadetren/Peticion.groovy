@@ -6,12 +6,16 @@ class Peticion {
 	Trayecto trayecto
 	User user
 	EstadoPeticion estado
+	PaypalTren paypalTren
+	Date dateCreated
+	Date lastUpdated		
 
     static constraints = {
-		salida(blank: false, nullable: false)
+		salida(blank: false, nullable: false, attributes: [precision: "minute"])
 		trayecto(blank: false, nullable: false)
 		user(blank: false, nullable: false)
 		estado()
+		paypalTren()
     }
 	
 	String toString() {

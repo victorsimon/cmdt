@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Reserva de plaza - Compartir Mesa De Tren</title>
 		<meta name="layout" content="main"/>
 		<style type="text/css" media="screen">
 
@@ -100,7 +101,7 @@
 					<g:if test="${doPayment}">
 						<h2><paypal:button itemName="${peticionesTren.tren}, ${peticionesTren.tren.trayecto}" 
 							itemNumber="${peticionesTren.tren.id}" amount="37,99" buyerId="${user.id}" 
-							discountAmount="0" params="[paymentaction: 'authorization']" 
+							discountAmount="0" params="[paymentaction: 'authorization']"
 							buttonSrc="${resource(dir: 'images', file: 'reservar.png')}"
 							buttonAlt="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif"/></h2>
 					</g:if>

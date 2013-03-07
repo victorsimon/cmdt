@@ -6,7 +6,9 @@ import compartirmesadetren.Tren
 import compartirmesadetren.User
 import compartirmesadetren.UserRole
 import compartirmesadetren.FAQ
-import grails.util.GrailsUtil;
+import compartirmesadetren.Report
+import compartirmesadetren.Parameter
+import grails.util.GrailsUtil
 import java.sql.Time
 
 class BootStrap {
@@ -151,6 +153,27 @@ Recibiras notificaciones de SITO relacionadas con la gestión y el funcionamient
 </ul>
 """
 			).save()
+		}
+		if (!Parameter.findByName("ID")) {
+			new Parameter(
+					name: "ID",
+					type: "number"
+				).save(flush: true)
+		}
+		if (!Report.findByName("Usuarios registrados")) {
+			def p = Parameter.findByName("ID")
+			new Report(
+					name: "Usuarios registrados",
+					description: "Listado de usuarios dados de alta",
+					jasper: "usuarios_registrados"
+				).addToParameters(p).save()
+		}
+		if (!Report.findByName("Comentarios")) {
+			new Report(
+					name: "Comentarion",
+					description: "Comentarios de los usuarios",
+					jasper: "comentarios"
+				).save()
 		}
 		switch (GrailsUtil.environment) {
 			case "development":

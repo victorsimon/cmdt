@@ -1,6 +1,7 @@
 <html>
 
 <head>
+		<title>Contactar - Compartir Mesa De Tren</title>
 	<meta name='layout' content='main'/>
 	<style type="text/css" media="screen">
 		* {

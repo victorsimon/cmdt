@@ -3,7 +3,7 @@ package compartirmesadetren
 class Parameter {
 
 	String name
-	String value
+	String type
 	static belongsTo = Report
 	static hasMany = [reports: Report]
 	Date dateCreated

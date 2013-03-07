@@ -8,10 +8,14 @@ class PaypalTren {
 	
 	Payment payment
 	Tren tren
+	User user
+	Date dateCreated
+	Date lastUpdated	
 	
     static constraints = {
 		payment()
 		tren()
+		user()
     }
 	
 }

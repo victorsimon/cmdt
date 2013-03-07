@@ -60,7 +60,7 @@ grails.exceptionresolver.params.exclude = ['password']
 grails.hibernate.cache.queries = false
 
 environments {
-    development {
+    test {
         grails.logging.jul.usebridge = true
         grails.serverURL = "http://localhost:8080"
 		grails.compartirmesadetren.oauth.debug = true
@@ -68,7 +68,17 @@ environments {
 		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
 		grails.mail.contact = "vsimon.batanero@gmail.com"
 		cmdt.dopayment = false
-		jasper.dir.reports = 'C:/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/reports'
+		jasper.dir.reports = 'C:/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/WEB-INF/reports'
+    }
+    development {
+    	grails.logging.jul.usebridge = true
+        grails.serverURL = "http://localhost:8080"
+		grails.compartirmesadetren.oauth.debug = true
+		grails.paypal.server = "https://www.sandbox.paypal.com/cgi-bin/webscr"
+		grails.paypal.email = "vsimon_1354244358_biz@gmail.com"
+		grails.mail.contact = "vsimon.batanero@gmail.com"
+		cmdt.dopayment = true
+		jasper.dir.reports = 'C:/Users/CompartirTren/Documents/workspace-ggts-3.1.0.RELEASE/CompartirMesaDeTren/web-app/WEB-INF/reports'
     }
     production {
         grails.logging.jul.usebridge = false
@@ -176,10 +186,10 @@ twitter {
     disableTwitter4jController = false  // To avoid intruders to use controller alltogether.
     'default' {
       debugEnabled          = false
-      OAuthConsumerKey       = 'cjAf40dFHzj0Gk0m1vy6Kw'
-      OAuthConsumerSecret    = 'Aclu3EkYqJRwVaxgXiv8L688UEG207Xqd0O3usIq0W4'
-      OAuthAccessToken       = '931646035-ZP2xVhX9Nxlz98FTnxb6S1dYcT1zoK6gYWx27yYZ'
-      OAuthAccessTokenSecret = 'AqTUGVMccpRnXPxNA2yNyJjGeHFwrP2LGPiM5B3TPM'
+      OAuthConsumerKey       = 'RVfbpCQru2QVLQp1KpdV3A'
+      OAuthConsumerSecret    = 'yeRYJR9tr4SZ9FXf0biLlMTincnaJueR4g4ahqHzlE'
+      OAuthAccessToken       = '931646035-ASPccj62E8eqTVCO0uz2ZS9M63ni1rbkuGUQWWiz'
+      OAuthAccessTokenSecret = 'JxOXoR5jbO0JYuKDUhXdCbNdxw6ofwNSxpDI4mU'
     }
 }
 

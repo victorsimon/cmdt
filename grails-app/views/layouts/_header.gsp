@@ -24,7 +24,6 @@
 	</span>
 	</div>
 </div>
-<h2 style="display: none;">Compartir mesa de tren, ave, alvia, avant de renfe. Trayectos y horaios. Viaje en tren barato.</h2>
 <div id="menu-principal">
 	<g:link elementId="inicio" controller="seleccionInicial">Inicio</g:link> |
 	<g:link elementId="queycomo" controller="queycomo">Qué es y cómo funciona</g:link> |
@@ -32,3 +31,4 @@
 	<g:link elementId="blog" url="http://compartirmesadetren.blogspot.com.es/">Blog</g:link> | 
 	<g:link elementId="contacto" controller="contact">Contactar</g:link> 
 </div>
+<h2 style="display: none;">Compartir mesa de tren, ave, alvia, avant de renfe. Trayectos y horarios. Viaje en tren barato.</h2>

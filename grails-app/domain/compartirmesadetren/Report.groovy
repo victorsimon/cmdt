@@ -5,14 +5,14 @@ class Report {
 	String jasper
 	String format = "PDF,HTML,XML,CSV"
 	String name
-	String desc
+	String description
 	Date dateCreated
 	Date lastUpdated
 	static hasMany = [parameters: Parameter]
 
     static constraints = {
-    	name blank: false
-    	desc blank: false
+    	name blank: false, unique: true
+    	description blank: false
     	jasper blank: false
     	format()
     }

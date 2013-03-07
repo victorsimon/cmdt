@@ -24,4 +24,8 @@ class ComentarioController {
 		flash.message = "Tu comentario ha sido enviado correctamente" 
 	}
 	
+	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
+	def viajerosFrecuentes (Comentario command) {
+		enviar(command)
+	}
 }

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Consulta de trenes y ofertas AVE-ALVIA - Compartir Mesa De Tren</title>
 		<meta name="layout" content="main"/>
 		<script type="text/javascript" src="${resource(dir: 'js', file: 'bannerRotator.js')}"></script>
   		<link href="${resource(dir: 'css', file: 'style.css')}" rel="stylesheet" type="text/css">

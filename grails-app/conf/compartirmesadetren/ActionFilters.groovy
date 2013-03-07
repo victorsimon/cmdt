@@ -17,5 +17,11 @@ class ActionFilters {
                 actionService.registroCompletado(springSecurityService.getCurrentUser())
             }
         }
+
+        addHeader(uri: '/*') {
+            after = {
+                response.setHeader('X-Frame-Options', 'SAMEORIGIN')
+            }
+        }
     }
 }

@@ -7,12 +7,13 @@ class ExtraerInfoRenfeJob {
 	def trenesService
 	
     static triggers = {
-      simple startDelay: 10000, repeatInterval: 900000l // execute job once in 15 min
+      //simple startDelay: 10000, repeatInterval: 900000l // execute job once in 15 min
+      simple startDelay: 10000, repeatInterval: 300000l // execute job once in 5 min
     }
 
     def execute() {
 		log.debug  "*********** iniciando extraccion de datos ****************"
-		def dia = new Date() + 2
+		def dia = new Date().clearTime() + 2
 		def fechas = []
 		60.times {
 			fechas << dia + it

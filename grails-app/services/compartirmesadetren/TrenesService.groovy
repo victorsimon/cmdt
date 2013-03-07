@@ -136,7 +136,7 @@ class TrenesService {
 		fechaYHora.time = fechaOriginal
 		fechaYHora.set(Calendar.HOUR_OF_DAY, hora)
 		fechaYHora.set(Calendar.MINUTE, minuto)
-		fechaYHora.set(Calendar.SECOND, minuto)
+		fechaYHora.set(Calendar.SECOND, 0)
 		fechaYHora.set(Calendar.MILLISECOND, 0)
 		//println "Time establecido a " + fechaYHora.time.time	
 		return fechaYHora

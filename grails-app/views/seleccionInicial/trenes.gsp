@@ -26,6 +26,11 @@
 		</g:link></p>
 	</g:if>
 	<g:if test="${ptren.tren.noValido}">
-		<p style="color: #CCCCCC;">${ptren.tren} Sin mesas disponibles</p>
+		<p><g:link action="detalle" id="${ptren.tren.id}">
+				${ptren.tren} <g:if test="${ptren.oportunidad}">
+									<img alt='tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-' src="${resource(dir: 'images', file: 'destacado.png')}" 
+										alt="Oportunidad" height="16" width="16" /> 
+							</g:if> 
+		<small> *Plazas limitadas</small></g:link></p>
 	</g:if>
 </g:each>

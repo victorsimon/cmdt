@@ -39,7 +39,15 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.22',
                 'org.tuckey:urlrewritefilter:4.0.3'
 		compile 'xerces:xercesImpl:2.9.1',
-				'net.sourceforge.nekohtml:nekohtml:1.9.15'
+				'net.sourceforge.nekohtml:nekohtml:1.9.15',
+                "org.grails.plugins:geb:0.9.0-RC-1"
+        test "org.gebish:geb-spock:0.9.0-RC-1"    
+        test 'org.seleniumhq.selenium:selenium-firefox-driver:latest.release'
+        test 'org.seleniumhq.selenium:selenium-chrome-driver:latest.release'
+        test 'org.seleniumhq.selenium:selenium-ie-driver:latest.release'
+        test('org.seleniumhq.selenium:selenium-htmlunit-driver:latest.release') {
+                exclude 'xml-apis'
+        }
     }
 
     plugins {
@@ -58,5 +66,6 @@ grails.project.dependency.resolution = {
 
         compile ':cache:1.0.0'
 		test ":spock:0.7"
+        test "org.grails.plugins:geb:0.9.0-RC-1"
     }
 }

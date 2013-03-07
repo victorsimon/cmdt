@@ -1,19 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuites>
-  <testsuite errors="0" failures="0" hostname="melon" id="0" name="UserControllerTests" package="compartirmesadetren" tests="2" time="3.164" timestamp="2012-10-25T03:17:36">
-      <properties />
-
-      <testcase classname="compartirmesadetren.UserControllerTests" name="testValidAuthenticate" time="2.972" />
-
-      <testcase classname="compartirmesadetren.UserControllerTests" name="testInvalidAuthenticate" time="0.166" />
-
-      <system-out><![CDATA[--Output from testValidAuthenticate--
---Output from testInvalidAuthenticate--
-]]></system-out>
-
-      <system-err><![CDATA[--Output from testValidAuthenticate--
---Output from testInvalidAuthenticate--
-]]></system-err>
-
-  </testsuite>
-</testsuites>
+<testsuites />

@@ -1,5 +1,6 @@
 <html> 
 	<head>
+		<title>Qué es y normas de uso - Compartir Mesa De Tren</title>
 		<meta name="layout" content="main"/>
 		<style type="text/css">
 			h1 {color: #81005F;}

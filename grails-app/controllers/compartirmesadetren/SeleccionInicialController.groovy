@@ -13,59 +13,51 @@ class SeleccionInicialController {
 	def mailService
 	def actionService
 	def twitter4jService
+	def calendarService
 	
-	def trayectos(Integer opcion) {
+	def trayectos() {
 		setLastURI()
-		def Date fecha
-		if (params?.time)
-			fecha = new Date(params.time.toLong())
-		else if (params.fecha) {
-			def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
-			fecha = dateFormat.parse(params.fecha)
-		}
-		def Trayecto trayecto
-		List<PeticionesTren> peticionesTren = []
-		if (params.trayecto) {
-			trayecto = Trayecto.read(params.trayecto)
-			if (!opcion) {
-				peticionesTren = getPeticionesTrenes([fecha], trayecto, false)
-			} else if (opcion == 1) { //proximos tres dias
-				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3, new Date() +4, new Date() +5, new Date() +6, new Date() +7, new Date() +8], trayecto, true)
-			}
-		}
-		[trayectos: Trayecto.list(), trayecto: trayecto, fecha: fecha?.format("dd/MM/yyyy"), trenes: peticionesTren]
+		def fecha = new Date().clearTime() + 2
+		[trayectos: Trayecto.list(), fecha: fecha.format("dd/MM/yyyy")]
 	}
 	
 	def trenes(Integer opcion) {
 		def Date fecha
-		if (params?.time)
-			fecha = new Date(params.time.toLong())
-		else if (params.fecha) {
-			def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
-			fecha = dateFormat.parse(params.fecha)
-		}
 		def Trayecto trayecto
 		List<PeticionesTren> peticionesTren = []
 		def ofertas = false
 		if (params.trayecto) {
 			trayecto = Trayecto.read(params.trayecto)
 			if (!opcion) {
-				if (fecha > new Date() + 1)
+				def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
+				fecha = dateFormat.parse(params.fecha).clearTime()
+				if (fecha >= new Date().clearTime() + 2)
 					peticionesTren = getPeticionesTrenes([fecha], trayecto, false)
 			} else if (opcion == 1) { //proximos tres dias
 				ofertas = true
-				fecha = new Date() + 2
-				peticionesTren = getPeticionesTrenes([new Date() + 2, new Date() +3, new Date() +4, new Date() +5, new Date() +6, new Date() +7, new Date() +8], trayecto, true)
+				fecha = new Date().clearTime() + 2
+				def listaFechas = [fecha]
+				15.times {
+					fecha = fecha.next()
+					listaFechas << fecha
+				}
+				peticionesTren = getPeticionesTrenes(listaFechas, trayecto, true)
 			}
+		} else {
+			trayecto = Trayecto.list()[0]
+			fecha = new Date().clearTime() + 2
+			def fechas = []
+			3.times { 
+				fechas << fecha ++
+			}
+			peticionesTren = getPeticionesTrenes(fechas, trayecto, false)
 		}
 		actionService.consultaTrenes(getAuthenticatedUser(), trayecto, fecha, ofertas)
 		[trenes: peticionesTren, ofertas: ofertas, trayecto: trayecto]
 	}
 
 	def proximos() {
-		def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
-		def fecha = dateFormat.parse(params.fecha)
-		chain (action: "trenes", params: [trayecto: params.trayecto, time : fecha.getTime(), opcion: 1])
+		chain (action: "trenes", params: [trayecto: params.trayecto, opcion: 1])
 	}
 	
 	/**
@@ -83,7 +75,11 @@ class SeleccionInicialController {
 	def reserva() {
 		Tren tren = Tren.read(params.id)
 		PeticionesTren peticionesTren = peticionesService.peticionesTren(tren)
-		List<Date> fechasSugeridas = [tren.salida -1, tren.salida, tren.salida +1]
+		List<Date> fechasSugeridas 
+		if (new Date().clearTime() + 2 >= tren.salida)
+			fechasSugeridas = [tren.salida -1, tren.salida, tren.salida +1]
+		else
+			fechasSugeridas = [tren.salida, tren.salida +1]
 		List<PeticionesTren> pt = getPeticionesTrenes(fechasSugeridas, tren.trayecto, false)
 		List<PeticionesTren> sugeridos = []
 		pt.each {
@@ -101,37 +97,62 @@ class SeleccionInicialController {
 	
 	@Secured(['ROLE_USER'])
 	def peticion() {
-		Tren tren = Tren.read(params.id)
-		def user = getAuthenticatedUser()
-		Peticion peticion = new Peticion(salida: tren.salida, user: user, trayecto: tren.trayecto, estado: EstadoPeticion.A_LA_ESPERA)
-		peticion.save(flush: true)
-		
-		GParsPool.withPool {
-			//Mail para la gestion
-			GParsPool.executeAsyncAndWait ({
-				mailService.sendMail {
-					to grailsApplication.config.grails.mail.contact
-					subject "Nueva reserva " + tren.toString() + " " + tren.trayecto
-					html tren.toString() + "|" + tren.trayecto + "|" + user.username + "|" + user.email
-				}
-			})
-			
-			//Mail para el usuario
-			String mailContent = g.render(template:"mailReserva", model:[user: user, tren: tren])
-			GParsPool.executeAsyncAndWait ({
-				mailService.sendMail {
-					to user.email
-					subject "Reserva: " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
-					html mailContent
-				}
-			})
-		}
-
-		twitter4jService.updateStatus("He reservado el trayecto #" + tren.trayecto + " " + tren.toString() + ". ¿Te interesa? #tarifamesa #alvia compartirmesadetren.com")
-
-		actionService.reservaCompletada(user, peticion)
 	}
 	
+	@Secured(['ROLE_ADMIN'])
+	def crearPeticion() {
+		if (!params.trenId || !params.user) {
+			return [trayectos: Trayecto.list(), users: User.list()]
+		}
+
+		Tren tren = Tren.read(params.trenId)
+		def user = User.read(params.user)
+		Peticion peticion = new Peticion(salida: tren.salida, user: user, trayecto: tren.trayecto, estado: EstadoPeticion.A_LA_ESPERA)
+		peticion.save(flush: true)
+		if (params.notificar) {
+			def ics = calendarService.createICal(tren)
+			GParsPool.withPool {
+				//Mail para la gestion
+				GParsPool.executeAsyncAndWait ({
+					mailService.sendMail {
+						multipart true
+						to grailsApplication.config.grails.mail.contact
+						subject "Nueva reserva " + tren.toString() + " " + tren.trayecto
+						html tren.toString() + "|" + tren.trayecto + "|" + user.username + "|" + user.email
+						attach "reserva.ics", "text/calendar",  ics as byte[]
+					}
+				})
+				
+				//Mail para el usuario
+				String mailContent = g.render(template:"mailReserva", model:[user: user, tren: tren])
+				GParsPool.executeAsyncAndWait ({
+					mailService.sendMail {
+						to user.email
+						subject "Reserva: " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
+						html mailContent
+					}
+				})
+			}
+
+			twitter4jService.updateStatus("He reservado el trayecto #" + tren.trayecto + " " + tren.toString() + ". ¿Te interesa? #tarifamesa #alvia compartirmesadetren.com")
+		}
+		actionService.reservaCompletada(user, peticion)
+		flash.message = 'Creada'
+		[trayectos: Trayecto.list(), users: User.list()]
+	}
+
+	@Secured(['ROLE_ADMIN'])
+	def trenesCrearPeticion() {
+		def Date fecha
+		def List<PeticionesTren> peticionesTren = []
+		def trayecto = Trayecto.read(params.trayecto)
+		def dateFormat = new SimpleDateFormat("dd/MM/yyyy")
+		fecha = dateFormat.parse(params.fecha).clearTime()
+		if (fecha >= new Date().clearTime())
+			peticionesTren = getPeticionesTrenes([fecha], trayecto, false)
+		[trenes: peticionesTren]
+	}
+
 	@Secured(['ROLE_USER'])
 	def cancel() {
 		Tren tren = Tren.read(params.id)
