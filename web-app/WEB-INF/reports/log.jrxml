@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="log" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a7b72186-cfca-4a18-834a-031f4ee4a17b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new Date('01/01/2000')]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     user_action.`id` AS user_action_id,
+     user_action.`version` AS user_action_version,
+     user_action.`action_key` AS user_action_action_key,
+     user_action.`data` AS user_action_data,
+     user_action.`date_created` AS user_action_date_created,
+     user_action.`description` AS user_action_description,
+     user_action.`tags` AS user_action_tags
+FROM
+     `user_action` user_action
+
+WHERE
+     date_created >= $P{fecha}]]>
+	</queryString>
+	<field name="user_action_id" class="java.lang.Long"/>
+	<field name="user_action_version" class="java.lang.Long"/>
+	<field name="user_action_action_key" class="java.lang.String"/>
+	<field name="user_action_data" class="java.lang.String"/>
+	<field name="user_action_date_created" class="java.sql.Timestamp"/>
+	<field name="user_action_description" class="java.lang.String"/>
+	<field name="user_action_tags" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="94e92b00-a77c-45cb-be56-f52f8cb8a55e" x="5" y="0" width="40" height="22"/>
+				<textElement/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bb6abf84-258d-4497-835e-57d33166f04d" x="50" y="0" width="100" height="22"/>
+				<textElement/>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="29806719-ffc6-43ec-bf52-94640bbbb7a4" x="294" y="0" width="100" height="22"/>
+				<textElement/>
+				<text><![CDATA[Datos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a8a68576-9da9-4a57-a38f-345d4ffa8e55" x="156" y="0" width="127" height="22"/>
+				<textElement/>
+				<text><![CDATA[Accion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e9ba8539-3247-40f1-bbed-c5885e11eac5" x="5" y="0" width="40" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_action_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1f9ed2c0-2aca-4867-bce5-4cef00589232" x="50" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new Date(Date.UTC($F{user_action_date_created}.getYear(),
+    $F{user_action_date_created}.getMonth(),
+    $F{user_action_date_created}.getDate(),
+    $F{user_action_date_created}.getHours() + 8,
+    $F{user_action_date_created}.getMinutes(),
+    $F{user_action_date_created}.getSeconds()))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="74d7bf35-46a4-4fea-8c21-6c430d05c3ed" x="294" y="0" width="508" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_action_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c072168f-71ab-47a3-af1a-757ad29c8435" x="156" y="0" width="127" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_action_description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="peticiones_fecha" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2c90fb59-3d80-42eb-ba5a-8c6a808f23d3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fecha" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     peticion.`id` AS peticion_id,
+     peticion.`salida` AS peticion_salida,
+     peticion.`trayecto_id` AS peticion_trayecto_id,
+     peticion.`user_id` AS peticion_user_id,
+     peticion.`estado` AS peticion_estado,
+     peticion.`date_created` AS peticion_date_created,
+     peticion.`last_updated` AS peticion_last_updated,
+     peticion.`paypal_tren_id` AS peticion_paypal_tren_id,
+     user.`id` AS user_id,
+     user.`account_expired` AS user_account_expired,
+     user.`account_locked` AS user_account_locked,
+     user.`email` AS user_email,
+     user.`enabled` AS user_enabled,
+     user.`password` AS user_password,
+     user.`password_expired` AS user_password_expired,
+     user.`username` AS user_username,
+     user.`phone_number` AS user_phone_number,
+     trayecto.`id` AS trayecto_id,
+     trayecto.`destino_id` AS trayecto_destino_id,
+     trayecto.`origen_id` AS trayecto_origen_id,
+     trayecto.`precio_mesa` AS trayecto_precio_mesa,
+     estacion.`id` AS estacion_id,
+     estacion.`nombre` AS estacion_nombre
+FROM
+     `peticion` peticion INNER JOIN `user` user ON peticion.`user_id` = user.`id`
+     INNER JOIN `trayecto` trayecto ON peticion.`trayecto_id` = trayecto.`id`
+     INNER JOIN `estacion` estacion ON trayecto.`origen_id` = estacion.`id`
+WHERE
+     peticion.`salida` >= $P{fecha}
+ORDER BY
+     peticion_salida, peticion_trayecto_id]]>
+	</queryString>
+	<field name="peticion_id" class="java.lang.Long"/>
+	<field name="peticion_salida" class="java.sql.Timestamp"/>
+	<field name="peticion_trayecto_id" class="java.lang.Long"/>
+	<field name="peticion_user_id" class="java.lang.Long"/>
+	<field name="peticion_estado" class="java.lang.String"/>
+	<field name="peticion_date_created" class="java.sql.Timestamp"/>
+	<field name="peticion_last_updated" class="java.sql.Timestamp"/>
+	<field name="peticion_paypal_tren_id" class="java.lang.Long"/>
+	<field name="user_id" class="java.lang.Long"/>
+	<field name="user_account_expired" class="java.lang.Boolean"/>
+	<field name="user_account_locked" class="java.lang.Boolean"/>
+	<field name="user_email" class="java.lang.String"/>
+	<field name="user_enabled" class="java.lang.Boolean"/>
+	<field name="user_password" class="java.lang.String"/>
+	<field name="user_password_expired" class="java.lang.Boolean"/>
+	<field name="user_username" class="java.lang.String"/>
+	<field name="user_phone_number" class="java.lang.String"/>
+	<field name="trayecto_id" class="java.lang.Long"/>
+	<field name="trayecto_destino_id" class="java.lang.Long"/>
+	<field name="trayecto_origen_id" class="java.lang.Long"/>
+	<field name="trayecto_precio_mesa" class="java.math.BigDecimal"/>
+	<field name="estacion_id" class="java.lang.Long"/>
+	<field name="estacion_nombre" class="java.lang.String"/>
+	<group name="peticion_trayecto_id">
+		<groupExpression><![CDATA[$F{peticion_trayecto_id}]]></groupExpression>
+	</group>
+	<group name="peticion_salida">
+		<groupExpression><![CDATA[$F{peticion_salida}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="2323a852-6973-4701-bb9b-63e74a66d84b" x="0" y="0" width="23" height="20"/>
+				<textElement/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e1427854-3464-4384-b516-408a92d83fa1" x="23" y="0" width="82" height="20"/>
+				<textElement/>
+				<text><![CDATA[Creada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="adf11f52-afe4-4185-8d56-4d00ffa60c36" x="105" y="0" width="88" height="20"/>
+				<textElement/>
+				<text><![CDATA[Salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1eb79b35-3989-4e54-badd-b258015b2d36" x="193" y="0" width="78" height="20"/>
+				<textElement/>
+				<text><![CDATA[Origen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="fdb3f545-050e-4a32-9c1f-f4324e934f37" x="271" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Usuario]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="16c40ea6-1368-4638-b309-8d7f34d5730e" x="371" y="0" width="231" height="20"/>
+				<textElement/>
+				<text><![CDATA[Email]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28f59f85-5ff3-4dde-bc36-9def932f5319" x="602" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ea688670-34f3-4fa0-aa50-9381e1fb8abe" x="702" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="22ede31f-c902-4426-a3c1-f636226d6270" x="0" y="2" width="23" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{peticion_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5f2681a3-336d-425d-b90a-cfa4e249a493" x="23" y="2" width="82" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{peticion_date_created}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bf2fccf8-bedb-4287-8eeb-1dbd54cd8bc6" x="105" y="2" width="88" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{peticion_salida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="47c8d9af-a1a4-4c11-9c93-f91e392e3a71" x="193" y="2" width="78" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{estacion_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="31ed1144-8754-4dc4-82cc-82c429cb3937" x="271" y="2" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_username}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="748b5f22-2ec5-482c-bbac-60a9b5b6342b" x="371" y="2" width="231" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a8350e66-09e4-4fae-89e1-a8bc11f0c8bb" x="602" y="2" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_phone_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="40158cc5-4639-4531-ab03-c6742e355ec3" x="702" y="2" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{peticion_estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="usuarios_registrados" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e467127e-3c7c-4f20-808b-bda0e6fe3c09">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_Desde" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     user.`id` AS user_id,
+     user.`account_locked` AS user_account_locked,
+     user.`email` AS user_email,
+     user.`username` AS user_username,
+     user.`phone_number` AS user_phone_number
+FROM
+     `user` user
+WHERE
+     id >= $P{ID_Desde}
+ORDER BY
+     user_id]]>
+	</queryString>
+	<field name="user_id" class="java.lang.Long"/>
+	<field name="user_account_locked" class="java.lang.Boolean"/>
+	<field name="user_email" class="java.lang.String"/>
+	<field name="user_username" class="java.lang.String"/>
+	<field name="user_phone_number" class="java.lang.String"/>
+	<variable name="user_id_1" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{user_id}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="24">
+			<staticText>
+				<reportElement uuid="32ef9f09-e057-47d2-b71a-1823307d12cf" x="0" y="0" width="171" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ba9f7fc5-a1d2-44de-9eef-98fb0f020b62" x="181" y="0" width="464" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dirección de correo electrónico]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b614440f-5e2c-46f6-b710-738166a74803" x="656" y="0" width="131" height="20"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement uuid="a12f9b19-9c3b-4e2b-8356-410da0717f4d" x="0" y="0" width="171" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_username}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="338936db-dfb7-4e48-82b4-0a891a68932e" x="181" y="0" width="464" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="df5afc96-917b-4745-ad80-99ae63c80767" x="656" y="0" width="131" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{user_phone_number}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
