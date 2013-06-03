@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class User {
 
+	static searchable = true
+
 	transient springSecurityService
 
 	String username

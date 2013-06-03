@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions
  */
-@TestFor(ICalendarService)
-class ICalendarServiceSpec {
+@TestFor(NotificacionesService)
+class NotificacionesServiceSpec {
 
     void testSomething() {
         fail "Implement me"

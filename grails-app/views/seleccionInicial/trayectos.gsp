@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Consulta de trenes y ofertas AVE-ALVIA - Compartir Mesa De Tren</title>
+		<title>Consulta de trenes y ofertas AVE ALVIA Renfe - Compartir Mesa De Tren</title>
 		<meta name="layout" content="main"/>
 		<script type="text/javascript" src="${resource(dir: 'js', file: 'bannerRotator.js')}"></script>
   		<link href="${resource(dir: 'css', file: 'style.css')}" rel="stylesheet" type="text/css">
@@ -101,7 +101,7 @@
 		  					</li>
 	    				</ul>
 	  				</div>
-	   				<center id="masInfo"><g:link controller="queycomo" class="mas-info">MÁS INFORMACIÓN...</g:link></center>
+	   				<center id="masInfo"><g:link url="/tarifa-mesa-renfe-como-funciona" class="mas-info">MÁS INFORMACIÓN...</g:link></center>
    				</div>
 				<fieldset class="form property-list">
 					<div class="fieldcontain">

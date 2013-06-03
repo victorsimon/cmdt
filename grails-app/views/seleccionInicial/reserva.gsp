@@ -82,7 +82,7 @@
 				<p><b>Comparte la información</b> de tu viaje en tus redes sociales para que tu trayecto sea más barato.</p>
 				<p><b>El ahorro</b> con el precio original es de <b style="color:#81006F;"><g:formatNumber number="${precio.precioRenfe - precio.precioCmdtMax}" type="currency" currencyCode="EUR" /> a <g:formatNumber number="${precio.precioRenfe - precio.precioCmdtMin}" type="currency" currencyCode="EUR" />*</b></p>
 				<p><i>*(Precio oficial por trayecto: <g:formatNumber number="${precio.precioRenfe}" type="currency" currencyCode="EUR" />)</i></p>
-				<p><b>Si tienes cualquier duda</b>, pincha en <g:link class="enlace" controller="queycomo">¿cómo funciona?</g:link> o revisa las <g:link class="enlace" controller="preguntasfrecuentes">preguntas frecuentes</g:link>. También puedes <g:link class="enlace" controller="contact">escríbeme</g:link>.</p>
+				<p><b>Si tienes cualquier duda</b>, pincha en <g:link class="enlace" url="/tarifa-mesa-renfe-como-funciona" >¿cómo funciona?</g:link> o revisa las <g:link class="enlace" url="/billetes-ave-preguntas-frecuentes">preguntas frecuentes</g:link>. También puedes <g:link class="enlace" controller="contact">escríbeme</g:link>.</p>
 			</div>
 			<fieldset class="property-list">
 				<input type="hidden" name="id" value="${peticionesTren.tren.id}" />
@@ -100,8 +100,8 @@
 				<div style="text-align: center;">
 					<g:if test="${doPayment}">
 						<h2><paypal:button itemName="${peticionesTren.tren}, ${peticionesTren.tren.trayecto}" 
-							itemNumber="${peticionesTren.tren.id}" amount="37,99" buyerId="${user.id}" 
-							discountAmount="0" params="[paymentaction: 'authorization']"
+							itemNumber="${peticionesTren.tren.id}" amount="4" buyerId="${user.id}" 
+							discountAmount="0" params="[paymentaction: 'authorization', currency_code: 'EUR', lc: 'es', country: 'ES']"
 							buttonSrc="${resource(dir: 'images', file: 'reservar.png')}"
 							buttonAlt="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif"/></h2>
 					</g:if>

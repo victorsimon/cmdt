@@ -1,7 +1,6 @@
 package compartirmesadetren
 
 import org.grails.paypal.Payment
-import groovyx.gpars.GParsPool
 
 class PaypalFilters {
 
@@ -10,6 +9,7 @@ class PaypalFilters {
 	def mailService
 	def twitter4jService
 	def grailsApplication
+	def notificacionesService
 
     def filters = {
 		
@@ -24,16 +24,24 @@ class PaypalFilters {
 		paymentReceivedFilter(controller:'paypal', action:'notifyPaypal') {
 			after = {
 				def payment = request.payment
-				if (!payment && params?.transactionId) { //Puede ser autorizacion
+				def notificacion = new NotificacionPaypal(parametros: params?.toMapString()).save(flush: true)
+				if (!payment && params?.transactionId && params.transactionId) { 
 					payment = Payment.findByTransactionId(params.transactionId)
 					if (payment) {
 						request.payment = payment
-						if (params.payment_status == "Pending") {
-							payment.status = org.grails.paypal.Payment.PENDING
-						} else if (params.payment_status == "Voided") {
-							payment.status = org.grails.paypal.Payment.CANCELLED
-						} else if (params.payment_status == "Complete") {
-							payment.status = org.grails.paypal.Payment.COMPLETE
+						switch(params.payment_status) {
+							case "Pending":
+								payment.status = org.grails.paypal.Payment.PENDING
+							break
+							case "Voided":
+								payment.status = org.grails.paypal.Payment.CANCELLED
+							break
+							case "Complete":
+								payment.status = org.grails.paypal.Payment.COMPLETE
+							break
+							case "Expired":
+								payment.status = org.grails.paypal.Payment.COMPLETE
+							break
 						}
 						payment.save(flush: true)
 					}
@@ -50,35 +58,14 @@ class PaypalFilters {
 													paypalTren: paymentRef)
 					peticion.save(flush: true)
 					
-					GParsPool.withPool {
-						//Mail para la gestion
-						GParsPool.executeAsyncAndWait ({
-							mailService.sendMail {
-								to grailsApplication.config.grails.mail.contact
-								subject "Nueva reserva " + tren.toString() + " " + tren.trayecto
-								html tren.toString() + "|" + tren.trayecto + "|" + user.username + "|" + user.email
-							}
-						})
-	
-						def g = grailsApplication.mainContext.getBean('org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib')					
-						//Mail para el usuario
-						String mailContent = g.render(template:"/seleccionInicial/mailReserva", model:[user: user, tren: tren])
-						GParsPool.executeAsyncAndWait ({
-							mailService.sendMail {
-								to user.email
-								subject "Reserva: " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
-								html mailContent
-							}
-						})
-					}
+					actionService.reservaCompletada(user, peticion)
 
 					try {
-						twitter4jService.updateStatus("He reservado el trayecto #" + tren.trayecto + " " + tren.toString() + ". ¿Te interesa? #tarifamesa #alvia compartirmesadetren.com")
-					} catch(Exception e) {
-						log.error e
+						notificacionesService.nuevaReserva(tren, user)
+					} catch(e) {
+						println e
 					}
 
-					actionService.reservaCompletada(user, peticion)
 				}
 			}
 		}

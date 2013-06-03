@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class Report {
 
+	static searchable = true
+
 	String jasper
 	String format = "PDF,HTML,XML,CSV"
 	String name

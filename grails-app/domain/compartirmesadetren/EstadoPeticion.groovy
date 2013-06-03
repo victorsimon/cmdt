@@ -2,7 +2,7 @@ package compartirmesadetren
 
 enum EstadoPeticion {
 	
-	A_LA_ESPERA("Esperando gestion"), BAJO_GESTION("Gestionandose"), CERRADA("Finalizada"), CANCELADA("Cancelada") 
+	A_LA_ESPERA("Esperando gestion"), BAJO_GESTION("Gestionandose"), CERRADA("Finalizada"), CANCELADA("Cancelada"), ANULADA("Anulada") 
 
 	String name
 	

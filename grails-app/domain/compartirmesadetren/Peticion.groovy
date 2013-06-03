@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class Peticion {
 	
+	static searchable = true
+
 	Date salida
 	Trayecto trayecto
 	User user
@@ -15,7 +17,7 @@ class Peticion {
 		trayecto(blank: false, nullable: false)
 		user(blank: false, nullable: false)
 		estado()
-		paypalTren()
+		paypalTren(nullable: true)
     }
 	
 	String toString() {

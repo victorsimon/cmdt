@@ -2,7 +2,6 @@ package compartirmesadetren
 import grails.plugins.springsecurity.Secured
 import java.text.DateFormat
 import java.text.SimpleDateFormat
-import groovyx.gpars.GParsPool
 
 class SeleccionInicialController {
 
@@ -13,7 +12,7 @@ class SeleccionInicialController {
 	def mailService
 	def actionService
 	def twitter4jService
-	def calendarService
+	def notificacionesService
 	
 	def trayectos() {
 		setLastURI()
@@ -76,7 +75,11 @@ class SeleccionInicialController {
 		Tren tren = Tren.read(params.id)
 		PeticionesTren peticionesTren = peticionesService.peticionesTren(tren)
 		List<Date> fechasSugeridas 
-		if (new Date().clearTime() + 2 >= tren.salida)
+		def hoy = new Date().clearTime()
+		if (tren.salida < hoy + 2) {
+			response.status = 404
+			return
+		} else if (tren.salida > hoy + 2 )
 			fechasSugeridas = [tren.salida -1, tren.salida, tren.salida +1]
 		else
 			fechasSugeridas = [tren.salida, tren.salida +1]
@@ -89,7 +92,7 @@ class SeleccionInicialController {
 		}
 		def doPayment = grailsApplication.config.cmdt.dopayment
 		def precio = Precio.findByTrayecto(tren.trayecto)
-
+		
 		actionService.seleccionTren(getAuthenticatedUser(), tren.toString())
 
 		def model = [peticionesTren: peticionesTren, sugeridos: sugeridos, user: getAuthenticatedUser(), doPayment: doPayment, precio: precio]
@@ -107,36 +110,17 @@ class SeleccionInicialController {
 
 		Tren tren = Tren.read(params.trenId)
 		def user = User.read(params.user)
-		Peticion peticion = new Peticion(salida: tren.salida, user: user, trayecto: tren.trayecto, estado: EstadoPeticion.A_LA_ESPERA)
-		peticion.save(flush: true)
-		if (params.notificar) {
-			def ics = calendarService.createICal(tren)
-			GParsPool.withPool {
-				//Mail para la gestion
-				GParsPool.executeAsyncAndWait ({
-					mailService.sendMail {
-						multipart true
-						to grailsApplication.config.grails.mail.contact
-						subject "Nueva reserva " + tren.toString() + " " + tren.trayecto
-						html tren.toString() + "|" + tren.trayecto + "|" + user.username + "|" + user.email
-						attach "reserva.ics", "text/calendar",  ics as byte[]
-					}
-				})
-				
-				//Mail para el usuario
-				String mailContent = g.render(template:"mailReserva", model:[user: user, tren: tren])
-				GParsPool.executeAsyncAndWait ({
-					mailService.sendMail {
-						to user.email
-						subject "Reserva: " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
-						html mailContent
-					}
-				})
-			}
-
-			twitter4jService.updateStatus("He reservado el trayecto #" + tren.trayecto + " " + tren.toString() + ". ¿Te interesa? #tarifamesa #alvia compartirmesadetren.com")
+		if (!params.noPeticion) {
+			Peticion peticion = new Peticion(salida: tren.salida, 
+											user: user, 
+											trayecto: tren.trayecto, 
+											estado: EstadoPeticion.A_LA_ESPERA)
+			peticion.save(flush: true)
+			println peticion.errors
 		}
-		actionService.reservaCompletada(user, peticion)
+		if (params.notificar) {
+			notificacionesService.nuevaReserva(tren, user)
+		}
 		flash.message = 'Creada'
 		[trayectos: Trayecto.list(), users: User.list()]
 	}

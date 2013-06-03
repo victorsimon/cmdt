@@ -60,7 +60,7 @@ class ActionService {
     	def actionKey = "registro-completado"
     	def description = "Registro completado"
     	def tags = ["usuario", "completado", "registro"]
-    	def data = [username: user.username]
+    	def data = [username: user.email]
 
     	UserAction ua = new UserAction(actionKey: actionKey, description: description, tags: tags.toString(), data: data.toString())
     	ua.save()

@@ -9,10 +9,13 @@ class UrlMappings {
 
 		"/sitemap"(controller: 'sitemap', action : 'sitemap')
 		"/robots.txt" (view: "/robots")
-		"/"(controller: "seleccionInicial", action: "trayectos")
+		"/"(view: "/index")
 		"/mantenimiento"(view:"/mantenimiento")
-		"/preguntasfrecuentes"(view:"/preguntasfrecuentes")
-		"/queycomo"(view:"/queycomo")
+		"/madrid-pamplona-mesa-renfe"(controller: "seleccionInicial", action: "trayectos")
+		"/en-tren-horarios-renfe-contacto"(controller: "contact", action: "index")
+		"/billetes-ave-preguntas-frecuentes"(view:"/preguntasfrecuentes")
+		"/tarifa-mesa-renfe-como-funciona"(view:"/queycomo")
+		"/condiciones-de-uso"(view: "/condiciones-de-uso")
 		"500"(view:'/error')
 		"404"(view:'/404')
 	}

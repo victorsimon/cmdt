@@ -94,8 +94,13 @@
 			<g:form action="crearPeticion" method="POST">
 				<fieldset class="form property-list">
 					<div class="fieldcontain">
-						<label class="property-label" for="user">Enviar notificaciones</label>
+						<label class="property-label" for="notificar">Enviar notificaciones</label>
 						<g:checkBox name="notificar" value="${notificar}" checked="${true}"/>
+					</div>
+
+					<div class="fieldcontain">
+						<label class="property-label" for="noPeticion">Solo notificar</label>
+						<g:checkBox name="noPeticion" value="${noPeticion}" checked="${true}"/>
 					</div>
 
 					<div class="fieldcontain">

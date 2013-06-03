@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class Parameter {
 
+	static searchable = true
+	
 	String name
 	String type
 	static belongsTo = Report

@@ -8,6 +8,9 @@ import compartirmesadetren.UserRole
 import compartirmesadetren.FAQ
 import compartirmesadetren.Report
 import compartirmesadetren.Parameter
+import compartirmesadetren.Peticion
+import compartirmesadetren.EstadoPeticion
+import compartirmesadetren.PaypalTren
 import grails.util.GrailsUtil
 import java.sql.Time
 
@@ -185,6 +188,43 @@ Recibiras notificaciones de SITO relacionadas con la gestión y el funcionamient
 				def testUser1 = new User(username: 'user', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
 				testUser1.save(flush: true)
 				UserRole.create testUser1, userRole, true
+
+				def tren1 = new Tren(
+					nombre: "ALVIA-00001",
+					salida: new Date().clearTime(),
+					llegada: new Date(),
+					trayecto: madridPamplona
+					)
+				tren1.save(flush: true)
+				def tren2 = new Tren(
+					nombre: "ALVIA-00002",
+					salida: new Date().clearTime(),
+					llegada: new Date(),
+					trayecto: pamplonaMadrid
+					)
+				tren2.save(flush: true)
+				def salida = tren1.salida - 2
+				10.times() {
+					def peticion = new Peticion(
+						salida: salida++,
+						trayecto: tren1.trayecto,
+						user: testUser,
+						estado: EstadoPeticion.A_LA_ESPERA,
+						paypalTren: null
+						)
+					peticion.save(flush: true)
+				}
+				salida = tren1.salida - 3
+				10.times() {
+					def peticion = new Peticion(
+						salida: salida++,
+						trayecto: tren2.trayecto,
+						user: testUser,
+						estado: EstadoPeticion.A_LA_ESPERA,
+						paypalTren: null
+						)
+					peticion.save(flush: true)
+				}
 			break
 			case "production":
 				if(!User.findByUsername('admin')) {

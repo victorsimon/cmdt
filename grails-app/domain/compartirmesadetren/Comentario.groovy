@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class Comentario {
 
+	static searchable = true
+	
 	String texto
 	User user
 	

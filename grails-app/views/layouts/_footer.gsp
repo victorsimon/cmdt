@@ -5,7 +5,7 @@
 		<!-- Boton follow twitter -->
 		<div style="heght: 23px; wdth: 183px; margin: 5px; float: left;"><a href="https://twitter.com/CompartirMesaDe" class="twitter-follow-button" data-show-count="false" data-lang="es">Seguir a @CompartirMesaDe</a></div>
 		<!-- Boton de me gusta para facebook -->
-		<div style="heght: 20px; wdth: 97px; margin: 5px;" class="fb-like" data-href="http://www.compartirmesadetren.com" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+		<div style="heght: 20px; wdth: 97px; margin: 5px;" class="fb-like" data-href="https://www.facebook.com/compartirtumesadetren" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
 		<!-- Boton +1 de google+ -->
 		<div style="heght: 24px; wdth: 300px; margin: 5px; top: 10px;" class="g-plusone" data-annotation="inline" data-width="450" ></div>
 		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
@@ -22,12 +22,17 @@
 </g:form>
 <div id="footer">
 <div style="margin-left:auto; margin-right:auto; text-align: center;">
-<g:link controller="queycomo" style="font-size: 1.2em; color: #81005E; font-style: normal;">Qué es y cómo funciona</g:link> |
-<g:link controller="preguntasfrecuentes" style="font-size: 1.2em; color: #81005E; font-style: normal;">Preguntas frecuentes</g:link> |
-<g:link controller="contact" style="font-size: 1.2em; color: #81005E; font-style: normal;">Contactar</g:link>
+<g:link url="/tarifa-mesa-renfe-como-funciona" style="font-size: 1.2em; color: #81005E; font-style: normal;">Qué es y cómo funciona</g:link> |
+<g:link url="/billetes-ave-preguntas-frecuentes" style="font-size: 1.2em; color: #81005E; font-style: normal;">Preguntas frecuentes</g:link> |
+<g:link url="/en-tren-horarios-renfe-contacto" style="font-size: 1.2em; color: #81005E; font-style: normal;">Contactar</g:link> |
+<a href="condiciones-de-uso" style="font-size: 1.2em; color: #81005E; font-style: normal;" target="_blank">Condiciones de uso</a>
 </div>
 <hr/>
 <g:copyrigth startYear="2010">CSMovil, S.L.</g:copyrigth>
+</div>
+<div class="subfooter">
+	<h1>Viaja en Renfe, en cualquier horario y cualquier tren o trenes.</h1>
+	<p>Selecciona el trayecto que deseas estre los que ofrecemos para poder compartir mesa en trenes de Renfe AVE. Así podrás ahorrar mientras viajas, aprovechando la tarifa de mesa que ofrece Renfe a sus clientes. La tarifa de mesa consiste en comprar las cuatro plazas que componen una de las mesas de un bagón de AVE o de ALVIA con un 60% de descuento sobre la tarifa estandar. Si sueles viajar solo no tendrás acceso a esta oferta, pero ahora con nosotros nada te lo impide. Comparte tren con más usuarios y benefíciate de esta y más ofertas.</p>
 </div>
 <script type="text/javascript">
 

@@ -6,6 +6,9 @@
 	<parameter name="ID_Desde" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Sin_activar" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[FALSE]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      user.`id` AS user_id,
@@ -16,7 +19,7 @@
 FROM
      `user` user
 WHERE
-     id >= $P{ID_Desde}
+     id >= $P{ID_Desde} AND account_locked = $P{Sin_activar}
 ORDER BY
      user_id]]>
 	</queryString>

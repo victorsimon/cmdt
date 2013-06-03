@@ -7,6 +7,7 @@ class Tren {
 	Date salida 
 	Date llegada
 	boolean noValido 
+	boolean bloqueado 
 	static belongsTo = [trayecto:Trayecto]
 	Date dateCreated
 	Date lastUpdated
@@ -16,6 +17,7 @@ class Tren {
 		salida(attributes: [precision: "minute",],)
 		llegada(attributes: [precision: "minute",],)
 		noValido()
+		bloqueado()
 		trayecto()
     }
 	

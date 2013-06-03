@@ -1,0 +1,16 @@
+* {
+	font-size: 94%;
+}
+
+body {
+	width: 400px;
+	margin: 0 auto;
+}
+
+h3 {
+	display: inline;
+}
+
+h3 + p {
+	display: inline;
+}

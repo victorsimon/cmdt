@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class Precio {
 
+	static searchable = true
+
 	Trayecto trayecto
 	BigDecimal precioCmdtMin
 	BigDecimal precioCmdtMed

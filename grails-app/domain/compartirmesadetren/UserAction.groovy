@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class UserAction {
 
+	static searchable = true
+
 	String actionKey
 	String description
 	String tags // Groovy list sintaxis

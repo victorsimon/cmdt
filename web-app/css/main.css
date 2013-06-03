@@ -138,6 +138,18 @@ img {
 	color: #cccccc;
 }
 
+.subfooter * {
+	color: #EEE;
+}
+
+.subfooter h1 {
+	font-size: 7px;
+}
+
+.subfooter p {
+	font-size: 5px;
+}
+
 .spinner {
 	background: url(../images/spinner.gif) 50% 50% no-repeat transparent;
 	height: 100px;

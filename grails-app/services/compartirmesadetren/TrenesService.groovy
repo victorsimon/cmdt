@@ -19,18 +19,53 @@ class TrenesService {
 			def List<Tren> trenesDisponiblesDia = []
 			def URLconsulta = componerURL(trayecto, salida)
 			def URLConnection conexion = conectarConCookieSession(URLconsulta, cookieSession)
-			def contenidoLimpio = limpiarContenido(conexion.content.text)
-			if (haCambiado(salida, trayecto, contenidoLimpio)) {
+			try {
+				def contenidoLimpio = limpiarContenido(conexion.content.text)
 				def Map<String, String> trenesProgramados = extraerTrenes(contenidoLimpio)
-				List<Tren> trenes = []
-				trenesProgramados.each {
-					Tren tmp = convertirLineasEnTrenes(it.value, salida, trayecto)
-					if (tmp) trenes.add(tmp)
+				if (haCambiado(salida, trayecto, trenesProgramados)) {
+					Long timestamp = new Date().time
+					List<Tren> trenes = []
+
+					//Restringimos el numero de trenes
+					log.debug "Restringiendo por horas"
+					def diaDeLaSemana = salida.getAt(Calendar.DAY_OF_WEEK) //SUNDAY = 1
+					def primero
+					if ([2,3,4].contains(diaDeLaSemana)) {
+						primero = 0
+					} else {
+						primero = 1
+					}
+					def totalTrenesDia = trenesProgramados.size()
+					log.debug "Es el día " + diaDeLaSemana + " y el primero admitido es el " + primero + " de " + totalTrenesDia
+
+					trenesProgramados.eachWithIndex() { t, i ->
+						DatosRenfe rawData = new DatosRenfe(timestamp: timestamp, salida: salida, 
+							trayecto: trayecto, rawData: t.value).save(flush: true)
+						if (i == primero || i == totalTrenesDia - 1) {
+							log.debug "Añadimos " + salida
+							Tren tmp = convertirLineasEnTrenes(t.value, salida, trayecto)
+							if (tmp) trenes.add(tmp)
+						} else {
+							log.debug "Descartamos " + salida
+						}
+					}
+					guardarReferenciaDeCambio(salida, trayecto, trenesProgramados)
+					marcarTrenesObsoletos(salida, trayecto, trenes)
 				}
-				guardarReferenciaDeCambio(salida, trayecto, contenidoLimpio)
-				marcarTrenesObsoletos(salida, trayecto, trenes)
+			} catch (e) {
+				log.warning "EL SITE DE RENFE ESTA CAIDO"
 			}
 		}
+	}
+
+	def consultarTrenesDisponibles(Trayecto trayecto, Date salida) {
+		def cookieSession = extraerCookieSession()
+		def List<Tren> trenesDisponiblesDia = []
+		def URLconsulta = componerURL(trayecto, salida)
+		def URLConnection conexion = conectarConCookieSession(URLconsulta, cookieSession)
+		def contenidoLimpio = limpiarContenido(conexion.content.text)
+		def Map<String, String> trenesProgramados = extraerTrenes(contenidoLimpio)
+		return trenesProgramados
 	}
 
 	private Tren convertirLineasEnTrenes(String source, Date salida, Trayecto trayecto) {
@@ -43,6 +78,7 @@ class TrenesService {
 			horaLlegada = horaLlegada + 1
 
 		log.debug "Convirtiendo " + source
+	
 		Tren tren = Tren.findBySalidaAndTrayecto(horaSalida.time, trayecto)
 		//Tren tren = Tren.buscarPorDiaSalida(horaSalida.time.time, trayecto)
 		if (!tren) {
@@ -72,7 +108,8 @@ class TrenesService {
 		return content
 	}
 	
-	private boolean haCambiado(Date fecha, Trayecto trayecto, String content) {
+	private boolean haCambiado(Date fecha, Trayecto trayecto, Map<String, String> trenes) {
+		def content = trenes.toMapString()
 		ContentMD5.withTransaction { status ->
 			def contentKey = fecha.format('dd-MM-yyyy') + ' - ' + trayecto
 			log.debug(contentKey)
@@ -111,7 +148,8 @@ class TrenesService {
 		}
 	}
 
-	private guardarReferenciaDeCambio(Date fecha, Trayecto trayecto, String content) {
+	private guardarReferenciaDeCambio(Date fecha, Trayecto trayecto, Map<String, String> trenes) {
+		def content = trenes.toMapString()
 		def nuevoMD5 = content.encodeAsMD5()
 		def contentKey = fecha.format('dd-MM-yyyy') + ' - ' + trayecto
 		def nuevoContentMD5 = new ContentMD5(contentKey: contentKey, md5HexString: nuevoMD5, timeStamp: new Date().time)

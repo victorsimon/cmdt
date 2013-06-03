@@ -7,6 +7,8 @@ class ComentarioController {
 	def scaffold = true
 
 	def actionService
+	def mailService
+	def grailsApplication
 
 	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 	def enviar (Comentario command) {
@@ -21,11 +23,24 @@ class ComentarioController {
 		command.save()
 		actionService.nuevoComentario(user)
 
-		flash.message = "Tu comentario ha sido enviado correctamente" 
+		println command.texto + "<br/> USER:" + user?.email
+		try {
+			mailService.sendMail {
+				to grailsApplication.config.grails.mail.contact
+				subject 'COMENTARIO'
+				html command.texto
+			}
+		}
+		catch(Exception e) {
+			flash.message = '*'
+		}
+		
+		flash.message += "Tu comentario ha sido guardado correctamente" 
 	}
 	
 	@Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
 	def viajerosFrecuentes (Comentario command) {
+		command.texto = 'VIAJEROS FRECUENTES <br/>' + command.texto
 		enviar(command)
 	}
 }

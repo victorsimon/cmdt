@@ -2,7 +2,7 @@ package compartirmesadetren
 
 import ch.silviowangler.groovy.util.builder.ICalendarBuilder
 
-class calendarService {
+class CalendarioService {
 
     def createICal(Tren tren) {
     	def start = tren.salida

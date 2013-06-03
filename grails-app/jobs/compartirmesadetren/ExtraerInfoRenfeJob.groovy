@@ -7,8 +7,8 @@ class ExtraerInfoRenfeJob {
 	def trenesService
 	
     static triggers = {
-      //simple startDelay: 10000, repeatInterval: 900000l // execute job once in 15 min
-      simple startDelay: 10000, repeatInterval: 300000l // execute job once in 5 min
+      simple startDelay: 60000l, repeatInterval: 900000l // execute job once in 15 min
+      //simple startDelay: 10000, repeatInterval: 300000l // execute job once in 5 min
     }
 
     def execute() {

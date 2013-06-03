@@ -6,7 +6,6 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="es" class="no-js"><!--<![endif]-->
 	<head>
 		<title><g:layoutTitle default="Compartir Mesa De Tren - CMDT"/></title>
-		<meta name="robots" content="noindex">
 		<meta name="keywords" content="renfe, ferrocarril, tren, transporte, billete, billete internet, billete impreso, billete electrónico, venta de billetes, viaje tren, horario tren, horarios tren, viajar tren, viajero, reserva billete, cercanias, regionales, media distancia, ave, mercancias, vagones, talgo, alaris, altaria, alvia, arco, viajeros, compartir Tarifa Mesa, Tarifa mesa, renfe en, renfe renfe, renfe tren">
 		<meta name="description" content="Desde compartir mesa de tren accede a descuentos en tus viajes en tren y benefíciate de la tarifa mesa de Renfe. Viaja barato en AVE, ALVIA y AVANT."/>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

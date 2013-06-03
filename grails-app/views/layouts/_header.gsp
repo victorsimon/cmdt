@@ -1,7 +1,7 @@
 <div id="header">
 	<img alt="tren-de-renfe-horarios-ave-tarifa-mesa-compartir-tarifa mesa-" src="${resource(dir: 'images', file: 'cmdt_logo.png')}" style="float: left;"/>
 	<div>
-		<h1 style="font-size: 1em; margin: 0;"><a class="header-main" href="${resource(dir:'/')}"><b>C</b>ompartir<b>M</b>esa<b>D</b>e<b>T</b>ren</a></h1>
+		<h1 style="font-size: 1em; margin: 0;"><g:link elementId="inicio" controller="seleccionInicial" class="header-main"><b>C</b>ompartir<b>M</b>esa<b>D</b>e<b>T</b>ren</g:link></h1>
 	</div>
 	<div>
 	<span class="header-sub">Viajar ahorrando en AVE y ALVIA</span>
@@ -26,9 +26,9 @@
 </div>
 <div id="menu-principal">
 	<g:link elementId="inicio" controller="seleccionInicial">Inicio</g:link> |
-	<g:link elementId="queycomo" controller="queycomo">Qué es y cómo funciona</g:link> |
-	<g:link elementId="preguntasfrecuentes" controller="preguntasfrecuentes">Preguntas frecuentes</g:link> |
+	<g:link elementId="queycomo" url="/tarifa-mesa-renfe-como-funciona">Qué es y cómo funciona</g:link> |
+	<g:link elementId="preguntasfrecuentes" url="/billetes-ave-preguntas-frecuentes">Preguntas frecuentes</g:link> |
 	<g:link elementId="blog" url="http://compartirmesadetren.blogspot.com.es/">Blog</g:link> | 
-	<g:link elementId="contacto" controller="contact">Contactar</g:link> 
+	<g:link elementId="contacto" url="/en-tren-horarios-renfe-contacto">Contactar</g:link> 
 </div>
 <h2 style="display: none;">Compartir mesa de tren, ave, alvia, avant de renfe. Trayectos y horarios. Viaje en tren barato.</h2>

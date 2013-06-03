@@ -2,6 +2,8 @@ package compartirmesadetren
 
 class FAQ {
 
+	static searchable = true
+
 	String pregunta
 	String respuesta
 

@@ -34,7 +34,7 @@
 				<g:each in="${peticionInstanceList}" status="i" var="peticionInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}" onclick="doClick(this);">
 					
-						<td><g:formatDate date="${peticionInstance.salida}" format="dd-MM-yyyy hh:mm" /></td>
+						<td><g:formatDate date="${peticionInstance.salida}" format="dd-MM-yyyy HH:mm" /></td>
 					
 						<td>${peticionInstance.trayecto}</td>
 
