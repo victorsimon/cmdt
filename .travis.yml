@@ -3,5 +3,4 @@ jdk:
   - oraclejdk7
   - openjdk7
   - openjdk6
-script: ./grailsw refresh-dependencies
-  		&& ./grailsw compile
+script: ./grailsw compile
