@@ -1,3 +1,5 @@
+package compartirmesadetren
+
 class SitemapController {
     def sitemap = {
         render(contentType: 'text/xml', encoding: 'UTF-8') {
