@@ -526,6 +526,15 @@
 				"buffer_size": 8868,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": ".travis.yml",
+			"settings":
+			{
+				"buffer_size": 186,
+				"line_ending": "Windows",
+				"name": "language: groovy"
+			}
 		}
 	],
 	"build_system": "",
@@ -719,7 +728,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"C:\\Users\\CompartirTren\\Documents\\workspace-ggts-3.1.0.RELEASE\\CompartirMesaDeTren",
@@ -866,7 +875,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 10,
 			"sheets":
 			[
 				{
@@ -1135,6 +1144,33 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 2565.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": ".travis.yml",
+					"settings":
+					{
+						"buffer_size": 186,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								161,
+								161
+							]
+						],
+						"settings":
+						{
+							"auto_name": "language: groovy",
+							"syntax": "Packages/YAML/YAML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
