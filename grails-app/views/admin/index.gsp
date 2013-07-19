@@ -1,119 +1,101 @@
-<html>
+<html class="no-js" lang="en">
 <head>
 	<style>
 		/*{border: 1px solid black;}*/
-		body {
-			font-family: Arial;
-			margin:0;
-			padding:0;
-		}
 		a:hover {
-			margin-bottom: 0;
-			border-bottom: 2px solid #FF8800;
-			color: #777777;
 		}
 		a {
-			text-decoration: none;
-			color: #777777;
 		}
 		a:visited {
-			color: #777777;
 		}
 		#menu * {
-			color: #FFFFFF;
 		}
 		#menu {
-			color: #FFFFFF;
-			font-size: .9em;
-			border-bottom: 1px solid #AAAAAA;
-			box-shadow: 0px 2px 3px #888888;
-			margin: 0;
-			padding: 10px 0 10px 0;
-			background-color: rgba(0,0,0,.70);
+			background-color: #333;
 		}
 		#menu ul {
-			margin:0;
-			padding: 0px 5px;
-			display: block;
-			list-style: none;
 		}
 		#menu ul li {
-			display: inline-block;
-			list-style: none;
 		}
 		#contenedor {
-			display: block;
-			width: 100%;
-			height: 90% ;
-			margin: 0;
-			padding: 0;
 		}
 		#opciones {
-			float: left;
-			width: 20%;
 		}
 		#opciones-titulo {
-			margin: 5px;
-			padding: 5px 15px;
-			color: #eee;
-			font-weight: bold;
-			background-color: rgba(256,88,00,.70);
-			border-radius: 5px 5px 0 0;
 		}
 		div.opcion {
-			padding: 0 10px 0 10px;
-			margin-bottom: 2px;
-			font-size: 1em;
 		}
 		div.contador {
-			float: right;
-			padding-right: .9em;
-			color: #777777;
 		}
 		#principal {
-			width: 80%;
-			height: 450px;
-			float: left;
-			margin: 0;
+			max-height: 65%;
 			overflow-x: hidden;
-			overflow-y: scroll;
-			box-shadow: -2px 0px 3px #888888;
+			overflow-y: auto;
 		}
 		#principal table {
-			border-collapse: collapse;
-			width: 100%;
-			font-size: 0.9em;
+			font-size: 95%;
 		}
 		#principal tr {
-			width: 100%;
-			cursor: pointer;
-			background-color: rgba(240, 240, 240, .85);
 		}
 		#principal td {
-			height: 30px;
-			border-top: 1px solid #AAAAAA;
-			padding: 2.5px 10px;
 		}
 		#detalle {
-			border-top: 1px solid #AAAAAA;
-			box-shadow: 0px -2px 3px #888888;
-			width:100%;
-			float:left;
-			overflow-x: hidden;
-			overflow-y: scroll;
+		}
+		#info table {
+			width: 100%;
+		}
+		#command a {
 		}
 	</style>
-	<g:javascript library="jquery" />
+	<meta charset="utf-8" />
+  	<meta name="viewport" content="width=device-width" />
+	<!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+  	<link rel="stylesheet" href="css/normalize.css" />
+  	<link rel="stylesheet" href="css/foundation.css" />	
+	<link type="text/css" media="screen" rel="stylesheet" href="css/responsive-tables.css" />
+  	<g:javascript library="jquery" />
 	<g:javascript library="jquery-ui" />
+	<script src="js/vendor/custom.modernizr.js"></script>
 	<r:layoutResources />
 </head>
 <body>
-	<div id="menu">
-		<ul><li><g:remoteLink action="reservas" update="contenedor">Gestión de Reservas</g:remoteLink></li></ul>
+	<div id="menu" class="row">
+		<div class="large-12 columns">
+			<ul class="inline-list"><li><g:remoteLink action="reservas" update="contenedor">Gestión de Reservas</g:remoteLink></li></ul>
+		</div>
 	</div>
-	<div id="contenedor">
+	<div class="row">
+		<div class="large-12 columns">
+			<hr/>
+		</div>
+	</div>
+	<div id="contenedor" class="row"><div class="large-12 columns">
 		<g:render template="reservas" model="${[peticiones: peticiones]}"/>
-	</div>
+	</div></div>
+	<script>
+	document.write('<script src=' +
+	  ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+	  '.js><\/script>')
+	</script>
+	<script src="js/foundation/foundation.js"></script>
+	<script src="js/foundation/foundation.alerts.js"></script>
+	<script src="js/foundation/foundation.clearing.js"></script>
+	<script src="js/foundation/foundation.cookie.js"></script>
+	<script src="js/foundation/foundation.dropdown.js"></script>
+	<script src="js/foundation/foundation.forms.js"></script>
+	<script src="js/foundation/foundation.joyride.js"></script>
+	<script src="js/foundation/foundation.magellan.js"></script>
+	<script src="js/foundation/foundation.orbit.js"></script>
+	<script src="js/foundation/foundation.placeholder.js"></script>
+	<script src="js/foundation/foundation.reveal.js"></script>
+	<script src="js/foundation/foundation.section.js"></script>
+	<script src="js/foundation/foundation.tooltips.js"></script>
+	<script src="js/foundation/foundation.topbar.js"></script>
+	<script src="js/foundation/foundation.interchange.js"></script>
+	<script src="js/foundation/responsive-tables.js"></script>
+	<script>
+	  $(document).foundation();
+	</script>	
 	<script type="text/javascript">
 	$(document).ready(function() {
 	});

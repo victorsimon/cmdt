@@ -11,6 +11,7 @@ import compartirmesadetren.Parameter
 import compartirmesadetren.Peticion
 import compartirmesadetren.EstadoPeticion
 import compartirmesadetren.PaypalTren
+import org.grails.paypal.Payment
 import grails.util.GrailsUtil
 import java.sql.Time
 
@@ -188,40 +189,63 @@ Recibiras notificaciones de SITO relacionadas con la gestión y el funcionamient
 				def testUser1 = new User(username: 'user', enabled: true, password: 'password', email: 'vsimon.batanero@gmail.com')
 				testUser1.save(flush: true)
 				UserRole.create testUser1, userRole, true
-
+				def date = new Date()
+				date.putAt(Calendar.HOUR_OF_DAY, 19)
+				date.putAt(Calendar.MINUTE, 35)
 				def tren1 = new Tren(
 					nombre: "ALVIA-00001",
-					salida: new Date().clearTime(),
-					llegada: new Date(),
+					salida: date,
+					llegada: date,
 					trayecto: madridPamplona
 					)
 				tren1.save(flush: true)
 				def tren2 = new Tren(
 					nombre: "ALVIA-00002",
-					salida: new Date().clearTime(),
-					llegada: new Date(),
+					salida: date,
+					llegada: date,
 					trayecto: pamplonaMadrid
 					)
 				tren2.save(flush: true)
+				def payment = new Payment(paypalTransactionId: "123456789", buyerId: 0)
+				payment.save(flush: true)
+				println payment.errors
+				def paypalTren = new PaypalTren(payment: payment, user: testUser, tren: tren1)
+				paypalTren.save(flush: true)
+				println paypalTren.errors
 				def salida = tren1.salida - 2
 				10.times() {
+					paypalTren.tren = tren1
+					paypalTren.save(flush: true)
 					def peticion = new Peticion(
 						salida: salida++,
 						trayecto: tren1.trayecto,
 						user: testUser,
+						plazas: 1,
 						estado: EstadoPeticion.A_LA_ESPERA,
-						paypalTren: null
+						paypalTren: paypalTren
 						)
 					peticion.save(flush: true)
+					def peticion2 = new Peticion(
+						salida: salida,
+						trayecto: tren1.trayecto,
+						user: testUser,
+						plazas: 2,
+						estado: EstadoPeticion.A_LA_ESPERA,
+						paypalTren: paypalTren
+						)
+					peticion2.save(flush: true)
 				}
 				salida = tren1.salida - 3
 				10.times() {
+					paypalTren.tren = tren2
+					paypalTren.save(flush: true)
 					def peticion = new Peticion(
 						salida: salida++,
 						trayecto: tren2.trayecto,
 						user: testUser,
+						plazas: 1,
 						estado: EstadoPeticion.A_LA_ESPERA,
-						paypalTren: null
+						paypalTren: paypalTren
 						)
 					peticion.save(flush: true)
 				}

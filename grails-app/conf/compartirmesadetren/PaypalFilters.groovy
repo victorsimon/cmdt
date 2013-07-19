@@ -49,11 +49,15 @@ class PaypalFilters {
 
 				if(params.transaction_entity == "auth" && payment && payment.status == org.grails.paypal.Payment.PENDING) {
 					def paymentRef = PaypalTren.findByPayment(request.payment)
+					paymentRef.payment = payment
+					paymentRef.save(fludh: true)
 					Tren tren = Tren.read(paymentRef.tren.id)
 					def user = User.read(paymentRef.user.id)
+					def plazas = paymentItems[0].quantity
 					Peticion peticion = new Peticion(salida: tren.salida, 
 													user: user, 
 													trayecto: tren.trayecto, 
+													plazas: plazas, 
 													estado: EstadoPeticion.A_LA_ESPERA,
 													paypalTren: paymentRef)
 					peticion.save(flush: true)
@@ -61,7 +65,7 @@ class PaypalFilters {
 					actionService.reservaCompletada(user, peticion)
 
 					try {
-						notificacionesService.nuevaReserva(tren, user)
+						notificacionesService.nuevaReserva(tren, user, plazas)
 					} catch(e) {
 						println e
 					}

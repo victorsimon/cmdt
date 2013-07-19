@@ -16,19 +16,8 @@ class DisponibilidadJob {
     		if (objetivo.salida <= new Date().clearTime()) {
     			objetivo.activo = false
     		} else {
-		        def results = DatosRenfe.findAllBySalidaAndTrayecto(objetivo.salida, 
-		        	objetivo.trayecto, [sort: "timestamp"])
-		        def disponible = objetivo.disponible
-		        def ts = 0 
-		        results.each { dato ->
-		        	if (ts != dato.timestamp) {
-		        		ts = dato.timestamp
-		        		disponible = false
-		        	}
-		        	if (dato.rawData.contains(objetivo.hora)) {
-		        		disponible = true
-		        	}
-		     	}
+		        def disponible = DatosRenfe.findBySalidaAndTrayecto(objetivo.salida, 
+		        	objetivo.trayecto)?.estaDisponible(objetivo.hora)
 		     	if (disponible != objetivo.disponible) {
 		     		objetivo.disponible = disponible
 		     		def texto = """

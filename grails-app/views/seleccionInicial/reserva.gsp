@@ -97,11 +97,19 @@
 					<label>Llegada</label>
 					<input disabled="disabled" value="${peticionesTren.tren.llegada.format('dd-MM-yyyy HH:mm')}" />
 				</div>
+				<div class="fieldcontain">
+					<label>Plazas</label>
+					<select onchange="$('#quantity').attr('value', this.value);">
+						<option value="1">1 persona</option>
+						<option value="2">2 personas</option>
+						<option value="3">3 personas</option>
+					</select>
+				</div>
 				<div style="text-align: center;">
 					<g:if test="${doPayment}">
 						<h2><paypal:button itemName="${peticionesTren.tren}, ${peticionesTren.tren.trayecto}" 
 							itemNumber="${peticionesTren.tren.id}" amount="4" buyerId="${user.id}" 
-							discountAmount="0" params="[paymentaction: 'authorization', currency_code: 'EUR', lc: 'es', country: 'ES']"
+							discountAmount="0" params="[paymentaction: 'authorization', currency_code: 'EUR', lc: 'es', country: 'ES', quantity: '1']"
 							buttonSrc="${resource(dir: 'images', file: 'reservar.png')}"
 							buttonAlt="https://www.paypalobjects.com/es_ES/i/scr/pixel.gif"/></h2>
 					</g:if>

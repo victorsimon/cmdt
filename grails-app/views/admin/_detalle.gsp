@@ -1,47 +1,15 @@
-<style>
-	#info * {
-		font-size: 0.95em;
-		color:#555555;
-	}
-	#info table tr {
-		cursor:auto;
-	}
-	#info {
-		height:20%;
-		width:100%;
-		float:left;
-	}
-	#info input {
-
-	}
-	#command {
-		float:left;
-	}
-</style>
-<span id="info">
-	<table>
-		<tr>
-			<td><label for="salida">Salida</label></td>
-			<td><input type="text" name="salida" id="salida" disabled="disabled" value="${peticion.salida.format('dd/MM/yyyy hh:mm')}"/></td>
-		</tr>
-		<tr>
-			<td><label for="trayecto">Trayecto</label></td>
-			<td><g:select name="trayecto" from="${compartirmesadetren.Trayecto.list()}" optionKey="id" value="${peticion.trayecto?.id}" disabled="disabled"/>
-			</td>
-		</tr>
-		<tr>
-			<td><label for="user">Usuario</label></td>
-			<td><input type="text" name="user" value="${peticion.user.username}" disabled/></td>
-		</tr>
-		<tr>
-			<td><label for="estado">Estado</label></td>
-			<td><input type="text" name="estado" value="${peticion.estado.name}" disabled/></td>
-		</tr>
-	</table>
-</span>
-<span id="command">
-	<input type="button"/>	
-</span>
+<div id="command" class="large-12 columns">
+	<g:each in="${acciones}" var="fila">
+		<div class="row">
+			<div class="large-8 large-centered columns">
+				<g:each in="${fila}" var="col">
+					<g:remoteLink class="small button large-5 columns" action="${col.accion}" id="${peticion.id}" update="principal" after="\$('#detalle').text('');">${col.texto}
+					 <span data-tooltip data-options="disable-for-touch:true" class="has-tip" title="${col.help}"> ? </span></g:remoteLink>
+				</g:each>
+			</div>
+		</div>
+	</g:each>
+</div>
 <script type="text/javascript">
 $(document).ready(function() {
 });

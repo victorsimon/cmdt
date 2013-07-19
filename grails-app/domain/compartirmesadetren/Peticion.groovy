@@ -7,6 +7,7 @@ class Peticion {
 	Date salida
 	Trayecto trayecto
 	User user
+	Integer plazas = 1
 	EstadoPeticion estado
 	PaypalTren paypalTren
 	Date dateCreated
@@ -16,6 +17,7 @@ class Peticion {
 		salida(blank: false, nullable: false, attributes: [precision: "minute"])
 		trayecto(blank: false, nullable: false)
 		user(blank: false, nullable: false)
+		plazas()
 		estado()
 		paypalTren(nullable: true)
     }

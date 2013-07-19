@@ -27,6 +27,7 @@ class TrenesService {
 					List<Tren> trenes = []
 
 					//Restringimos el numero de trenes
+					/*
 					log.debug "Restringiendo por horas"
 					def diaDeLaSemana = salida.getAt(Calendar.DAY_OF_WEEK) //SUNDAY = 1
 					def primero
@@ -37,23 +38,26 @@ class TrenesService {
 					}
 					def totalTrenesDia = trenesProgramados.size()
 					log.debug "Es el día " + diaDeLaSemana + " y el primero admitido es el " + primero + " de " + totalTrenesDia
+					*/
 
 					trenesProgramados.eachWithIndex() { t, i ->
 						DatosRenfe rawData = new DatosRenfe(timestamp: timestamp, salida: salida, 
 							trayecto: trayecto, rawData: t.value).save(flush: true)
-						if (i == primero || i == totalTrenesDia - 1) {
+						//if (i == primero || i == totalTrenesDia - 1) {
 							log.debug "Añadimos " + salida
 							Tren tmp = convertirLineasEnTrenes(t.value, salida, trayecto)
 							if (tmp) trenes.add(tmp)
+						/*
 						} else {
 							log.debug "Descartamos " + salida
 						}
+						*/
 					}
 					guardarReferenciaDeCambio(salida, trayecto, trenesProgramados)
 					marcarTrenesObsoletos(salida, trayecto, trenes)
 				}
 			} catch (e) {
-				log.warning "EL SITE DE RENFE ESTA CAIDO"
+				log.warn "EL SITE DE RENFE ESTA CAIDO"
 			}
 		}
 	}

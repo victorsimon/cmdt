@@ -27,6 +27,8 @@
 
 						<g:sortableColumn property="trayecto" title="${message(code: 'peticion.trayecto.label', default: 'Trayecto')}" />
 					
+						<g:sortableColumn property="plazas" title="${message(code: 'peticion.plazas.label', default: 'Plazas')}" />
+					
 						<g:sortableColumn property="Estado" title="${message(code: 'peticion.estado.label', default: 'Estado')}" />
 					</tr>
 				</thead>
@@ -37,6 +39,8 @@
 						<td><g:formatDate date="${peticionInstance.salida}" format="dd-MM-yyyy HH:mm" /></td>
 					
 						<td>${peticionInstance.trayecto}</td>
+
+						<td>${peticionInstance.plazas}</td>
 
 						<td>${peticionInstance.estado}</td>
 					</tr>

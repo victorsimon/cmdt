@@ -34,7 +34,7 @@ class SeleccionInicialController {
 					peticionesTren = getPeticionesTrenes([fecha], trayecto, false)
 			} else if (opcion == 1) { //proximos tres dias
 				ofertas = true
-				fecha = new Date().clearTime() + 2
+				fecha = new Date() + 2
 				def listaFechas = [fecha]
 				15.times {
 					fecha = fecha.next()
@@ -75,7 +75,7 @@ class SeleccionInicialController {
 		Tren tren = Tren.read(params.id)
 		PeticionesTren peticionesTren = peticionesService.peticionesTren(tren)
 		List<Date> fechasSugeridas 
-		def hoy = new Date().clearTime()
+		def hoy = new Date()
 		if (tren.salida < hoy + 2) {
 			response.status = 404
 			return
@@ -155,13 +155,16 @@ class SeleccionInicialController {
 	private List<PeticionesTren> getPeticionesTrenes(List<Date> fechas, Trayecto trayecto, boolean ofertas) {
 		List<PeticionesTren> peticionesTren = []
 		List<Tren> trenesDia = trenesService.buscarTrenes(fechas, trayecto)
+		def hoy = new Date() + 2
 		trenesDia.each { Tren tren ->
-			if (ofertas) {
-				PeticionesTren pt = peticionesService.peticionesTren(tren)
-				if (pt.isOferta())
-					peticionesTren << pt 
-			} else 
-				peticionesTren << peticionesService.peticionesTren(tren)
+			if (tren.salida >= hoy) {
+				if (ofertas) {
+					PeticionesTren pt = peticionesService.peticionesTren(tren)
+					if (pt.isOferta())
+						peticionesTren << pt 
+				} else 
+					peticionesTren << peticionesService.peticionesTren(tren)
+			}
 		}
 		return peticionesTren
 	}
