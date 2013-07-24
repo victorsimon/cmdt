@@ -64,12 +64,12 @@ class NotificacionesService {
 					String mailContent = groovyPageRenderer.render template : "/seleccionInicial/mailCancelacion", model : [user: peticion.user, tren: tren, plazas: peticion.plazas]
 					mailService.sendMail {
 						to grailsApplication.config.grails.mail.contact
-						subject "NOTIFICACION| Cancelar la petición ${peticion}"
+						subject "NOTIFICACION| Cancelada la petición ${peticion}"
 						html msg
 					}
 					mailService.sendMail {
 						to peticion.user.email
-						subject "Cancelaci&oacute;n reserva " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
+						subject "Cancelacion reserva " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
 						html mailContent
 					}
 				} catch(e) {
@@ -100,7 +100,7 @@ class NotificacionesService {
 					}
 					mailService.sendMail {
 						to peticion.user.email
-						subject "Anulaci&oacute;n reserva " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
+						subject "Anulacion reserva " + tren.toString() + " " + tren.trayecto + " - www.compartirmesadetren.com"
 						html mailContent
 					}
 				} catch(e) {

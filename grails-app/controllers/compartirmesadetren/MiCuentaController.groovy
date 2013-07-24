@@ -20,14 +20,14 @@ class MiCuentaController {
 	
 	def listRequest(Long id) {
 		def userInstance = springSecurityService.currentUser
-		def peticiones = Peticion.findAllByUserAndSalidaGreaterThan(userInstance, new Date(), params)
+		def peticiones = peticionesToCommand(Peticion.findAllByUserAndSalidaGreaterThan(userInstance, new Date(), params))
 		def total = peticiones?.size()
 		render (view: "list", model: [peticionInstanceList: peticiones, peticionInstanceTotal: total, peticionesTittle: 'Peticiones abiertas'])
 	}
 
 	def listClosed(Long id) {
 		def userInstance = springSecurityService.currentUser
-		def peticiones = Peticion.findAllByUserAndSalidaLessThan(userInstance, new Date(), params)
+		def peticiones = peticionesToCommand(Peticion.findAllByUserAndSalidaLessThan(userInstance, new Date(), params))
 		def total = peticiones?.size()
 		render (view: "list", model: [peticionInstanceList: peticiones, peticionInstanceTotal: total, peticionesTittle: 'Historico de peticiones'])
 	}
@@ -50,6 +50,60 @@ class MiCuentaController {
 		user.save(flush: true)
 
 		redirect (action: 'show')
+	}
+
+	private peticionesToCommand(peticiones) {
+		def commandList = []
+		peticiones.each() {
+			commandList << new PeticionCommand(it)
+		}
+		return commandList
+	}
+}
+
+class PeticionCommand {
+	Date salida
+	Trayecto trayecto
+	def plazas
+	def estado
+
+	public PeticionCommand(peticion) {
+		this.salida = peticion.salida
+		this.trayecto = peticion.trayecto
+		this.plazas = peticion.plazas
+		this.estado = estadoToInfo peticion.estado
+	}
+
+	private final estadoToInfo(estado) {
+		def e = estado
+		switch(estado) {
+			case EstadoPeticion.IGNORAR:
+			case EstadoPeticion.CERRADA:
+				e = "Finalizada"				
+			break
+			case EstadoPeticion.A_LA_ESPERA:
+			case EstadoPeticion.BAJO_GESTION:
+			case EstadoPeticion.VIGILAR:
+			case EstadoPeticion.RESERVAR:
+				e = "Bajo gestión"
+			break
+			case EstadoPeticion.COBRAR:
+				e = "Pendiente de pago"
+			break
+			case EstadoPeticion.COMPRAR:
+			case EstadoPeticion.ENVIAR:
+				e = "Preparando billete"
+			break
+			case EstadoPeticion.COBRAR_FIANZA:
+			case EstadoPeticion.ANULADA:
+				e = "Anulada"
+			break
+			case EstadoPeticion.CANCELAR_FIANZA:
+			case EstadoPeticion.CANCELADA:
+				e = "Cancelada"
+			break
+		}
+		return e
 	}
 }
 

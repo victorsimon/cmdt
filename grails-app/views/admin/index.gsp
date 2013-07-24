@@ -1,31 +1,8 @@
 <html class="no-js" lang="en">
 <head>
 	<style>
-		/*{border: 1px solid black;}*/
-		a:hover {
-		}
-		a {
-		}
-		a:visited {
-		}
-		#menu * {
-		}
 		#menu {
 			background-color: #333;
-		}
-		#menu ul {
-		}
-		#menu ul li {
-		}
-		#contenedor {
-		}
-		#opciones {
-		}
-		#opciones-titulo {
-		}
-		div.opcion {
-		}
-		div.contador {
 		}
 		#principal {
 			max-height: 65%;
@@ -35,16 +12,25 @@
 		#principal table {
 			font-size: 95%;
 		}
-		#principal tr {
-		}
-		#principal td {
-		}
-		#detalle {
-		}
 		#info table {
 			width: 100%;
 		}
-		#command a {
+		.spinner {
+			/*background: url(../images/spinner.gif) 10px 10px no-repeat transparent;*/
+			background-color: #DDD;
+		    position: fixed;
+		    right:  0px;
+			bottom: 0px;
+		    padding: 5px 20px 5px 5px;
+			text-align: center;
+			overflow: auto;
+			display: none;
+			font-size: 12px;
+			border-top-left-radius: 5px;
+			color: #666;
+		}
+		#opcion div span {
+			font-weight: bold;
 		}
 	</style>
 	<meta charset="utf-8" />
@@ -53,34 +39,34 @@
   	<link rel="stylesheet" href="css/normalize.css" />
   	<link rel="stylesheet" href="css/foundation.css" />	
 	<link type="text/css" media="screen" rel="stylesheet" href="css/responsive-tables.css" />
-  	<g:javascript library="jquery" />
-	<g:javascript library="jquery-ui" />
 	<script src="js/vendor/custom.modernizr.js"></script>
+	<g:javascript library="jquery" />
+	<g:javascript library="jquery-ui" />
 	<r:layoutResources />
 </head>
 <body>
 	<div id="menu" class="row">
-		<div class="large-12 columns">
-			<ul class="inline-list"><li><g:remoteLink action="reservas" update="contenedor">Gestión de Reservas</g:remoteLink></li></ul>
+		<div class="small-12 large-12 columns">
+			<ul class="inline-list"><li><g:remoteLink action="reservas" update="contenedor" before="\$('#spinner').fadeIn()" after="\$('#detalle').empty(); \$('#spinner').fadeOut()">Gestión de Reservas</g:remoteLink></li></ul>
 		</div>
 	</div>
 	<div class="row">
-		<div class="large-12 columns">
+		<div class="small-12 large-12 columns">
 			<hr/>
 		</div>
 	</div>
-	<div id="contenedor" class="row"><div class="large-12 columns">
+	<div id="contenedor" class="row"><div class="small-12 large-12 columns">
 		<g:render template="reservas" model="${[peticiones: peticiones]}"/>
 	</div></div>
-	<script>
+	<div id="spinner" class="spinner" style="">Loading&hellip;</div>
+	<!-- script>
 	document.write('<script src=' +
 	  ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
-	  '.js><\/script>')
-	</script>
+	  '.js><\/script>');
+	</script -->
 	<script src="js/foundation/foundation.js"></script>
 	<script src="js/foundation/foundation.alerts.js"></script>
 	<script src="js/foundation/foundation.clearing.js"></script>
-	<script src="js/foundation/foundation.cookie.js"></script>
 	<script src="js/foundation/foundation.dropdown.js"></script>
 	<script src="js/foundation/foundation.forms.js"></script>
 	<script src="js/foundation/foundation.joyride.js"></script>
@@ -97,7 +83,15 @@
 	  $(document).foundation();
 	</script>	
 	<script type="text/javascript">
+	lastEstado = null;
 	$(document).ready(function() {
+		$('.opcion div a').live('click', function() {
+			if (lastEstado) {
+				$(lastEstado).prev().html('&nbsp;&nbsp;&nbsp;');
+			}
+			lastEstado = this;
+			$(this).prev().html('>&nbsp;');			
+		});
 	});
 	</script>
 </body>

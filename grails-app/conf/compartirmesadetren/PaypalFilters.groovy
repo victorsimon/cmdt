@@ -49,11 +49,13 @@ class PaypalFilters {
 
 				if(params.transaction_entity == "auth" && payment && payment.status == org.grails.paypal.Payment.PENDING) {
 					def paymentRef = PaypalTren.findByPayment(request.payment)
+					payment.paypalTransactionId = params.txn_id
+					payment.save(flush: true)
 					paymentRef.payment = payment
 					paymentRef.save(fludh: true)
 					Tren tren = Tren.read(paymentRef.tren.id)
 					def user = User.read(paymentRef.user.id)
-					def plazas = paymentItems[0].quantity
+					def plazas = payment.paymentItems[0].quantity
 					Peticion peticion = new Peticion(salida: tren.salida, 
 													user: user, 
 													trayecto: tren.trayecto, 

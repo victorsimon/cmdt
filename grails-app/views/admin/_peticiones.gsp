@@ -32,6 +32,7 @@
 		$('#todas').text(totales.todas);
 		$('#pendientes').text(totales.pendientes);
 		$('#pasadas').text(totales.pasadas);
+		$('#IGNORAR').text(totales.ignorar);
 		$('#A_LA_ESPERA').text(totales.enEspera);
 		$('#BAJO_GESTION').text(totales.enProceso);
 		$('#CANCELADA').text(totales.canceladas);
@@ -79,7 +80,7 @@
 			$('#ENVIAR').addClass('success');
 			$('#ENVIAR').removeClass('alert');
 		}
-		$(window).trigger('redraw');
+		//$(window).trigger('redraw');
 	};
 
 	var callTotals = function() {
@@ -88,7 +89,9 @@
 		});
 	};
 
-	$(document).ready(
-		setInterval('callTotals()', 1000)
-		);
+	$(document).ready( function() {
+		setInterval('callTotals()', 5000);
+		callTotals();
+		$(window).trigger('redraw');
+		});
 </script>

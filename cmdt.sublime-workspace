@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"last",
+				"lastEstado"
+			],
+			[
+				"ra",
+				"border-top-left-radius"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"para",
+				"params"
+			],
+			[
 				"CA",
 				"CANCELAR_FIANZA"
 			],
@@ -102,10 +118,6 @@
 			[
 				"true",
 				"touch:true"
-			],
-			[
-				"last",
-				"lastColor"
 			],
 			[
 				"las",
@@ -244,10 +256,6 @@
 				"TrenObjetivo"
 			],
 			[
-				"para",
-				"parametros"
-			],
-			[
 				"No",
 				"NotificacionPaypal"
 			],
@@ -294,10 +302,6 @@
 			[
 				"time",
 				"timestamp"
-			],
-			[
-				"ra",
-				"rawData"
 			],
 			[
 				"tim",
@@ -510,10 +514,6 @@
 			[
 				"min",
 				"minute"
-			],
-			[
-				"url",
-				"url"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "grails-app/views/admin/_peticiones.gsp",
 			"settings":
 			{
-				"buffer_size": 2539,
+				"buffer_size": 2578,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,7 +547,7 @@
 			"file": "grails-app/controllers/compartirmesadetren/AdminController.groovy",
 			"settings":
 			{
-				"buffer_size": 14936,
+				"buffer_size": 15166,
 				"line_ending": "Unix"
 			}
 		},
@@ -571,7 +571,7 @@
 			"file": "grails-app/services/compartirmesadetren/NotificacionesService.groovy",
 			"settings":
 			{
-				"buffer_size": 4722,
+				"buffer_size": 5188,
 				"line_ending": "Unix"
 			}
 		},
@@ -581,6 +581,38 @@
 			{
 				"buffer_size": 1150,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "grails-app/conf/compartirmesadetren/PaypalFilters.groovy",
+			"settings":
+			{
+				"buffer_size": 2954,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "grails-app/views/admin/index.gsp",
+			"settings":
+			{
+				"buffer_size": 3310,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "web-app/css/main.css",
+			"settings":
+			{
+				"buffer_size": 13390,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "grails-app/views/admin/_reservas.gsp",
+			"settings":
+			{
+				"buffer_size": 2466,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -787,6 +819,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lastBGColor",
+			"last",
+			"paymentItems",
 			"request",
 			"label ",
 			"label",
@@ -911,10 +946,7 @@
 			"Tren.get",
 			"Trayecto.get",
 			"get",
-			"h5",
-			"h4",
-			"getAuthenticatedUser()",
-			"getAuthenticatedUser"
+			"h5"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -934,6 +966,7 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -941,15 +974,15 @@
 					"file": "grails-app/views/admin/_peticiones.gsp",
 					"settings":
 					{
-						"buffer_size": 2539,
+						"buffer_size": 2578,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1012,
-								1012
+								2496,
+								2496
 							]
 						],
 						"settings":
@@ -958,7 +991,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 780.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1022,15 +1055,15 @@
 					"file": "grails-app/controllers/compartirmesadetren/AdminController.groovy",
 					"settings":
 					{
-						"buffer_size": 14936,
+						"buffer_size": 15166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7994,
-								7994
+								15079,
+								15079
 							]
 						],
 						"settings":
@@ -1039,7 +1072,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1633.0,
+						"translation.y": 4957.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1104,15 +1137,15 @@
 					"file": "grails-app/services/compartirmesadetren/NotificacionesService.groovy",
 					"settings":
 					{
-						"buffer_size": 4722,
+						"buffer_size": 5188,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								847,
-								847
+								896,
+								896
 							]
 						],
 						"settings":
@@ -1121,7 +1154,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 130.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1145,6 +1178,114 @@
 						"settings":
 						{
 							"syntax": "Packages/Groovy/Groovy.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "grails-app/conf/compartirmesadetren/PaypalFilters.groovy",
+					"settings":
+					{
+						"buffer_size": 2954,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1937,
+								1937
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Groovy/Groovy.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 195.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "grails-app/views/admin/index.gsp",
+					"settings":
+					{
+						"buffer_size": 3310,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3033,
+								3033
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 819.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "web-app/css/main.css",
+					"settings":
+					{
+						"buffer_size": 13390,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2605,
+								2938
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1670.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "grails-app/views/admin/_reservas.gsp",
+					"settings":
+					{
+						"buffer_size": 2466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1688,
+								1688
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Grails/View/GSP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

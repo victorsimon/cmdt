@@ -11,9 +11,11 @@ class AdminController {
 	def notificacionesService
 
 	def index() {
+		def peticiones = Peticion.findAllBySalidaGreaterThanEquals(new Date().clearTime(), 
+			[sort: "salida", order: "desc"])
 		render (view: "index", 
 			model: [
-				peticiones: Peticion.list(sort: "salida", order: "asc"),
+				peticiones: peticiones,
 				totales: new TotalesCommand()])
 	}
 
@@ -36,23 +38,32 @@ class AdminController {
 			success: true])
 	}
 
+	def reservas() {
+		def peticiones = Peticion.findAllBySalidaGreaterThanEquals(new Date().clearTime(), 
+			[sort: "salida", order: "desc"])
+		render (template: "reservas", 
+			model: [
+				peticiones: peticiones, 
+				totales: new TotalesCommand()])
+	}
+
 	def todas() {
 		render (template: "peticiones", 
 			model: [
-				peticiones: Peticion.list(sort: "salida", order: "asc"), 
+				peticiones: Peticion.list(sort: "salida", order: "desc"), 
 				totales: new TotalesCommand()])
 	}
 
 	def pendientes() {
 		def peticiones = Peticion.findAllBySalidaGreaterThanEquals(new Date().clearTime(), 
-			[sort: "salida", order: "asc"])
+			[sort: "salida", order: "desc"])
 		render (template: "peticiones", model: [peticiones: peticiones,
 			totales: new TotalesCommand()])
 	}
 
 	def pasadas() {
 		def peticiones = Peticion.findAllBySalidaLessThan(new Date().clearTime(), 
-			[sort: "salida", order: "asc"])
+			[sort: "salida", order: "desc"])
 		render (template: "peticiones", model: [peticiones: peticiones,
 			totales: new TotalesCommand()])
 	}
@@ -60,7 +71,7 @@ class AdminController {
 	def porEstado() {
 		def peticiones = params.fecha?:Peticion.findAllByEstado(
 			params.estado, 
-			[sort: "salida", order: "asc"])
+			[sort: "salida", order: "desc"])
 		render (template: "peticiones", model: [peticiones: peticiones,
 			totales: new TotalesCommand()])
 	}
@@ -396,6 +407,7 @@ class TotalesCommand {
 	def cobrar
 	def comprar
 	def enviar
+	def ignorar
 
 	public TotalesCommand() {
 		todas = Peticion.count()
@@ -413,6 +425,7 @@ class TotalesCommand {
 		cobrar = countByEstado (EstadoPeticion.COBRAR) 
 		comprar = countByEstado (EstadoPeticion.COMPRAR) 
 		enviar = countByEstado (EstadoPeticion.ENVIAR) 
+		ignorar = countByEstado (EstadoPeticion.IGNORAR) 
 	}
 
 	private int countByEstado(estado) {
