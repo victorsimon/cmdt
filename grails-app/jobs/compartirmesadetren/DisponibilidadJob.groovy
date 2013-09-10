@@ -16,11 +16,12 @@ class DisponibilidadJob {
     		if (objetivo.salida <= new Date().clearTime()) {
     			objetivo.activo = false
     		} else {
-		        def disponible = DatosRenfe.findBySalidaAndTrayecto(objetivo.salida, 
-		        	objetivo.trayecto)?.estaDisponible(objetivo.hora)
-		     	if (disponible != objetivo.disponible) {
-		     		objetivo.disponible = disponible
-		     		def texto = """
+		        def salida = new Date().parse("dd/MM/yyyy HH.mm", "${objetivo.salida.format('dd/MM/yyyy')} ${objetivo.hora}")
+		        def tren = Tren.findBySalidaAndTrayecto(salida, objetivo.trayecto)
+		     	if (tren && tren.noValido == objetivo.disponible) {
+		     		objetivo.disponible = !objetivo.disponible
+		     		objetivo.save(flush: true)
+	     			def texto = """
 Cambio de estado: 
 ${objetivo.salida.format('dd/MM/yyyy')} ${objetivo.hora} ${objetivo.trayecto.toString()}
 Nuevo estado ${objetivo.disponible? 'DISPONIBLE': 'NO DISPONIBLE'}

@@ -22,7 +22,7 @@
 			</div>
 			<div class="large-6 columns">
 				<label for="hora">Hora</label>
-				<input type="time" id="hora" name="hora" value="${peticion.salida.format('hh:mm')}"/>
+				<input type="time" id="hora" name="hora" value="${peticion.salida.format('HH:mm')}"/>
 			</div>
 		</div>
 	</fieldset>

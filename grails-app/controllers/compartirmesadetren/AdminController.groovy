@@ -31,6 +31,7 @@ class AdminController {
 		def salida = new Date().parse("dd/MM/yyyy HH:mm", params.fecha + " " + params.hora)
 		peticion.salida = salida
 		peticion.estado = params.estado
+		peticion.trayecto = Trayecto.read(params.trayecto)
 		peticion.save(flush: true)
 		render (template: "edit", model: [
 			peticion: peticion, 
@@ -358,9 +359,9 @@ class AdminController {
 
 	private def transitarA(id, estado) {
 		def peticion = Peticion.read(id)
+		params.estado = peticion.estado
 		peticion.estado = estado
 		peticion.save(flush: true)
-		params.estado = estado
 		return peticion
 	}
 

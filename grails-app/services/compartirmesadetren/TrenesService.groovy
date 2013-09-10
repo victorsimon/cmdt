@@ -161,15 +161,19 @@ class TrenesService {
 	}
 
 	private marcarTrenesObsoletos(Date salida, Trayecto trayecto, List<Tren> trenesAMantener) {
-		log.debug "Marcando trenes obsoletos"
-		def trenesBorrar = Tren.buscarPorDiaSalida(salida.time, trayecto)
-		trenesBorrar.each { Tren tren ->
-			log.debug tren
-			if (!trenesAMantener.contains(tren)) {
-				log.debug "MARCANDO COMO NO VALIDO"
-				tren.noValido = true
+		if (Tren.count() > 0) {
+			log.debug "Marcando trenes obsoletos"
+			def trenesBorrar = Tren.buscarPorDiaSalida(salida.time, trayecto)
+			trenesBorrar.each { Tren tren ->
+				log.debug tren
+				if (!trenesAMantener.contains(tren)) {
+					log.debug "MARCANDO COMO NO VALIDO"
+					tren.noValido = true
+				} else {
+					tren.noValido = false
+				}
+				tren.save(flush: true)
 			}
-			tren.save(flush: true)
 		}
 	}
 	

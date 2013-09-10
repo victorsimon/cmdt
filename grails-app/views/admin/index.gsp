@@ -29,8 +29,13 @@
 			border-top-left-radius: 5px;
 			color: #666;
 		}
-		#opcion div span {
+		.opcion div > span:first-child {
 			font-weight: bold;
+			height: 15px;
+			width: 20px;
+		}
+		.touch .opcion {
+			padding-bottom: 10px;
 		}
 	</style>
 	<meta charset="utf-8" />
@@ -47,7 +52,7 @@
 <body>
 	<div id="menu" class="row">
 		<div class="small-12 large-12 columns">
-			<ul class="inline-list"><li><g:remoteLink action="reservas" update="contenedor" before="\$('#spinner').fadeIn()" after="\$('#detalle').empty(); \$('#spinner').fadeOut()">Gestión de Reservas</g:remoteLink></li></ul>
+			<ul class="inline-list"><li><g:remoteLink action="reservas" update="contenedor" before="\$('#spinner').fadeIn()" after="\$('#detalle').empty(); \$('#spinner').fadeOut();\$('#actuales').click()">Gestión de Reservas</g:remoteLink></li></ul>
 		</div>
 	</div>
 	<div class="row">
@@ -83,15 +88,7 @@
 	  $(document).foundation();
 	</script>	
 	<script type="text/javascript">
-	lastEstado = null;
 	$(document).ready(function() {
-		$('.opcion div a').live('click', function() {
-			if (lastEstado) {
-				$(lastEstado).prev().html('&nbsp;&nbsp;&nbsp;');
-			}
-			lastEstado = this;
-			$(this).prev().html('>&nbsp;');			
-		});
 	});
 	</script>
 </body>

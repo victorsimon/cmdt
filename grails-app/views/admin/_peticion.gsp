@@ -1,7 +1,7 @@
 <tr peticion="${it.id}">
 	<td class="visible"><a class="" href='https://www.paypal.com/es/cgi-bin/webscr?cmd=_view-a-trans&id=${it.paypalTren?.payment?.paypalTransactionId}' target='_blank'>${it.paypalTren?.payment?.paypalTransactionId}</a></td>
 	<td class="visible">${it.plazas}</td>
-	<td class="visible">${it.salida.format('dd/MM/yyyy hh:mm')}</td>
+	<td class="visible">${it.salida.format('dd/MM/yyyy HH:mm')}</td>
 	<td class="visible">${it.trayecto}</td>
 	<td class="visible">${it.estado.name}</td>
 	<td class="visible">

@@ -6,8 +6,8 @@ class Tren {
 	String nombre
 	Date salida 
 	Date llegada
-	boolean noValido 
-	boolean bloqueado 
+	Boolean noValido = false
+	Boolean bloqueado = false
 	static belongsTo = [trayecto:Trayecto]
 	Date dateCreated
 	Date lastUpdated

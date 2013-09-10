@@ -18,6 +18,7 @@ import java.sql.Time
 class BootStrap {
 
     def init = { servletContext ->
+		TimeZone.setDefault(TimeZone.getTimeZone("GMT+2"))
     	//Aqui inicializo los datos comunes. Mas abajo pongo los especificos de cada entorno
     	def adminRole = Role.findByAuthority('ROLE_ADMIN')
     	def userRole = Role.findByAuthority('ROLE_USER')
@@ -190,28 +191,29 @@ Recibiras notificaciones de SITO relacionadas con la gestión y el funcionamient
 				testUser1.save(flush: true)
 				UserRole.create testUser1, userRole, true
 				def date = new Date()
+				date.clearTime()
 				date.putAt(Calendar.HOUR_OF_DAY, 19)
 				date.putAt(Calendar.MINUTE, 35)
 				def tren1 = new Tren(
 					nombre: "ALVIA-00001",
 					salida: date,
 					llegada: date,
-					trayecto: madridPamplona
+					trayecto: madridPamplona,
+					noValido: false
 					)
-				tren1.save(flush: true)
+				tren1.save(flush: true, failOnError: true)
 				def tren2 = new Tren(
 					nombre: "ALVIA-00002",
 					salida: date,
 					llegada: date,
-					trayecto: pamplonaMadrid
+					trayecto: pamplonaMadrid,
+					noValido: false
 					)
-				tren2.save(flush: true)
+				tren2.save(flush: true, failOnError: true)
 				def payment = new Payment(paypalTransactionId: "123456789", buyerId: 0)
 				payment.save(flush: true)
-				println payment.errors
 				def paypalTren = new PaypalTren(payment: payment, user: testUser, tren: tren1)
-				paypalTren.save(flush: true)
-				println paypalTren.errors
+				paypalTren.save(flush: true, failOnError: true)
 				def salida = tren1.salida - 2
 				10.times() {
 					paypalTren.tren = tren1
