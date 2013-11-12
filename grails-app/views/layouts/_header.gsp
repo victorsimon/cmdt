@@ -32,3 +32,14 @@
 	<g:link elementId="contacto" url="/en-tren-horarios-renfe-contacto">Contactar</g:link> 
 </div>
 <h2 style="display: none;">Compartir mesa de tren, ave, alvia, avant de renfe. Trayectos y horarios. Viaje en tren barato.</h2>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- CMDT Horizontal -->
+<center style="margin: 10px auto;">
+	<ins class="adsbygoogle"
+	     style="display:inline-block;width:728px;height:90px"
+	     data-ad-client="ca-pub-8089105942108480"
+	     data-ad-slot="5298652093"></ins>
+</center>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
