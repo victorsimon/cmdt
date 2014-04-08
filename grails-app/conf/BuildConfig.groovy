@@ -5,6 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+//grails.project.dependency.resolver="maven"
 
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -39,19 +40,11 @@ grails.project.dependency.resolution = {
         runtime 'mysql:mysql-connector-java:5.1.22',
                 'org.tuckey:urlrewritefilter:4.0.3'
 		compile 'xerces:xercesImpl:2.9.1',
-				'net.sourceforge.nekohtml:nekohtml:1.9.15',
-                "org.grails.plugins:geb:0.9.0-RC-1"
-        test "org.gebish:geb-spock:0.9.0-RC-1"    
-        test 'org.seleniumhq.selenium:selenium-firefox-driver:latest.release'
-        test 'org.seleniumhq.selenium:selenium-chrome-driver:latest.release'
-        test 'org.seleniumhq.selenium:selenium-ie-driver:latest.release'
-        test('org.seleniumhq.selenium:selenium-htmlunit-driver:latest.release') {
-                exclude 'xml-apis'
-        }
+				'net.sourceforge.nekohtml:nekohtml:1.9.15'
     }
 
     plugins {
-        runtime ":hibernate:$grailsVersion"
+        runtime ":hibernate:3.6.10.2"
         runtime ":jquery:1.8.0"
         runtime ":resources:1.1.6"
 
@@ -60,11 +53,28 @@ grails.project.dependency.resolution = {
         //runtime ":cached-resources:1.0"
         //runtime ":yui-minify-resources:0.1.4"
 
-        build ":tomcat:$grailsVersion"
+        build ":tomcat:7.0.42"
 
         runtime ":database-migration:1.1"
 
         compile ':cache:1.0.0'
-        test "org.grails.plugins:geb:0.9.0-RC-1"
+        compile ':mail:1.0', {
+            excludes 'spring-test'
+        } 
+        compile ':famfamfam:1.0.1'
+        compile ':gpars:0.3'
+        compile ':ic-alendar:0.3.4'
+        compile ':jasper:1.6.1'
+        compile ':jdbc-pool:1.0.9.3'
+        compile ':jquery-ui:1.8.24'
+        compile ':paypal:0.6.8'
+        compile ':quartz:1.0-RC6'
+        compile ':quartz-monitor:0.3-RC2'
+        compile ':recaptcha:0.5.3'
+        compile ':runtime-logging:0.4'
+        compile ':spring-security-core:1.2.7.3'
+        compile ':spring-security-oauth:2.0.1.1'
+        compile ':spring-security-ui:0.2'
+        compile ':twitter4j:0.3.2'
     }
 }
